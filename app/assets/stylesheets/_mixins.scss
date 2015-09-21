@@ -23,6 +23,14 @@
   }
 }
 
+@mixin blur($blur) {
+  -webkit-filter: blur($blur);
+  -moz-filter: blur($blur);
+  -o-filter: blur($blur);
+  -ms-filter: blur($blur);
+  filter: blur($blur);
+}
+
 @mixin bgCover($img){
   background: $grey-light url("#{$img}") no-repeat center top;
   filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='#{$img}', sizingMethod='scale')";

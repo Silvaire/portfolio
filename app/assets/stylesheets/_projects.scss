@@ -31,3 +31,31 @@
     }
   }
 }
+
+.single-project {
+  &__banner {
+    position: relative;
+    overflow: hidden;
+    &__image {
+      @include blur(3px);
+      position: fixed;
+      top: -1px;
+      height: 600px;
+      left: -1px;
+      right: -1px;
+      z-index: -1;
+    }
+  }
+  &__content {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+@include mq(small) {
+  .single-project {
+    &__banner {
+      margin-top: -5px;
+    }
+  }
+}

@@ -50,9 +50,8 @@
       z-index: 3;
     }
     &:after {
-      @include opacity(.5);
       @include user-select(none);
-      background: linear-gradient(#{$hex} 40%, transparent 140%);
+      background: linear-gradient(transparent 0%, #{rgba($hex, 0.5)} 70%, #{rgba($hex, 0.8)} 100%);
       bottom: 0;
       content: '';
       height: 100%;

@@ -1,0 +1,17 @@
+<section class="section single-project">
+  <div class="single-project__banner text-white padding--top--huge padding--bottom--mini overlay-gradient-black">
+    <div class="single-project__banner__image" style="<%= bgCover(@post.the_thumb_url) %>"></div>
+    <div class="row">
+      <div class="small-12 columns">
+        <h2 class="heading-3 padding--top--huge padding--bottom--mini"><%= @post.the_title %></h2>
+        <h2 class="heading-1 big padding--bottom"><%= @post.the_field('introduction') %></h2>
+      </div>
+    </div>
+    </div>
+  <div class="row single-project__content">
+    <div class="small-12 medium-10 large-9 columns end padding--vertical--maxi">
+      <h2 class="heading-2 padding--bottom"><%= @post.the_field('header') %></h2>
+      <%= simple_format(@post.the_field('description')) %>
+    </div>
+  </div>
+</section>

@@ -12,9 +12,10 @@
 #
 #= require jquery
 #= require jquery_ujs
-#= require turbolinks
 #= require fastclick
 #= require foundation
+#= require headroom.js/dist/headroom
+#= require headroom.js/dist/jQuery.headroom
 
 
 

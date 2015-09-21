@@ -1,4 +1,8 @@
+initializeHeadroom = () ->
+  $("html").headroom();
+
 $ ->
+  initializeHeadroom()
   $(document).foundation({
     reveal:
       opened: ->
