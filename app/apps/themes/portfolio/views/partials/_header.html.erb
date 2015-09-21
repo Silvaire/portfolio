@@ -11,7 +11,7 @@
           </h1>
         </div>
         <nav id="primary-navigation" class="primary-navigation show-for-medium-up" role="navigation">
-          <%= raw get_nav_menu('main_menu', 'nav navbar-nav ') %>
+          <%= raw draw_menu() %>
         </nav>
         <div class="mobile-menu-toggle hide-for-print">
           <div class="table__cell">
@@ -29,13 +29,7 @@
   </div>
   <nav class="mobile-navigation">
     <div class="mobile-navigation__content">
-      
-      <div class="mobile-search-form">
-        <!-- <form action="{{ url('search') }}">
-          <input type="search" name="q" placeholder="{{ 'Search'|t }}" value="{{craft.request.getQuery('q')}}">
-          <button class="button"><i class="ion-ios-search-strong"></i></button>
-        </form> -->
-      </div>
+      <%= raw get_nav_menu('main_menu', '') %>
     </div>
   </nav>
   <div class="toolbar">
@@ -46,7 +40,7 @@
       </form>
     </div> -->
     <% current_site.get_languages.each do | lang | %>
-      <h3><a class="button" href="<%= url_to_fixed("url_for", {locale: lang}) %>"><%= lang %></a></h3>
+      <h3><a class="parent-style <% if lang == I18n.locale %>active<% end %>" href="<%= url_to_fixed("url_for", {locale: lang}) %>"><%= lang %></a></h3>
     <% end %>
 
     <%#= raw current_site.draw_languages("language list-inline pull-right", true) %>

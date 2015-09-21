@@ -7,6 +7,7 @@ module Themes::Portfolio::MainHelper
     # here your code on save settings for current site, by default params[:theme_fields] is auto saved into theme
     # Also, you can save your extra values added in admin/settings.html.erb
     # sample: theme.set_meta("my_key", params[:my_value])
+    PluginRoutes.system_info[:skip_format_url]=true
   end
 
   def portfolio_on_install_theme(theme)

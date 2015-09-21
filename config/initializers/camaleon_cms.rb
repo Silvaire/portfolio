@@ -1,0 +1,1 @@
+PluginRoutes.system_info[:skip_format_url]=true
