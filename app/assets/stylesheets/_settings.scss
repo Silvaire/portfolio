@@ -3,7 +3,8 @@
 $black: #000000;
 $white: #ffffff;
 
-$grey-light: #f0efef;
+$grey-lightest: #eee;
+$grey-light: #ccc;
 $grey: #aaaaaa;
 $grey-dark: #58595b;
 
@@ -23,6 +24,7 @@ $colorList: (
   'black': $black,
   'white': $white,
   'grey': $grey,
+  'grey-lightest': $grey-lightest,
   'grey-light': $grey-light,
   'grey-dark': $grey-dark,
   'black-light': $black-light,

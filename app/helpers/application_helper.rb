@@ -83,4 +83,8 @@ module ApplicationHelper
       [html, parent_current]
     end
   end
+
+  def bgCover(image_url)
+    "background-image: url('#{image_url}');-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover; background-position: center center; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'#{image_url}\', sizingMethod=\'scale\'); -ms-filter: 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'#{image_url}\', sizingMethod=\'scale\')';"
+  end
 end

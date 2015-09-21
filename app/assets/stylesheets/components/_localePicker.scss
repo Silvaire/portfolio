@@ -1,0 +1,10 @@
+.locale-picker {
+  &__link {
+    display: inline-block;
+    padding: 5px;
+    margin: 0;
+    &--active a, a:focus, a:hover {
+      color: $brown-light;
+    }
+  }
+}

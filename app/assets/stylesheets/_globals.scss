@@ -186,46 +186,45 @@ table {
   }
 }
 
-// .section-table {
-//   padding: 0;
-//   height: auto;
-//   display: table;
-//   vertical-align: middle;
-//   width: 100%;
-//   min-height: 450px;
-//   @include mq(veryLarge) {
-//     min-height: 700px;
-//   }
-// }
-// .section-table:before, .section-table:after {
-//   content: " ";
-//   display: table;
-// }
-// .section-table:after {
-//   clear: both;
-// }
-// .section-table .img-side {
-//   display: table-cell !important;
-//   width: 50%;
-//   vertical-align: top;
-//   position: relative;
-//   left: 0;
-//   &.switch-side {
-//     left: -50%;
-//   }
-// }
-// .section-table .text-side {
-//   *zoom: 1;
-//   width: 50%;
-//   display: table-cell;
-//   padding: 0 50px;
-//   vertical-align: middle;
-//   position: relative;
-//   left: 0;
-//   &.switch-side {
-//     left: 50%;
-//   }
-// }
+.section-table {
+  padding: 0;
+  height: auto;
+  display: table;
+  vertical-align: middle;
+  width: 100%;
+  min-height: 450px;
+  @include mq(veryLarge) {
+    min-height: 700px;
+  }
+}
+.section-table:before, .section-table:after {
+  content: " ";
+  display: table;
+}
+.section-table:after {
+  clear: both;
+}
+.section-table .img-side {
+  display: table-cell !important;
+  width: 50%;
+  vertical-align: top;
+  position: relative;
+  left: 0;
+  &.switch-side {
+    left: -50%;
+  }
+}
+.section-table .text-side {
+  *zoom: 1;
+  width: 50%;
+  display: table-cell;
+  vertical-align: middle;
+  position: relative;
+  left: 0;
+  &.switch-side {
+    left: 50%;
+  }
+}
 
 // Spacer: is used with text-align: justify to get elements evenly positoned
 .spacer {
@@ -290,5 +289,8 @@ hr {
 @include mq(small) {
   .remove-equalize-on-small {
     height: inherit !important;
+  }
+  body {
+    padding-top: $mobile-header-height;
   }
 }

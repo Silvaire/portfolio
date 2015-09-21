@@ -13,11 +13,16 @@
 #= require jquery
 #= require jquery_ujs
 #= require turbolinks
+#= require fastclick
+#= require foundation
+
 
 
 #= require plugins/jquery.royalslider.min.js
 #= require plugins/rAF.js
 
 #= require _mobileMenu
+#= require _scrollToElement
+#= require _globals
 
 #= require_self

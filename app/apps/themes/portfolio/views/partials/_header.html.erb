@@ -1,16 +1,16 @@
 <header id="header" role="banner">
-  <div class="row">
+  <div class="row row--full-width">
     <div class="small-12 medium-12 large-12 columns">
       <div class="site-header">
-        <div class="site-branding">
+        <!-- <div class="site-branding">
           <h1 class="site-title">
-            <a href="{{ siteUrl }}" rel="home">
+            <a href="<%= @post.the_url() %>" rel="home">
               <%= image_tag current_site.the_logo, class: "img-responsive" %>
               <span class="hide"><%= current_site.the_title %></span>
             </a>
           </h1>
-        </div>
-        <nav id="primary-navigation" class="primary-navigation show-for-medium-up" role="navigation">
+        </div> -->
+        <nav id="primary-navigation" class="primary-navigation" role="navigation">
           <%= raw my_draw_menu() %>
         </nav>
         <div class="mobile-menu-toggle hide-for-print">
@@ -29,12 +29,7 @@
   </div>
   <nav class="mobile-navigation">
     <div class="mobile-navigation__content">
-      <%= raw get_nav_menu('main_menu', '') %>
+      <%= raw my_draw_menu() %>
     </div>
   </nav>
-  <div class="toolbar">
-    <% current_site.get_languages.each do | lang | %>
-      <h3><a class="parent-style <% if lang == I18n.locale %>active<% end %>" href="<%= url_to_fixed("url_for", {locale: lang}) %>"><%= lang %></a></h3>
-    <% end %>
-  </div>
 </header>

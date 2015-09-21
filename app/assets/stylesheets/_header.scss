@@ -1,0 +1,46 @@
+header {
+  @include box-shadow(0px, 0px, 1px, $black-light, true); 
+  .primary-navigation {
+    ul {
+      text-align: center;
+      margin: auto;
+      list-style: none;
+      li {
+        display: inline-block;
+        a {
+          color: $grey-light;
+          display: inline-block;
+          padding: 20px;
+          font-size: 40px;
+          font-weight: 100;
+          &:hover, &:focus, &.current-link {
+            color: $green;
+
+          }
+        }
+      }
+    }
+  }
+}
+
+@include mq(small) {
+  header {
+    position: fixed;
+    margin-top: -1px;
+    width: 100%;
+    background: $white;
+    z-index: 10000;
+    top: 0;
+    .primary-navigation {
+      ul {
+        li {
+          a {
+            font-weight: 200;
+            font-size: 25px;
+            padding: 10px;
+          }
+        }
+      }
+    }
+  }
+}

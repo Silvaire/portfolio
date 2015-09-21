@@ -57,6 +57,10 @@
   font-family: $helvetica;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  margin: auto;
+}
+
 h1,
 .heading-1 {
   @extend %helvetica-ultra-light;
@@ -118,8 +122,15 @@ p,
 
 a {
   @extend %helvetica-light;
+  color: $black-light;
   &:hover, &:focus, &:active {
     color: $green;
+  }
+  &.wrap-link {
+    color: inherit;
+    &:hover, &:focus, &:active {
+      color: inherit;
+    }
   }
 }
 

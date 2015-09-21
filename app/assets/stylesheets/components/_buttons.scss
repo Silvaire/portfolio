@@ -1,15 +1,17 @@
 .button {
-  @include transition(none !important);
+  @include transition(none);
   @include user-select(none);
   // border: solid 1px $grey-dark;
   background: $green;
-  color: $grey-light;
+  color: $white;
   font-size: 12px;
   line-height: 1.6em;
   letter-spacing: 0.2em;
   padding: 13px 23px 13px; //The font seems to be not vertically centered, so manual fix
   position: relative;
   text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 0;
   &:hover, &:focus {
     background: $brown-light;
     color: $black-light;
@@ -17,6 +19,49 @@
     // border: solid 1px $green;
   }
   &--light {
+    background: $grey-lightest;
+    color: $black-light;
+    &:hover, &:focus {
+      background: $brown-light;
+      // border: solid 1px $grey-lightest;
+    }
+  }
+  &--hover {
+    color: inherit;
+    &__button-wrap {
+      position: absolute;
+      @include transition(bottom 0.4s);
+      left: 0;
+      right: 0;
+      bottom: -15px;
+      margin-top: 0;
+      text-align: center;
+    }
+    .button {
+      @include transition(opacity 0.4s);
+      opacity: 0;
+    }
+    &:hover {
+      color: inherit;
+      .button--hover__button-wrap {
+        bottom: 10px;
+      }
+      .button {
+        opacity: 1;
+      }
+    }
+  }
+}
 
+@include mq(small) {
+  .button {
+    &--hover {
+      &__button-wrap {
+        position: static;
+      }
+      .button {
+        opacity: 1;
+      }
+    }
   }
 }

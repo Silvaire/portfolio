@@ -1,0 +1,32 @@
+.project {
+  &--major {
+
+  }
+  &--other {
+    &__image-wrap {
+      margin: auto;
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      border: solid 3px;
+      position: relative;
+      overflow: hidden;
+    }
+    &__image {
+      @include transition(width 0.4s, height 0.4s, top 0.4s, left 0.4s);
+      position: absolute;
+      top: 0;
+      width: 150px;
+      left: 0;
+      height: 150px;
+    }
+    &:hover {
+      .project--other__image {
+        width: 200px;
+        left: -25px;
+        height: 200px;
+        top: -25px;
+      }
+    }
+  }
+}

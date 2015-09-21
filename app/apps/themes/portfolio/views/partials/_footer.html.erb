@@ -1,1 +1,11 @@
-<footer></footer>
+<footer class="padding--vertical--huge padding--horizontal">
+  <div class="row row--full-width">
+    <div class="locale-picker small-text-right">
+      <% languages = current_site.get_languages %>
+      <% languages.each do | lang | %>
+        <h3 class="locale-picker__link <% if lang == I18n.locale %>locale-picker__link--active<% end %>"><a class="parent-style" href="<%= url_to_fixed("url_for", {locale: lang}) %>"><%= lang %></a></h3>
+        <% if not languages.last %> | <% end %>
+      <% end %>
+    </div>
+  </div>
+</footer>
