@@ -1,0 +1,80 @@
+@mixin padding-css-rules ($rules) {
+  @each $rule in $rules { 
+    #{$rule}: $column-gutter;
+  }
+  &--tiny {
+    @each $rule in $rules {
+      #{$rule}: $column-gutter/4;
+    }
+  }
+  &--mini {
+    @each $rule in $rules {
+      #{$rule}: $column-gutter/2;
+    }
+  }
+  &--maxi {
+    @each $rule in $rules {
+      #{$rule}: $column-gutter*2;
+    }
+  }
+  &--huge {
+    @each $rule in $rules {
+      #{$rule}: $column-gutter*4;
+    }
+  }
+  &--none {
+    @each $rule in $rules {
+      #{$rule}: 0;
+    }
+  }
+}
+
+@mixin padding-html-classes($size:false) {
+  $list: vertical horizontal top right bottom left;
+  @if $size {
+    @each $where in $list {
+      .#{$size}-padding--#{$where} {
+        @if $where == horizontal {
+          @include padding-css-rules($rules:padding-left padding-right);
+        }
+        @else if $where == vertical {
+          @include padding-css-rules($rules:padding-top padding-bottom);
+        }
+        @else {
+          @include padding-css-rules($rules:padding-#{$where});
+        }
+      }
+    } 
+    .#{$size}-padding {
+      @include padding-css-rules($rules:padding);
+    }
+  }
+  @else { //for backwards compatibilty
+    @each $where in $list {
+      .padding--#{$where} {
+        @if $where == horizontal {
+          @include padding-css-rules($rules:padding-left padding-right);
+        }
+        @else if $where == vertical {
+          @include padding-css-rules($rules:padding-top padding-bottom);
+        }
+        @else {
+          @include padding-css-rules($rules:padding-#{$where});
+        }
+      }
+    } 
+    .padding {
+      @include padding-css-rules($rules:padding);
+    }
+  }
+}
+
+@include padding-html-classes($size:small);
+@include padding-html-classes();
+
+@include mq(mediumUp) {
+  @include padding-html-classes($size:medium);
+}
+@include mq(large) {
+  @include padding-html-classes($size:large);
+}

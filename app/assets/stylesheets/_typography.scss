@@ -1,0 +1,260 @@
+%clearface,
+.clearface {
+  font-style: normal;
+  font-family:'Clearface ITC W01', $georgia;
+  font-weight: 400;
+}
+
+%grot,
+.grot {
+  font-family:"Grot10 Regular", Avenir, Corbel, "Trebuchet MS", sans-serif; 
+  font-weight:normal; 
+  font-style:normal;
+}
+
+
+.basefont,
+%basefont {
+  @extend %helvetica-light;
+}
+
+.upcase,
+.uppercase,
+%uppercase {
+  text-transform: uppercase;
+}
+
+.lowercase,
+%lowercase {
+  text-transform: lowercase;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+
+.helvetica,
+%helvetica {
+  font-family: $helvetica;
+}
+
+.helvetica-light,
+%helvetica-light {
+  font-family: $helvetica;
+  font-weight: 200;
+}
+
+.helvetica-ultra-light,
+%helvetica-ultra-light {
+  font-family: $helvetica;
+  font-weight: 100;
+}
+
+
+.placeholder,
+%placeholder {
+  font-family: $helvetica;
+}
+
+h1,
+.heading-1 {
+  @extend %helvetica-ultra-light;
+  font-size: 38px;
+  line-height: 1.15em;
+  letter-spacing: -0.01em;
+  color: inherit;
+  @include mq(small) {
+    font-size: 30px;
+  }
+}
+
+h2,
+.heading-2 {
+  @extend %helvetica-light;
+  font-size: 24px;
+  line-height: 1.25em;
+  letter-spacing: -0.01em;
+  color: inherit;
+  @include mq(small) {
+    font-size: 20px;
+  }
+}
+
+h3,
+.heading-3 {
+  @extend %helvetica-light;
+  font-size: 12px;
+  line-height: 1.83em;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: inherit;
+}
+
+p,
+.paragraph {
+  @extend %helvetica-light;
+  font-size: 14px;
+  line-height: 1.5em;
+  letter-spacing: 0.05em;
+  margin-bottom: 0;
+  &.small, &--small {
+    font-size: 12px;
+  }
+  &.upcase, &--upcase {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+}
+
+.parent-style {
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+}
+
+a {
+  @extend %helvetica-light;
+  &:hover, &:focus, &:active {
+    color: $green;
+  }
+}
+
+blockquote,
+.blockquote,
+%blockquote {
+  border: none;
+  background-color: $white;
+  @extend .padding;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: $grey;
+  }
+  p {
+    font-size: 15px;
+    color: $grey;
+    position: relative;
+    padding-left: $column-gutter;
+    margin: 0;
+    &:before {
+      content: '“';
+      font-size: 60px;
+      position: absolute;
+      left: 0;
+      top: -21px;
+      vertical-align: top;
+    }
+  }
+  cite {
+    font-size: 12px;
+    color: $grey;
+    font-style: normal;
+    padding-left: $column-gutter;
+    padding-top: 15px;
+  }
+}
+
+ol {
+  padding: 0;
+  margin-bottom: 30px;
+  li {
+    position: relative;
+    color: $grey;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 5px;
+  }
+}
+
+
+ul {
+  &.bullet {
+    padding: 0;
+    margin-bottom: 30px;
+    li {
+      position: relative;
+      color: $grey;
+      font-size: 14px;
+      line-height: 20px;
+      margin-bottom: 5px;
+    }
+  }
+  &.arrow {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+    li {
+      position: relative;
+      padding-left: 25px;
+      color: $grey;
+      font-size: 14px;
+      line-height: 20px;
+      margin-bottom: 5px;
+      &:before {
+        line-height: 20px;
+        font-size: 14px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        @extend .ion;
+        content: $ionicon-var-ios-arrow-right;
+      }
+    }
+  }
+  &.check {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+    li {
+      position: relative;
+      padding-left: 25px;
+      color: $grey;
+      font-size: 14px;
+      line-height: 20px;
+      margin-bottom: 5px;
+      &:before {
+        line-height: 20px;
+        font-size: 14px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        @extend .ion;
+        content: $ionicon-var-checkmark-round;
+        color: #b4b4b4;
+      }
+      @include mq(print) {
+        font-size: 12px;
+      }
+    }
+    &--large {
+      li {
+        padding-left: 25px;
+        font-size: 17px;
+        line-height: 21px;
+        margin-bottom: 5px;
+        &:before {
+          top: 3px;
+          color: #b4b4b4;
+        }
+      }
+    }
+    &--small {
+      li {
+        padding-left: 25px;
+        font-size: 12px;
+        line-height: 15px;
+        margin-bottom: 3px;
+        &:before {
+          top: 0;
+        }
+      }
+    }
+  }
+}

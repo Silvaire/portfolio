@@ -1,0 +1,294 @@
+/* =Global
+----------------------------------------------- */
+*, *:after, *:before {
+  @include selection($brown-light, $green);
+}
+
+html {
+  height: auto;
+  min-height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+body {
+  @extend %basefont;
+  background-color: $white;
+  height: auto;
+  margin: 0 auto;
+  min-height: 340px;
+  overflow-x: hidden;
+  padding: 0;
+  width: 100%;
+  color: $black-light;
+  z-index: 1;
+  &.mobileNav-open {
+    overflow: hidden;
+  }
+}
+
+main {
+  position: relative;
+}
+
+section, .section {
+  width: 100%;
+  display: block;
+  position: relative;
+}
+
+figure {
+  margin: 0;
+  padding: 0;
+}
+
+.relative {
+  position: relative;
+}
+
+
+// List styles
+ul.inline,
+ol.inline,
+ul.ib,
+ol.ib {
+  > li {
+    display: inline-block;
+  }
+}
+.ib {
+  display: inline-block;
+}
+
+ul {
+  &.nostyle {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+
+// Row extensions
+.full-width-row, .row--full-width {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  max-width: 100%;
+  @include clearfix;
+  position: relative;
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+  &.collapse {
+    .column,
+    .columns {
+      padding: 0;
+    }
+  }
+}
+
+.row {
+  &--small-max-width {
+    max-width: 900px;
+  }
+  &--max-width {
+    max-width: 1400px;
+  }
+  &--large-max-width {
+    max-width: 1600px;
+  }
+}
+
+//No outlines
+a, input, textarea, button, select {
+  &:focus {
+    outline: none;
+  }
+}
+
+// Negative Margin
+.negative-margin-top {
+  margin-top: -90px;
+  position: relative;
+  z-index: 2;
+  &--large {
+    margin-top: -180px;
+    position: relative;
+    z-index: 2;
+  }
+  &--x-large {
+    margin-top: -400px;
+    position: relative;
+    z-index: 2;
+  }
+  @include mq(small) {
+    margin-top: 0;
+    &--large, &--x-large {
+      margin-top: 0;
+    }
+  }
+  @include mq(print) {
+    margin-top: 0px;
+  }
+}
+
+//Border classes
+.border {
+  border: 1px solid $borderColor;
+  &--none {
+    border: 0px solid transparent;
+  }
+  &--top {
+    border-top: 1px solid $borderColor;
+    &--none {
+      border-top: 0px solid transparent;
+    }
+  }
+  &--right {
+    border-right: 1px solid $borderColor;
+    &--none {
+      border-right: 0px solid transparent;
+    }
+  }
+  &--bottom {
+    border-bottom: 1px solid $borderColor;
+    &--none {
+      border-bottom: 0px solid transparent;
+    }
+  }
+  &--left {
+    border-left: 1px solid $borderColor;
+    &--none {
+      border-left: 0px solid transparent;
+    }
+  }
+}
+
+// Table and table cell for vertical alignment
+.table {
+  display: table;
+  height: 100%;
+  width: 100%;
+  &__cell {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+
+table {
+  @include mq(print) {
+    table-layout: fixed !important;
+  }
+}
+
+// .section-table {
+//   padding: 0;
+//   height: auto;
+//   display: table;
+//   vertical-align: middle;
+//   width: 100%;
+//   min-height: 450px;
+//   @include mq(veryLarge) {
+//     min-height: 700px;
+//   }
+// }
+// .section-table:before, .section-table:after {
+//   content: " ";
+//   display: table;
+// }
+// .section-table:after {
+//   clear: both;
+// }
+// .section-table .img-side {
+//   display: table-cell !important;
+//   width: 50%;
+//   vertical-align: top;
+//   position: relative;
+//   left: 0;
+//   &.switch-side {
+//     left: -50%;
+//   }
+// }
+// .section-table .text-side {
+//   *zoom: 1;
+//   width: 50%;
+//   display: table-cell;
+//   padding: 0 50px;
+//   vertical-align: middle;
+//   position: relative;
+//   left: 0;
+//   &.switch-side {
+//     left: 50%;
+//   }
+// }
+
+// Spacer: is used with text-align: justify to get elements evenly positoned
+.spacer {
+  display: inline-block;
+  width: 100%;
+  height: 0px;
+  padding: 0;
+  margin: 0;
+}
+
+hr {
+  border-top: solid 1px $grey-dark;
+  margin: auto;
+}
+
+.square-block {
+  padding-bottom: 100%;
+  position: relative;
+  &__content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0; 
+  }
+}
+
+.no-image {
+  visibility: hidden;
+  @include opacity(0);
+  @include no-touch-events;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+@include mq(mediumDown) {
+  .remove-equalize-on-medium-down {
+    height: inherit !important;
+  }
+  .section-table, .section-table .text-side , .section-table .img-side {
+    display: block !important;
+    width: 100%;
+    margin: 0;
+    left: 0;
+    right: 0;
+  }
+  .section-table .img-side {
+    height: 350px;
+  }
+  .section-table .text-side {
+    padding: 2.5% 5%;
+  }
+
+  .section-table .text-side.switch-side, .section-table .img-side.switch-side {
+    left: 0;
+    right: 0;
+  }
+}
+
+@include mq(small) {
+  .remove-equalize-on-small {
+    height: inherit !important;
+  }
+}

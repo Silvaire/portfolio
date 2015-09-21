@@ -1,0 +1,72 @@
+// Color classes
+// Add here more colors to the color list to build more color classes
+//
+// Colors are given in foo: $bar format
+
+// Colorlist is defined in Foundation Settings
+@each $color, $hex in $colorList {
+  // BEM coloring awesomeness
+  [class*="--text-#{$color}"],
+  .text-#{""+$color} {
+    color: #{$hex};
+  }
+  [class*="--bg-#{$color}"],
+  .bg-#{""+$color} {
+    background-color: #{$hex};
+  }
+  [class*="--overlay-#{$color}"],
+  .overlay-#{""+$color} {
+    position: relative;
+    z-index: 1;
+    > * {
+      position: relative;
+      z-index: 3;
+    }
+    &:after {
+      @include opacity(.8);
+      @include user-select(none);
+      background-color: #{$hex};
+      bottom: 0;
+      content: '';
+      height: 100%;
+      left: 0;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 100%;
+      z-index: 2;
+      .ie & {
+        @include opacity(0.3);
+      }
+    }
+  }
+  [class*="--overlay-gradient-#{$color}"],
+  .overlay-gradient-#{""+$color} {
+    position: relative;
+    z-index: 1;
+    > * {
+      position: relative;
+      z-index: 3;
+    }
+    &:after {
+      @include opacity(.5);
+      @include user-select(none);
+      background: linear-gradient(#{$hex} 40%, transparent 140%);
+      bottom: 0;
+      content: '';
+      height: 100%;
+      left: 0;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 100%;
+      z-index: 2;
+      .ie & {
+        background-color: #{$hex};
+        @include opacity(0.3);
+      }
+    }
+  }
+}

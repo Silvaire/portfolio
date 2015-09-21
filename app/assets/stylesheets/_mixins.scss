@@ -1,0 +1,90 @@
+@mixin hwa {
+  @include transform-style(preserve-3d);
+  @include backface-visibility(hidden);
+}
+
+@mixin hoverActiveFocus() {
+  &:hover,
+  &:active,
+  &:focus {
+    @content;
+  }
+}
+
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow:inset $top $left $blur $color;
+    -moz-box-shadow:inset $top $left $blur $color;
+    box-shadow:inset $top $left $blur $color;
+  } @else {
+    -webkit-box-shadow: $top $left $blur $color;
+    -moz-box-shadow: $top $left $blur $color;
+    box-shadow: $top $left $blur $color;
+  }
+}
+
+@mixin bgCover($img){
+  background: $grey-light url("#{$img}") no-repeat center top;
+  filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='#{$img}', sizingMethod='scale')";
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='#{$img}', sizingMethod='scale')";
+  @include prefixer(background-size, cover, webkit o spec);
+  display: table;
+}
+
+@mixin no-touch-events {
+  @include user-select(none);
+  @include prefixer(touch-callout, none, webkit moz ms o spec);
+}
+
+@mixin selection-style($b, $c) {
+  background: $b;
+  color: $c;
+  text-shadow: none !important;
+}
+
+@mixin selection($b, $c) {
+  ::-webkit-selection {
+    @include selection-style($b, $c);
+  }
+  ::-moz-selection {
+    @include selection-style($b, $c);
+  }
+  ::selection {
+    @include selection-style($b, $c);
+  }
+}
+
+@mixin opacity($trans) {
+  filter: unquote("progid:DXImageTransform.Microsoft.Alpha(Opacity=#{round($trans * 100)})");
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$trans * 100})";
+  -moz-opacity: $trans;
+  -khtml-opacity: $trans;
+  opacity: $trans;
+}
+
+@mixin mq($media) {
+  @if ($media == phone or $media == tiny) {
+    @media only screen and (max-width: $phone) { @content; }
+  }
+  @else if ($media == allPhones or $media == small) {
+    @media only screen and (max-width: $tablet-min - 1) { @content; }
+  }
+  @else if ($media == tabletUp or $media == mediumUp) {
+    @media only screen and (min-width: $tablet-min) { @content; }
+  }
+  @else if ($media == tabletDown or $media == mediumDown) {
+    @media only screen and (max-width: $tablet-max) { @content; }
+  }
+  @else if ($media == tablet or $media == medium) {
+    @media only screen and (min-width: $tablet-min) and (max-width: $tablet-max) { @content; }
+  }
+  @else if ($media == large or $media == desktop) {
+    @media only screen and (min-width: $large-screen) { @content; }
+  }
+  @else if $media == veryLarge {
+    @media only screen and (min-width: $xl-screen + 1) { @content; }
+  }
+  @else if $media == print {
+    @media print { @content; }
+  }
+}

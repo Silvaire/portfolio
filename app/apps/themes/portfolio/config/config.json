@@ -1,0 +1,14 @@
+{
+  "name" : "Portfolio",
+  "description" : "",
+  "thumb" : "assets/images/image.png",
+  "helpers": [
+    "Themes::Portfolio::MainHelper"
+  ],
+  "hooks": {
+    "on_active": ["themKey_on_install_theme"],
+    "on_inactive": ["themKey_on_uninstall_theme"],
+    "on_theme_settings": ["themKey_settings"]
+    //here all your hooks
+  }
+}

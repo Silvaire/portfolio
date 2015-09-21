@@ -1,0 +1,22 @@
+.button {
+  @include transition(none !important);
+  @include user-select(none);
+  // border: solid 1px $grey-dark;
+  background: $green;
+  color: $grey-light;
+  font-size: 12px;
+  line-height: 1.6em;
+  letter-spacing: 0.2em;
+  padding: 13px 23px 13px; //The font seems to be not vertically centered, so manual fix
+  position: relative;
+  text-align: center;
+  &:hover, &:focus {
+    background: $brown-light;
+    color: $black-light;
+    // color: $green;
+    // border: solid 1px $green;
+  }
+  &--light {
+
+  }
+}

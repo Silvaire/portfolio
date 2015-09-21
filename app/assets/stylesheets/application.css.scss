@@ -1,0 +1,26 @@
+@import 'bourbon';
+// configure the style from settings
+@import 'settings';
+
+// ionicons
+@import '../bower_components/ionicons/scss/ionicons';
+
+// move mixins to their own partial
+@import 'mixins';
+
+// Plugins
+@import 'plugins/royalSlider';
+
+// Styles and classes
+
+@import 'globals';
+@import 'colorClasses';
+@import 'paddingClasses';
+@import 'typography';
+@import 'header';
+@import 'footer';
+@import 'ieClasses';
+
+// Components
+@import 'components/navigation';
+@import 'components/buttons';

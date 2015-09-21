@@ -1,0 +1,29 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <!-- META SECTION -->
+        <title>My theme</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- END META SECTION -->
+        <%= stylesheet_link_tag    'foundation', media: 'all', 'data-turbolinks-track' => true %>
+        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+        <%= raw the_head %>
+    </head>
+    <body>
+
+    <!-- container -->
+    <div class="container">
+        <%= render partial: 'partials/header' %>
+
+        <div class="content">
+            <%= yield %>
+        </div>
+
+        <%= render partial: 'partials/footer' %>
+        <%= render partial: 'partials/scripts' %>
+    </div>
+    <!-- ./container -->
+    </body>
+    </html>
