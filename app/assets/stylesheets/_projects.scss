@@ -13,6 +13,7 @@
       overflow: hidden;
     }
     &__image {
+      @include transform-style(preserve-3d);
       @include transition(width 0.4s, height 0.4s, top 0.4s, left 0.4s);
       position: absolute;
       top: 0;
