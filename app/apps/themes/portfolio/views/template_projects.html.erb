@@ -11,7 +11,7 @@
 </section>
 <section class="section" id="major-projects">
   <div class="row row--full-width">
-    <% current_site.the_category('major').decorate.the_posts().each do |post| %>
+    <% current_site.the_category('major').decorate.the_posts().reorder('posts.updated_at DESC').each do |post| %>
       <% post = post.decorate %>
       <div class="section-table project--major">
         <% switch_side = cycle('switch-side ', '') %> 
@@ -31,7 +31,7 @@
 </section>
 <section class="section" id="other-projects">
   <div class="row row--full-width collapse small-text-center" data-equalizer>
-    <% current_site.the_category('minor').decorate.the_posts().each do |post| %>
+    <% current_site.the_category('minor').decorate.the_posts().reorder('posts.updated_at DESC').each do |post| %>
       <% post = post.decorate %>
       <div class="small-12 medium-6 large-4 columns end project--other remove-equalize  -on-small <%= cycle('bg-green text-white' , '', 'bg-grey-light') %>" data-equalizer-watch>
         <a href="<%= post.the_url %>" class="wrap-link">
