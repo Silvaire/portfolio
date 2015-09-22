@@ -3,13 +3,16 @@
     <div class="single-project__banner__image" style="<%= bgCover(@post.the_thumb_url) %>"></div>
     <div class="row">
       <div class="small-12 columns">
-        <h2 class="heading-3 padding--top--huge padding--bottom--mini"><%= @post.the_title %></h2>
-        <h2 class="heading-1 big padding--bottom"><%= @post.the_field('introduction') %></h2>
+        <!-- <h2 class="heading-3 padding--top--huge padding--bottom--mini"><%= @post.the_title %></h2> -->
+        <h2 class="heading-1 big padding--top--huge padding--bottom--mini single-project__banner__title"><%= @post.the_field('introduction') %></h2>
       </div>
     </div>
     </div>
   <div class="row single-project__content">
-    <div class="small-12 medium-10 large-9 columns end padding--vertical--maxi">
+    <div class="small-12 medium-10 large-9 columns end padding--bottom--maxi padding--top--mini">
+      <div class="crumbs padding--bottom">
+        <p><a class="parent-style" href="<%= current_site.the_post('projects').the_url %>"><%= current_site.the_post('projects').the_title %></a>&nbsp;/&nbsp;<p><%= @post.the_title %></p>
+      </div>
       <h2 class="heading-2 padding--bottom"><%= @post.the_field('header') %></h2>
       <%= simple_format(@post.the_field('description')) %>
     </div>

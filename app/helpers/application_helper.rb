@@ -57,7 +57,7 @@ module ApplicationHelper
     nav_menu.eager_load(:metas).each do |nav_menu_item|
       data_nav_item = _get_link_nav_menu(nav_menu_item)
       next if data_nav_item == false
-      _is_current = site_current_path == data_nav_item[:link] || site_current_path == data_nav_item[:link].sub(".html", "") || (current_site.the_post(current_site.options[:home_page]).the_url(as_path:true) == data_nav_item[:link] && is_home?)
+      _is_current = site_current_path == data_nav_item[:link] || site_current_path == data_nav_item[:link].sub(".html", "") || (current_site.the_post(current_site.options[:home_page]).the_url(as_path:true) == data_nav_item[:link] && is_home?) || (data_nav_item[:link] == current_site.the_post('projects').the_url(as_path:true) && @post_type.the_slug == 'project')
       has_children = nav_menu_item.have_children? && (args[:levels] == -1 || (args[:levels] != -1 && level <= args[:levels]))
       r = { menu_item: nav_menu_item, link: data_nav_item, level: level, settings: _args, has_children: has_children, link_attrs: '', index: index}; args[:callback_item].call(r);
       _args = r[:settings]

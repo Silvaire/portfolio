@@ -36,6 +36,7 @@
   &__banner {
     position: relative;
     overflow: hidden;
+    height: 400px;
     &__image {
       @include blur(3px);
       position: fixed;
@@ -44,6 +45,19 @@
       left: -1px;
       right: -1px;
       z-index: -1;
+    }
+    & > .row {
+      height: 100%;
+      & > .columns {
+        height: 100%;
+      }
+    }
+    &__title {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      left: 0;
+      padding: 0 15px;
     }
   }
   &__content {
