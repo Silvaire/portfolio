@@ -1,5 +1,7 @@
 .project-filters {
   background: $white;
+  position: static;
+  top: $mini-header-height - 5px;
   &__button {
     display: inline-block;
     margin: 2px;
@@ -30,8 +32,17 @@
 
 @include mq(small) {
   .project-filters {
+    // top: $mobile-header-height - 5px;
     &.sticky {
-      top: $mobile-header-height - 5px; 
+      position: static;
+      border-bottom: none;
+      // top: $mobile-header-height - 5px;
+      // .headroom--not-top.headroom--unpinned & {
+      //   top: $mobile-header-height - 5px;
+      // }
     }
+  }
+  .filterSection-placeholder {
+    margin-top: 0;
   }
 }
