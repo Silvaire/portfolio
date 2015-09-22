@@ -1,0 +1,18 @@
+<section class="section">
+  <div class="homepage__background-picture" style="<%= bgCover(@post.the_field('picture')) %>"></div>
+  <div class="overlay-black text-white">
+    <div class="row homepage">
+      <div class="table padding--horizontal small-text-center">
+        <div class="table__cell">
+          <h2 class="heading-1 homepage__title small-padding--bottom medium-padding--bottom--maxi"><%= @post.the_field('descriptive-title') %></h2>
+          <div class="homepage__content padding--bottom">
+            <%= simple_format(@post.the_field('description')) %>
+          </div>
+          <div class="homepage__links">
+            <a class="button button--light" href="<%= current_site.the_post('projects').the_url %>"><%= t('See my projects') %></a>
+            <a class="button button--light" href="<%= current_site.the_post('about').the_url %>"><%= t('More about me') %></a>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>

@@ -23,7 +23,7 @@
       z-index: 3;
     }
     &:after {
-      @include opacity(.8);
+      @include opacity(.5);
       @include user-select(none);
       background-color: #{$hex};
       bottom: 0;

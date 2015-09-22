@@ -1,0 +1,41 @@
+.homepage {
+  height: 700px;
+  height: 100vh;
+  margin-top: -$header-height;
+  &__background-picture {
+    @include blur(3px);
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    bottom: -10px;
+    right: -10px;
+  }
+  &__title {
+    font-size: 100px;
+  }
+  &__content p {
+    font-size: 20px;
+  }
+  &__links .button {
+    margin: 20px;
+    width: 200px;
+  }
+}
+
+@include mq(small) {
+  .homepage {
+    margin-top: -$mobile-header-height;
+    &__title {
+      font-size: 50px;
+      font-weight: 100;
+    }
+    &__content p {
+      font-size: 15px;
+    }
+    &__links {
+      .button {
+        margin: 10px;
+      }
+    }
+  }
+}

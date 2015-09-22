@@ -3,7 +3,7 @@
 @import 'settings';
 
 // ionicons
-@import '../bower_components/ionicons/scss/ionicons';
+@import 'ionicons';
 
 // move mixins to their own partial
 @import 'mixins';
@@ -26,6 +26,7 @@
 @import 'paddingClasses';
 @import 'typography';
 @import 'header';
+@import 'home';
 @import 'projects';
 @import 'footer';
 @import 'ieClasses';

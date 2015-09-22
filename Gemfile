@@ -9,6 +9,7 @@ gem 'pg'
 
 gem 'camaleon_cms'
 gem 'bourbon'
+gem 'ionicons-rails'
 
 gem 'decorators', '~> 2.0.1'
 

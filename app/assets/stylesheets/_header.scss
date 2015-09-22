@@ -27,6 +27,17 @@ header {
         }
       }
     }
+    &__home {
+      display: none;
+    }
+    &__home-icon {
+      @include transition(height 0.6s, width 0.6s);
+      border: solid 1px;
+      border-radius: 50%;
+      width: 64px;
+      height: 64px;
+      display: inline-block;
+    }
     .headroom--not-top.headroom--unpinned & {
       ul {
         li {
@@ -41,6 +52,15 @@ header {
             }
           }
         }
+      }
+      .current-link .primary-navigation__home-icon {
+        width: 34px;
+        height: 33px;
+        border: solid 1px;
+      }
+      .primary-navigation__home-icon {
+        width: 0;
+        height: 0;
       }
     }
   }
@@ -57,6 +77,10 @@ header {
             padding: 10px;
           }
         }
+      }
+      &__home-icon {
+        width: 40px;
+        height: 40px;
       }
     }
   }
