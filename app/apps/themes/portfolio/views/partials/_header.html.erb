@@ -33,3 +33,16 @@
     </div>
   </nav>
 </header>
+<div class="ie-disclaimer">
+  <div class="ie-disclaimer__inner">
+    <div class="ie-disclaimer__content">
+      <h2 class="heading-1 padding--bottom"><%= t(:forgot_the_year, year: Time.now.strftime('%Y')) %></h2>
+      <div class="padding--bottom">
+        <%= t("You are using a browser that is older than 6 years") %>. <%= t("In browser years, that's like 1000") %>. <%= t("I can only advise you to updgrade it so that you can enjoy today's internet properly") %>.
+      </div>
+      <div>
+        <a class="button" target="_blank" href="http://outdatedbrowser.com/"><%= t("Join today's internet") %></a>
+      </div>
+    </div>
+  </div>
+</div>

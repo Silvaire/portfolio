@@ -19,8 +19,8 @@
 
 
 
-#= require plugins/jquery.royalslider.min.js
-#= require plugins/rAF.js
+#= require plugins/jquery.royalslider.min
+#= require plugins/rAF
 
 #= require _mobileMenu
 #= require _scrollToElement

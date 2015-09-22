@@ -8,6 +8,8 @@ var scrollToElement = function(elem, padding, speed, easing) {
   $window = $(window);
   if ( $window.width() < 769 ) {
     padding = padding + 60;
+  } else {
+    padding = padding + 52;
   }
   removeScrollingClass = function() {
     return $('html').removeClass('scrolling');
