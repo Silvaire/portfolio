@@ -1,3 +1,5 @@
+require 'open-uri'
+
 module Themes::Portfolio::MainHelper
   def self.included(klass)
     #klass.helper_method [:my_helper_method] rescue "" # here your methods accessible from views
@@ -22,5 +24,10 @@ module Themes::Portfolio::MainHelper
 
   def portfolio_on_uninstall_theme(theme)
     theme.destroy
+  end
+
+  def after_post_save(params)
+    # post = params[:post].decorate
+    # post_type = params[:post_type].decorate
   end
 end

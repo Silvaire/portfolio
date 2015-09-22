@@ -73,6 +73,7 @@ h1,
   }
   @include mq(small) {
     font-size: 30px;
+    font-weight: 200;
     &.big {
       font-size: 35px;
     }

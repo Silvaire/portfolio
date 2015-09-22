@@ -19,5 +19,7 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  Read about more projects: "Read about more projects"
+fr:
+  Read about more projects: "En savoir plus sur d'autres projets"
+  Read more: "Lire la suite"
+  Read: "Lire"

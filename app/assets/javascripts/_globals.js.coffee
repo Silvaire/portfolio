@@ -1,5 +1,5 @@
 initializeHeadroom = () ->
-  $("html").headroom({offset:100})
+  $("html").headroom()
 
 $ ->
   initializeHeadroom();
