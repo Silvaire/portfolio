@@ -9,12 +9,36 @@
     </div>
     </div>
   <div class="row single-project__content">
-    <div class="small-12 medium-10 large-9 columns end padding--bottom--maxi padding--top--mini">
+    <div class="small-12 medium-10 large-9 columns end padding--bottom padding--top--mini">
       <div class="crumbs padding--bottom">
-        <p><a class="parent-style" href="<%= current_site.the_post('projects').the_url %>"><%= current_site.the_post('projects').the_title %></a>&nbsp;/&nbsp;<p><%= @post.the_title %></p>
+        <p><a class="parent-style" href="<%= current_site.the_post('projects').the_url %>"><%= current_site.the_post('projects').the_title %></a></p>&nbsp;/&nbsp;<p><%= @post.the_title %></p>
       </div>
       <h2 class="heading-2 padding--bottom"><%= @post.the_field('header') %></h2>
       <%= simple_format(@post.the_field('description')) %>
+      <div class="single-project__links padding--top text-grey">
+        <% @post.get_field_values('links').each do |hash| %>
+          <% hash = JSON.parse(hash) %>
+          <a class="button button--small" target="_blank" href="<%= hash["value"] %>"><%= hash["attr"] %></a>
+        <% end %>
+      </div>
+    </div>
+    <div class="small-12 columns large-padding--bottom--maxi small-padding--horizontal--none large-padding--horizontal--mini">
+      <div class="slideshow slideshow--no-arrows slideshow--autoplay single-project__slideshow">
+        <% @post.get_field_values('pictures').each do |url|%>
+          <div class="slideshow__slide">
+            <img class="rsImg" src="<%= url %>" />
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
+  <!-- <div class="row row--full-width">
+    <div class="slideshow slideshow--no-arrows slideshow--autoplay single-project__slideshow">
+      <% @post.get_field_values('pictures').each do |url|%>
+        <div class="slideshow__slide">
+          <img class="rsImg" src="<%= url %>" />
+        </div>
+      <% end %>
+    </div>
+  </div> -->
 </section>

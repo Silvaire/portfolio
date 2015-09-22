@@ -1,8 +1,8 @@
 initializeHeadroom = () ->
-  $("html").headroom();
+  $("html").headroom({offset:100})
 
 $ ->
-  initializeHeadroom()
+  initializeHeadroom();
   $(document).foundation({
     reveal:
       opened: ->

@@ -13,6 +13,13 @@
 
 // Styles and classes
 
+// Components
+@import 'components/navigation';
+@import 'components/buttons';
+@import 'components/localePicker';
+@import 'components/slideshows';
+@import 'components/breadcrumbs';
+
 @import 'globals';
 @import 'colorClasses';
 @import 'paddingClasses';
@@ -21,9 +28,3 @@
 @import 'projects';
 @import 'footer';
 @import 'ieClasses';
-
-// Components
-@import 'components/navigation';
-@import 'components/buttons';
-@import 'components/localePicker';
-@import 'components/breadcrumbs';

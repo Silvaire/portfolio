@@ -1,0 +1,318 @@
+//Default styles for a slideshow
+.slideshow {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  direction: ltr;
+  &__slide {
+    float: left;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    &.rsFakePreloader {
+      opacity: 1 !important;
+      -webkit-transition: 0s;
+      -moz-transition: 0s;
+      -o-transition:  0s;
+      transition:  0s;
+      display: none;
+    }
+  }
+  .rsABlock {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    &__content {
+      padding: 40px;
+    }
+  }
+  &--overflow {
+    height: 600px;
+    margin-top: -150px;
+    z-index: 1000;
+    .slideshow__slide__bg {
+      position: absolute;
+      top: 120px;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .rsABlock__content {
+      height: 100%;
+      padding-top: 170px;
+    }
+  }
+  &.rsFullscreen {
+    position: fixed !important;
+    height: auto !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 2147483647 !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    right: 0 !important;
+  }
+  &.rsAutoHeight, &--autoheight {
+    height: auto;
+    .slideshow__slide {
+      height: auto;
+      .rsImg {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+  &.single-project__slideshow {
+    height: 600px;
+    // height: 700px;
+    // height: 100vh;
+    @include mq(mediumDown) {
+      height: 450px;
+    }
+    @include mq(small) {
+      height: 250px;
+    }
+  }
+}
+
+.rsArrow {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  z-index: 2000;
+  .rsArrowIcn {
+    display: table;
+    height: 100%;
+    &:before {
+      display: table-cell;
+      vertical-align: middle;
+      @extend .ion;
+      font-size: 30px;
+      color: $black;
+      padding: 0 10px;
+    }
+  }
+  &.rsArrowLeft {
+    left: 0;
+    .rsArrowIcn {
+      &:before {
+        content: $ionicon-var-ios-arrow-left;
+      }
+    }
+  }
+  &.rsArrowRight {
+    right: 0;
+    .rsArrowIcn {
+      &:before {
+        content: $ionicon-var-ios-arrow-right;
+      }
+    }
+  }
+}
+
+.rsNav {
+  &.rsBullets {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    z-index: 1000;
+    .rsBullet {
+      display: inline-block;
+      padding: 10px 4px;
+      cursor: pointer;
+      span {
+        display: block;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: $white;
+        @include opacity(0.5);
+      }
+      &.rsNavSelected {
+        span {
+          @include opacity(1);
+          background-color: $white;
+        }
+      }
+    }
+  }
+  &.rsTabs {
+    .rsTab {
+      &.rsNavSelected {
+
+      }
+    }
+  }
+  &.rsThumbs {
+    background-color: $grey-light;
+    bottom: 0;
+    height: 80px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+    .rsThumbsContainer {
+      @include clearfix;
+      height: 100%;
+      position: relative;
+      padding: 10px 0;
+      .rsThumb {
+        float: left;
+        height: 100%;
+        .rsTmb {
+          &.imageTmb {
+            display: block;
+            overflow: hidden;
+            height: 100%;
+            width: 50px;
+            position: relative;
+            .image {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              @include opacity(0.5);
+            }
+          }
+        }
+        &.rsNavSelected,
+        &:hover,
+        &:focus {
+          .rsTmb {
+            &.imageTmb {
+              .image {
+                @include opacity(1.0);
+              }
+            }
+          }
+        }
+      }
+    }
+    .rsThumbsArrow {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      @include opacity(1);
+      @include transition(all 0.2s linear);
+      background-color: $grey-light;
+      &.rsThumbsArrowDisabled {
+        @include opacity(0);
+      }
+      .rsThumbsArrowIcn {
+        display: table;
+        height: 100%;
+        &:before {
+          display: table-cell;
+          vertical-align: middle;
+          @extend .ion;
+          font-size: 30px;
+          color: $black;
+          padding: 0 10px;
+        }
+      }
+      &.rsThumbsArrowLeft {
+        left: 0;
+        .rsThumbsArrowIcn {
+          &:before {
+            content: $ionicon-var-ios-arrow-left;
+          }
+        }
+      }
+      &.rsThumbsArrowRight {
+        right: 0;
+        .rsThumbsArrowIcn {
+          &:before {
+            content: $ionicon-var-ios-arrow-right;
+          }
+        }
+      }
+    }
+    &.rsThumbsVer {
+      bottom: 0;
+      right: 0;
+      left: auto;
+      overflow: hidden;
+      position: absolute;
+      height: 100%;
+      width: 80px;
+      z-index: 1000;
+      .rsThumbsContainer {
+        @include clearfix;
+        position: relative;
+        padding: 0px 10px;
+        width: auto;
+        .rsThumb {
+          float: none;
+          height: auto;
+          .rsTmb {
+            &.imageTmb {
+              display: block;
+              overflow: hidden;
+              height: 50px;
+              width: 100%;
+              position: relative;
+              .image {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                @include opacity(0.8);
+              }
+            }
+          }
+          &.rsNavSelected,
+          &:hover,
+          &:focus {
+            .rsTmb {
+              &.imageTmb {
+                .image {
+                  @include opacity(1.0);
+                }
+              }
+            }
+          }
+        }
+      }
+      .rsThumbsArrow {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 30px;
+        .rsThumbsArrowIcn {
+          width: 100%;
+          height: 100%;
+          text-align: center;
+        }
+        &.rsThumbsArrowLeft {
+          top: 0;
+          bottom: auto;
+          .rsThumbsArrowIcn {
+            &:before {
+              content: $ionicon-var-ios-arrow-up;
+            }
+          }
+        }
+        &.rsThumbsArrowRight {
+          top: auto;
+          bottom: 0;
+          .rsThumbsArrowIcn {
+            &:before {
+              content: $ionicon-var-ios-arrow-down;
+            }
+          }
+        }
+      }
+    }
+  }
+}

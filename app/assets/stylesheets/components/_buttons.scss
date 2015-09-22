@@ -7,7 +7,7 @@
   font-size: 12px;
   line-height: 1.6em;
   letter-spacing: 0.2em;
-  padding: 13px 23px 13px; //The font seems to be not vertically centered, so manual fix
+  padding: 13px 23px;
   position: relative;
   text-align: center;
   text-transform: uppercase;
@@ -50,6 +50,11 @@
         opacity: 1;
       }
     }
+  }
+  &--small {
+    font-size: 11px;
+    text-transform: none;
+    padding: 10px 15px;
   }
 }
 

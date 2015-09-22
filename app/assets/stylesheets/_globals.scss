@@ -19,6 +19,7 @@ body {
   min-height: 340px;
   overflow-x: hidden;
   padding: 0;
+  padding-top: $header-height;
   width: 100%;
   color: $black-light;
   z-index: 1;

@@ -37,6 +37,7 @@
     position: relative;
     overflow: hidden;
     height: 400px;
+    top: -2px;
     &__image {
       @include blur(3px);
       position: fixed;
