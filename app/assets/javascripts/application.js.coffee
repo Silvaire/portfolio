@@ -25,6 +25,7 @@
 #= require _mobileMenu
 #= require _scrollToElement
 #= require _slideshows
+#= require _projectFilters
 #= require _globals
 
 #= require_self

@@ -1,0 +1,37 @@
+.project-filters {
+  background: $white;
+  &__button {
+    display: inline-block;
+    margin: 2px;
+    padding: 10px;
+    border: solid 1px;
+    font-size: 12px;
+    &--active, &:hover, &:focus {
+      background: $grey-dark;
+      color: $white;
+      border: solid 1px $grey-dark;
+    }
+  }
+  &.sticky {
+    @include transition(top 0.6s);
+    border-bottom: solid 1px $grey-light;
+    position: fixed;
+    top: $header-height - 5px;
+    z-index: 10000;
+    .headroom--not-top.headroom--unpinned & {
+      top: $mini-header-height - 5px;
+    }
+  }
+}
+
+.filterSection-placeholder {
+  margin-top: 74px;
+}
+
+@include mq(small) {
+  .project-filters {
+    &.sticky {
+      top: $mobile-header-height - 5px; 
+    }
+  }
+}

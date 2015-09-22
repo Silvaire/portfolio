@@ -1,5 +1,5 @@
 header {
-  @include box-shadow(0px, 0px, 1px, $black-light); 
+  @include box-shadow(0px, 0px, 1px, $black-light);
   position: fixed;
   margin-top: -1px;
   width: 100%;
@@ -75,6 +75,9 @@ header {
             @include sansSerif;
             font-size: 25px;
             padding: 10px;
+            .headroom--not-top.headroom--unpinned &.current-link {
+              font-size: 25px;
+            }
           }
         }
       }
