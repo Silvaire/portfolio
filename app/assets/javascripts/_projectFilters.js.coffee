@@ -27,10 +27,10 @@ enableStickyFilters = () ->
     $nextSection = $filterSection.next()
     $(window).scroll ->
       filterSectionTop = $nextSection.offset().top - $(window).scrollTop()
-      if filterSectionTop < 52 + 74 and $('.headroom--unpinned').length
+      if filterSectionTop < 52 + 71 and $('.headroom--unpinned').length
         $filterSection.addClass('sticky')
         $nextSection.addClass('filterSection-placeholder')
-      if filterSectionTop > 104 + 74 and $('.headroom--pinned').length
+      if filterSectionTop > 104 + 71 and $('.headroom--pinned').length
         $filterSection.removeClass('sticky')
         $nextSection.removeClass('filterSection-placeholder')  
 

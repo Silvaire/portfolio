@@ -2,9 +2,10 @@
   background: $white;
   position: static;
   top: $mini-header-height - 5px;
+  font-size: 0;
   &__button {
     display: inline-block;
-    margin: 2px;
+    margin: 3px;
     color: $grey;
     padding: 5px 10px;
     border: solid 3px;
@@ -29,7 +30,7 @@
 }
 
 .filterSection-placeholder {
-  margin-top: 74px;
+  margin-top: 71px;
 }
 
 @include mq(small) {
