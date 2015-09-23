@@ -33,6 +33,20 @@
   margin-top: 71px;
 }
 
+.no-project {
+  @include transition(opacity 0.4s);
+  position: absolute;
+  text-align: center;
+  width: 70%;
+  left: 15%;
+  opacity: 0;
+  &--show {
+    position: static;
+    margin: auto;
+    opacity: 1;
+  }
+}
+
 @include mq(small) {
   .project-filters {
     // top: $mobile-header-height - 5px;

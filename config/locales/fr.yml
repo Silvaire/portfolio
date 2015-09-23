@@ -30,8 +30,12 @@ fr:
   forgot_the_year: "Oups, il semblerait que vous ayez oublié que nous sommes en %{year} !"
   See my projects: "Voir mes projets"
   More about me: "Qui suis-je ?"
-  Ruby on Rails: "Ruby on Rails"
-  AJAX: "AJAX"
-  Sensors: "Capteurs"
-  Ruby Gems: "Ruby Gems"
-  Active Records: "Active Records"
+  no_project: "Désolé, il n'y a pas de projet correspondant. Essayez de désactiver des filtres pour en faire apparaitre."
+
+
+
+  UX Design : "UX Design"
+  Backend : "Backend"
+  Frontend : "Frontend"
+  Wearables : "Wearables"
+  Conception : "Conception"

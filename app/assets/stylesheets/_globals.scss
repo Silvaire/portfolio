@@ -209,6 +209,7 @@ table {
   clear: both;
 }
 .section-table .img-side {
+  @include transition(left 0.4s);
   display: table-cell !important;
   width: 50%;
   vertical-align: top;
@@ -219,6 +220,7 @@ table {
   }
 }
 .section-table .text-side {
+  @include transition(left 0.4s);
   *zoom: 1;
   width: 50%;
   display: table-cell;

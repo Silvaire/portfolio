@@ -4,7 +4,8 @@ enableProjectFilters = () ->
     $projects = $('.project')
     $filters.click ->
       $this = $(@)
-      $projects.addClass('project--filtered-out')
+      $projects.removeClass('project--filtered-out')
+      $projects.find('.switch-side').removeClass('switch-side')
       if($this.hasClass('project-filters__button--active'))
         $this.removeClass('project-filters__button--active')
       else
@@ -14,9 +15,18 @@ enableProjectFilters = () ->
         $activeFilters.each ->
           $filter = $(this)
           techId = $filter.data('id')
-          $projects.filter("[data-techs*='" + techId + ",']").removeClass('project--filtered-out')
+          $projects.filter(":not([data-techs*='" + techId + ",'])").addClass('project--filtered-out')
+      # else
+      #   $projects.removeClass('project--filtered-out')
+      $activeProjects = $projects.filter('.project:not(.project--filtered-out)')
+      if $activeProjects.length
+        $('.no-project').removeClass('no-project--show')
+        $activeProjects.filter('.project--major').each (index, element) ->
+          $project = $(this)
+          if index % 2 == 0
+            $project.find('.text-side, .img-side').addClass('switch-side')
       else
-        $projects.removeClass('project--filtered-out')
+        $('.no-project').addClass('no-project--show')
       $this.blur()
       return false
 

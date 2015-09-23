@@ -42,6 +42,7 @@
     }
     &.project--other {
       width: 0;
+      height: 0 !important;
     }
   }
 }
@@ -73,6 +74,17 @@
       width: 100%;
       left: 0;
       padding: 0 15px;
+    }
+  }
+  &__categories {
+    &__item {
+      display: inline-block;
+      margin-top: 5px;
+      color: $grey-dark;
+      padding: 5px 10px;
+      border: solid 3px;
+      font-weight: 400;
+      font-size: 13px;
     }
   }
   &__content {

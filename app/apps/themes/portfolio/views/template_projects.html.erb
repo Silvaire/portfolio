@@ -17,6 +17,9 @@
   </div>
 </section>
 <section class="section padding--top" id="major-projects">
+  <div class="no-project padding--bottom">
+    <h4 class="heading-1"><%= t(:no_project) %></h4>
+  </div>
   <div class="row row--full-width">
     <% current_site.the_category('major').decorate.the_posts().reorder('posts.updated_at DESC').each do |post| %>
       <% post = post.decorate %>
@@ -28,11 +31,7 @@
             <div class="padding--vertical small-padding--horizontal--mini medium-padding--horizontal--maxi large-padding--horizontal--huge">
               <h3 class="heading-3"><%= post.the_title %></h3>
               <h2 class="padding--bottom--tiny"><%= post.the_field('introduction') %></h2>
-              <p class="small padding--bottom--mini text-grey">
-                <% techs.each do |tech| %>
-                  <%= t(tech.name) %><% if not techs.last == tech %>, <% end %>
-                <% end %>
-              </p>
+              <p class="small padding--bottom--mini text-grey"><%= post.the_field('technologies') %></p>
               <p class="padding--bottom"><%= post.the_field('header') %></p>
               <a href="<%= post.the_url %>" class="button"><%= t('Read more') %></a>
             </div>
@@ -56,11 +55,7 @@
             </div>
             <h3 class="heading-3 padding--top"><%= post.the_title %></h3>
             <h2 class="padding--bottom--mini"><%= post.the_field('introduction') %></h2>
-            <p class="small padding--bottom">
-              <% techs.each do |tech| %>
-                <%= t(tech.name) %><% if not techs.last == tech %>, <% end %>
-              <% end %>
-            </p>
+            <p class="small padding--bottom"><%= post.the_field('technologies') %></p>
             <span class="button button--light"><%= t('Read more') %></span>
           </div>
         </a>
