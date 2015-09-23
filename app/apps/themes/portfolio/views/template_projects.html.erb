@@ -12,7 +12,7 @@
 <section class="project-filters small-text-center padding--horizontal--mini padding--top--mini padding--bottom--mini" id="project-filters">
   <div class="row row--full-width">
     <% current_site.the_post_type('project').post_type.post_tags.each do |tag| %>
-      <a href="#" class="project-filters__button" data-id="<%= tag.id %>"><%= tag.name %></a>
+      <a href="#" class="project-filters__button" data-id="<%= tag.id %>"><%= t(tag.name) %></a>
     <% end %>
   </div>
 </section>
@@ -30,7 +30,7 @@
               <h2 class="padding--bottom--tiny"><%= post.the_field('introduction') %></h2>
               <p class="small padding--bottom--mini text-grey">
                 <% techs.each do |tech| %>
-                  <%= tech.name %><% if not techs.last == tech %>, <% end %>
+                  <%= t(tech.name) %><% if not techs.last == tech %>, <% end %>
                 <% end %>
               </p>
               <p class="padding--bottom"><%= post.the_field('header') %></p>
@@ -58,7 +58,7 @@
             <h2 class="padding--bottom--mini"><%= post.the_field('introduction') %></h2>
             <p class="small padding--bottom">
               <% techs.each do |tech| %>
-                <%= tech.name %><% if not techs.last == tech %>, <% end %>
+                <%= t(tech.name) %><% if not techs.last == tech %>, <% end %>
               <% end %>
             </p>
             <span class="button button--light"><%= t('Read more') %></span>

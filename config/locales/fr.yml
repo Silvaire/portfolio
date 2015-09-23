@@ -30,3 +30,8 @@ fr:
   forgot_the_year: "Oups, il semblerait que vous ayez oublié que nous sommes en %{year} !"
   See my projects: "Voir mes projets"
   More about me: "Qui suis-je ?"
+  Ruby on Rails: "Ruby on Rails"
+  AJAX: "AJAX"
+  Sensors: "Capteurs"
+  Ruby Gems: "Ruby Gems"
+  Active Records: "Active Records"
