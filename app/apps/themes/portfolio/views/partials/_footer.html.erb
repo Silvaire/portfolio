@@ -1,6 +1,39 @@
-<footer class="padding--vertical--huge padding--horizontal">
-  <div class="row row--full-width">
-    <div class="locale-picker small-text-right">
+<footer class="padding--vertical--maxi">
+  <div class="row">
+    <div class="small-12 medium-5 large-5 columns">
+      <p class="site-author"><%= current_site.the_field('author') %></p>
+      <a target="_blank" href="http://maps.google.com/?q=<%= current_site.the_field('address').gsub( / *\n+/, ", ") %>"><%= simple_format(current_site.the_field('address')) %></a>
+    </div>
+    <div class="small-12 medium-5 large-3 columns small-padding--top medium-padding--top--none">
+      <div class="social-links">
+        <% if not current_site.the_field('linkedin').blank? %>
+          <a class="social-links__item" target="_blank" href="<%= current_site.the_field('linkedin') %>">
+            <i class="ion-social-linkedin"></i>
+          </a>
+        <% end %>
+        <% if not current_site.the_field('twitter').blank? %>
+          <a class="social-links__item" target="_blank" href="<%= current_site.the_field('twitter') %>">
+            <i class="ion-social-twitter"></i>
+          </a>
+        <% end %>
+        <% if not current_site.the_field('github').blank? %>
+          <a class="social-links__item" target="_blank" href="<%= current_site.the_field('github') %>">
+            <i class="ion-social-github"></i>
+          </a>
+        <% end %>
+      </div>
+      <a href="mailto:<%= current_site.the_field('email') %>">
+        <i class="ion-android-mail"></i>
+        <%= current_site.the_field('email') %>
+      </a>
+      <% current_site.get_field_values('phone').each do |phone| %>
+        <a href="tel:<%= phone.gsub(' ', '') %>">
+          <i class="ion-ios-telephone"></i>
+          <%= phone %>
+        </a>
+      <% end %>
+    </div>
+    <div class="small-12 medium-2 large-4 columns end locale-picker medium-text-right small-padding--top medium-padding--top--none">
       <% languages = current_site.get_languages %>
       <% languages.each do | lang | %>
         <h3 class="locale-picker__link <% if lang == I18n.locale %>locale-picker__link--active<% end %>"><a class="parent-style" href="<%= url_to_fixed("url_for", {locale: lang}) %>"><%= lang %></a></h3>

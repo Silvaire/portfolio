@@ -2,5 +2,36 @@ footer {
   position: relative;
   z-index: 1;
   background: $black-light;
-  color: $white;
+  color: $grey-lightest;
+  a {
+    font-size: 14px;
+    line-height: 1.5em;
+    letter-spacing: 0.05em;
+    color: $grey-lightest;
+    display: block;
+    &:hover {
+      color: $brown-light;
+    }
+    &:active, &:focus {
+      color: $grey-lightest;
+    }
+  }
+  .social-links {
+    &__item {
+      font-size: 18px;
+      padding-right: 5px;
+      display: inline-block;
+      width: 24px;
+    }
+  }
+  i {
+    width: 20px;
+    display: inline-block;
+    font-size: 18px;
+    line-height: 20px;
+    padding-right: 5px;
+  }
+  .site-author {
+    line-height: 27px;
+  }
 }

@@ -1,7 +1,7 @@
 /* =Global
 ----------------------------------------------- */
 *, *:after, *:before {
-  @include selection($brown-light, $green);
+  @include selection($grey-lightest, $black-light);
 }
 
 html {
