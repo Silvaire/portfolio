@@ -1,0 +1,31 @@
+<section class="not-found small-padding--vertical ">
+  <div class="row">
+    <h2 class="heading-1 not-found__title small-text-center padding--bottom">404</h2>
+    <p class="small-12 medium-offset-1 medium-10 large-offset-2 large-8 columns end small-text-center not-found__text"><%= t(:not_found) %></p>
+  </div>
+  <% post = current_site.the_post_type('project').the_posts().reorder('RANDOM()').limit(1).first.decorate %>
+  <div class="project--other small-padding--top large-padding--vertical">
+    <a href="<%= post.the_url %>" class="wrap-link">
+      <div class="row text-white bg-green" data-equalizer>
+        <div class="small-12 medium-4 large-3 columns end">
+          <div class="table remove-equalize-on-small small-padding--top medium-padding--none" data-equalizer-watch>
+            <div class="table__cell">
+              <div class="project--other__image-wrap">
+                <div class="project--other__image" style="<%= bgCover(post.the_thumb_url) %>"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="small-12 medium-8 large-9 columns padding--vertical remove-equalize-on-small small-text-center medium-text-left" data-equalizer-watch>
+          <h3 class="heading-3"><%= post.the_title %></h3>
+          <h2 class="padding--bottom--mini"><%= post.the_field('introduction') %></h2>
+          <p class="small padding--bottom"><%= post.the_field('technologies') %></p>
+          <span class="button button--light"><%= t('Read more') %></span>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="row small-text-center">
+    <a href="<%= url_to_fixed("root_url") %>" class="button"><%= t("Just bring me home") %></a>
+  </div>
+</section>

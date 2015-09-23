@@ -109,6 +109,9 @@ p,
   line-height: 1.5em;
   letter-spacing: 0.05em;
   margin-bottom: 0;
+  &.big, &--big {
+    font-size: 17px;
+  }
   &.small, &--small {
     font-size: 12px;
   }

@@ -69,7 +69,7 @@
     }
   }
   &.single-project__slideshow {
-    height: 600px;
+    // height: 600px;
     // height: 700px;
     // height: 100vh;
     @include mq(mediumDown) {
@@ -120,7 +120,7 @@
   &.rsBullets {
     width: 100%;
     position: absolute;
-    bottom: 0;
+    bottom: 20px;
     left: 0;
     text-align: center;
     z-index: 1000;

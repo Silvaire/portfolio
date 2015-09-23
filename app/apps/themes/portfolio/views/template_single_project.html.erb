@@ -10,14 +10,15 @@
     </div>
   <div class="row single-project__content">
     <div class="small-12 medium-9 columns end padding--bottom padding--top--mini">
-      <div class="crumbs padding--bottom--mini">
+      <div class="crumbs padding--bottom">
         <p><a class="parent-style" href="<%= current_site.the_post('projects').the_url %>"><%= current_site.the_post('projects').the_title %></a></p>&nbsp;/&nbsp;<p><%= @post.the_title %></p>
       </div>
-      <div class="single-project__categories padding--bottom">
-        <% @post.the_tags().each do |tag| %>
-        <p class="single-project__categories__item"><%= t(tag.name) %></p>
-        <% end %>
-      </div>
+      <!-- <div class="single-project__categories padding--bottom">
+        <%# @post.the_tags().each do |tag| %>
+        <p class="single-project__categories__item"><%#= t(tag.name) %></p>
+        <%# end %>
+      </div> -->
+      <p class="big text-green padding--bottom--tiny"><%= t(:project_skills) %> <%= @post.the_field('technologies') %></p>
       <h2 class="heading-2 padding--bottom"><%= @post.the_field('header') %></h2>
       <%= simple_format(@post.the_field('description')) %>
       <div class="single-project__links padding--top">
@@ -26,10 +27,9 @@
           <a class="button button--small" target="_blank" href="<%= hash["value"] %>"><%= hash["attr"] %></a>
         <% end %>
       </div>
-      <p class="text-grey padding--top"><%= t("Project skills:") %> <%= @post.the_field('technologies') %></p>
     </div>
     <div class="small-12 columns small-padding--bottom--maxi small-padding--horizontal--none large-padding--horizontal--mini">
-      <div class="slideshow slideshow--no-arrows slideshow--autoplay single-project__slideshow">
+      <div class="slideshow slideshow--no-arrows slideshow--autoplay slideshow--autoheight single-project__slideshow">
         <% @post.get_field_values('pictures').each do |url|%>
           <div class="slideshow__slide">
             <img class="rsImg" src="<%= url %>" />
