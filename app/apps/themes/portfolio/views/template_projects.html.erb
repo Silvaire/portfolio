@@ -21,22 +21,24 @@
     <% current_site.the_category('major').decorate.the_posts().reorder('posts.updated_at DESC').each do |post| %>
       <% post = post.decorate %>
       <% techs = post.the_tags %>
-      <div class="section-table project--major" data-techs="<% techs.each do |tech| %><%= tech.id %><% if not techs.last == tech %>,<% end %><% end %>">
-        <% switch_side = cycle('switch-side ', '') %> 
-        <div class="<%= switch_side  %>text-side">
-          <div class="padding--vertical small-padding--horizontal--mini medium-padding--horizontal--maxi large-padding--horizontal--huge">
-            <h3 class="heading-3"><%= post.the_title %></h3>
-            <h2 class="padding--bottom--tiny"><%= post.the_field('introduction') %></h2>
-            <p class="small padding--bottom--mini text-grey">
-              <% techs.each do |tech| %>
-                <%= tech.name %><% if not techs.last == tech %>, <% end %>
-              <% end %>
-            </p>
-            <p class="padding--bottom"><%= post.the_field('header') %></p>
-            <a href="<%= post.the_url %>" class="button"><%= t('Read more') %></a>
+      <div class="project project--major" data-techs="<% techs.each do |tech| %><%= tech.id %>,<% end %>">
+        <div class="section-table ">
+          <% switch_side = cycle('switch-side ', '') %> 
+          <div class="<%= switch_side  %>text-side">
+            <div class="padding--vertical small-padding--horizontal--mini medium-padding--horizontal--maxi large-padding--horizontal--huge">
+              <h3 class="heading-3"><%= post.the_title %></h3>
+              <h2 class="padding--bottom--tiny"><%= post.the_field('introduction') %></h2>
+              <p class="small padding--bottom--mini text-grey">
+                <% techs.each do |tech| %>
+                  <%= tech.name %><% if not techs.last == tech %>, <% end %>
+                <% end %>
+              </p>
+              <p class="padding--bottom"><%= post.the_field('header') %></p>
+              <a href="<%= post.the_url %>" class="button"><%= t('Read more') %></a>
+            </div>
           </div>
+          <div class="<%= switch_side  %>img-side" style="<%= bgCover(post.the_thumb_url) %>"></div>
         </div>
-        <div class="<%= switch_side  %>img-side" style="<%= bgCover(post.the_thumb_url) %>"></div>
       </div>
     <% end %>
   </div>
@@ -46,7 +48,7 @@
     <% current_site.the_category('minor').decorate.the_posts().reorder('posts.updated_at DESC').each do |post| %>
       <% post = post.decorate %>
       <% techs = post.the_tags %>
-      <div class="small-12 medium-6 large-4 columns end project--other remove-equalize-on-small <%= cycle('bg-green text-white' , '', 'bg-grey-light') %>" data-techs="<% techs.each do |tech| %><%= tech.id %><% if not techs.last == tech %>,<% end %><% end %>" data-equalizer-watch>
+      <div class="small-12 medium-6 large-4 columns end project project--other remove-equalize-on-small <%= cycle('bg-green text-white' , '', 'bg-grey-light') %>" data-techs="<% techs.each do |tech| %><%= tech.id %>,<% end %>" data-equalizer-watch>
         <a href="<%= post.the_url %>" class="wrap-link">
           <div class="small-padding--horizontal large-padding--horizontal--maxi small-padding--vertical medium-padding--vertical--maxi">
             <div class="project--other__image-wrap">

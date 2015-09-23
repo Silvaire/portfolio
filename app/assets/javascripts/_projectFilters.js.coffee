@@ -1,10 +1,10 @@
 enableProjectFilters = () ->
   $filters = $('.project-filters__button')
   if $filters.length
-    $projects = $('.project--major, .project--other')
+    $projects = $('.project')
     $filters.click ->
       $this = $(@)
-      $projects.hide()
+      $projects.addClass('project--filtered-out')
       if($this.hasClass('project-filters__button--active'))
         $this.removeClass('project-filters__button--active')
       else
@@ -13,9 +13,9 @@ enableProjectFilters = () ->
       if $activeFilters.length
         $activeFilters.each ->
           techId = $this.data('id')
-          $projects.filter("[data-techs*='" + techId + "']").show()
+          $projects.filter("[data-techs*='" + techId + ",']").removeClass('project--filtered-out')
       else
-        $projects.show()
+        $projects.removeClass('project--filtered-out')
       $this.blur()
       return false
 
