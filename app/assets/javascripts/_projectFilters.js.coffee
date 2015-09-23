@@ -12,7 +12,8 @@ enableProjectFilters = () ->
       $activeFilters = $filters.filter('.project-filters__button--active')
       if $activeFilters.length
         $activeFilters.each ->
-          techId = $this.data('id')
+          $filter = $(this)
+          techId = $filter.data('id')
           $projects.filter("[data-techs*='" + techId + ",']").removeClass('project--filtered-out')
       else
         $projects.removeClass('project--filtered-out')
