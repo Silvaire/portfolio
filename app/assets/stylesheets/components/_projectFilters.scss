@@ -5,13 +5,15 @@
   &__button {
     display: inline-block;
     margin: 2px;
-    padding: 10px;
-    border: solid 1px;
-    font-size: 12px;
+    color: $grey;
+    padding: 5px 10px;
+    border: solid 3px;
+    font-weight: 400;
+    font-size: 13px;
     &--active, &:hover, &:focus {
-      background: $grey-dark;
-      color: $white;
-      border: solid 1px $grey-dark;
+      // background: $grey-dark;
+      color: $green;
+      // border: solid 3px;
     }
   }
   &.sticky {
