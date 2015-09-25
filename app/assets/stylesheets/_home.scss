@@ -2,6 +2,16 @@
   height: 700px;
   height: 100vh;
   margin-top: -$header-height;
+  padding-top: $header-height;
+  &__content {
+    @include transition(opacity 0.4s, padding-top 0.4s);
+    padding-top: 30px;
+    opacity: 0;
+    &.loaded {
+      padding-top: 0;
+      opacity: 1;
+    }
+  }
   &__background-picture {
     @include blur(3px);
     position: absolute;
