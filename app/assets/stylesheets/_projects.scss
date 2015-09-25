@@ -1,8 +1,176 @@
+.projects-landing {
+  height: 700px;
+  height: 100vh;
+  position: relative;
+  padding-top: $header-height;
+  margin-top: -$header-height;
+  .projects-landing__featured {
+    position: relative;
+    height: calc(100% - 75px);
+    @include mq(mediumDown) {
+      height: auto;
+    }
+  }
+  .projects-landing__read-more {
+    padding: 15px 0;
+    height: 75px;
+  }
+}
 .project {
   @include transition(opacity 0.4s, height 0.4s, width 0.4s);
   opacity: 1;
   overflow: hidden;
-  &--major {
+  &--featured {
+    @include transition(width 1s cubic-bezier(0.57, 0.01, 0.13, 1.03));
+    background: $white;
+    font-size: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+    float: left;
+    &.loaded {
+      @include transition(none !important);
+    }
+    &:first-child {
+      background: $green-darker;
+      z-index: 5;
+      .button {
+        color: $green-darker;
+      }
+    }
+    &:nth-child(2) {
+      background: $green-dark;
+      .button {
+        color: $green-dark;
+      }
+    }
+    &:nth-child(3) {
+      background: $green;
+      .button {
+        color: $green;
+      }
+    }
+    &:nth-child(4) {
+      background: $green-light;
+      .button {
+        color: $green-light;
+      }
+    }
+    &:nth-child(5) {
+     background: $green-lighter; 
+     .button {
+        color: $green-lighter;
+      }
+    }
+    &__background {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      left: 0;
+      opacity: 0.25;
+      @include mq(mediumDown) {
+        display: none;
+      }
+    }
+    &__picture-wrap {
+      // position: absolute;
+      position: relative;
+      top: 15%;
+      margin-top: -65px;
+      margin: auto;
+      // left: 20%;
+      width: 130px;
+    }
+    &__picture-frame {
+      position: relative;
+      border-radius: 50%;
+      border: solid 3px;
+      padding-bottom: 100%;
+      overflow: hidden;
+    }
+    &__picture {
+      @include transition(filter 3s);
+      @include filter(grayscale(100%));
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+    &__content {
+      max-width: 275px;
+      height: 100%;
+      position: relative;
+      margin: auto;
+      .loaded > & {
+        max-width: 400px;
+      }
+    }
+    &__introduction {
+      @include transition(opacity 0.2s 0s);
+      position: absolute;
+      top: 60%;
+      width: 100%;
+      opacity: 0;
+      @include mq(mediumDown) {
+        position: static;
+        opacity: 1;
+      }
+    }
+    &__title {
+      @include transition(font-size 0.2s);
+      width: 100%;
+      position: absolute;
+      top: 45%;
+      @include mq(mediumDown) {
+        position: static;
+      }
+    }
+    &__button {
+      @include transition(opacity 0.2s 0s);
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      bottom: 10%;
+      opacity: 1;
+      @include mq(mediumDown) {
+        position: static;
+      }
+    }
+    &.kwicks-expanded {
+      .project--featured {
+        &__introduction {
+          @include transition(opacity 0.2s 0.2s);
+          opacity: 1;
+        }
+      }
+    }
+    &.kwicks-collapsed {
+      .project--featured {
+        &__picture-wrap {
+        }
+        &__title {
+          font-size: 13px;
+        }
+      }
+    }
+    &:hover {
+      .project--featured {
+        &__background {
+          @include radial-gradient(circle at 50% 50%, $white, $black);
+        }
+        &__picture {
+          @include filter(grayscale(0));
+        }
+      }
+    }
+    @include mq(mediumDown) {
+      position: static;
+    }
+  }
+  &--all {
     height: 450px;
   }
   &--other {
@@ -37,7 +205,7 @@
   }
   &--filtered-out {
     opacity: 0;
-    &.project--major {
+    &.project--all {
       height: 0;  
     }
     &.project--other {
@@ -95,7 +263,7 @@
 
 @include mq(mediumDown) {
   .project {
-    &--major {
+    &--all {
       height: auto;
     }
   }

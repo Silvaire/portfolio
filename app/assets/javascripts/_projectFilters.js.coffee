@@ -1,7 +1,7 @@
 enableProjectFilters = () ->
   $filters = $('.project-filters__button')
   if $filters.length
-    $projects = $('.project')
+    $projects = $('.project--all')
     $filters.click ->
       $this = $(@)
       $projects.removeClass('project--filtered-out')
@@ -21,7 +21,7 @@ enableProjectFilters = () ->
       $activeProjects = $projects.filter('.project:not(.project--filtered-out)')
       if $activeProjects.length
         $('.no-project').removeClass('no-project--show')
-        $activeProjects.filter('.project--major').each (index, element) ->
+        $activeProjects.filter('.project--all').each (index, element) ->
           $project = $(this)
           if index % 2 == 0
             $project.find('.text-side, .img-side').addClass('switch-side')

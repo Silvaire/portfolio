@@ -21,11 +21,14 @@
 
 #= require plugins/jquery.royalslider.min
 #= require plugins/rAF
+#= require plugins/kwicks.min
 
 #= require _mobileMenu
 #= require _scrollToElement
 #= require _slideshows
+#= require _home
 #= require _projectFilters
+#= require _projects
 #= require _globals
 
 #= require_self

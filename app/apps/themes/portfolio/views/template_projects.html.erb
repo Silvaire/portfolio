@@ -1,4 +1,55 @@
 <section class="section">
+  <div class="row row--full-width projects-landing">
+    <div class="projects-landing__featured bg-green kwicks kwicks-horizontal" id="featured-projects">
+      <% current_site.the_category('major').decorate.the_posts().reorder('posts.updated_at DESC').limit(3).each do |post| %>
+        <% orig = post %>
+        <% post = post.decorate %>
+        <% techs = post.the_tags %>
+        <div class="project project--featured padding--horizontal--tiny text-white" id="featured-project-<%= post.id %>">
+          <div class="project--featured__background"></div>
+          <div class="project--featured__content small-text-center">
+            <div class="project--featured__picture-wrap padding--top">
+              <div class="project--featured__picture-frame">
+                <div class="project--featured__picture" style="<%= bgCover(post.the_thumb_url) %>"></div>
+              </div>
+            </div>
+            <h2 class="heading-2 project--featured__title padding--top padding--bottom--mini"><%= post.the_title %></h2>
+            <h3 class="heading-3 large-padding--bottom--tiny project--featured__introduction small-padding--bottom"><%= post.the_field('introduction') %></h3>
+            <!-- <p class="small padding--bottom--mini project--featured__technologies"><%= post.the_field('technologies') %></p> -->
+            <div class="project--featured__button padding--bottom">
+              <a href="<%= post.the_url %>" class="button button--light"><%= t('Read more') %></a>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% current_site.the_category('major').decorate.the_posts().reorder('posts.updated_at DESC').limit(2).each do |post| %>
+        <% orig = post %>
+        <% post = post.decorate %>
+        <% techs = post.the_tags %>
+        <div class="project project--featured padding--horizontal--tiny text-white" id="featured-project-<%= post.id %>">
+          <div class="project--featured__background"></div>
+          <div class="project--featured__content small-text-center">
+            <div class="project--featured__picture-wrap padding--top">
+              <div class="project--featured__picture-frame">
+                <div class="project--featured__picture" style="<%= bgCover(post.the_thumb_url) %>"></div>
+              </div>
+            </div>
+            <h2 class="heading-2 project--featured__title padding--top padding--bottom--mini"><%= post.the_title %></h2>
+            <h3 class="heading-3 large-padding--bottom--tiny project--featured__introduction small-padding--bottom"><%= post.the_field('introduction') %></h3>
+            <!-- <p class="small padding--bottom--mini project--featured__technologies"><%= post.the_field('technologies') %></p> -->
+            <div class="project--featured__button padding--bottom">
+              <a href="<%= post.the_url %>" class="button button--light"><%= t('Read more') %></a>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="small-12 columns projects-landing__read-more small-text-center">
+      <a class="button scroll-to" href="#project-filters"><%= t('See all projects') %></a>
+    </div>
+  </div>
+</section>
+<!-- <section class="section">
   <div class="row small-text-center padding--vertical--maxi">
     <h2 class="small-12 columns heading-1 padding--bottom"><%= @post.the_field('descriptive-title') %></h2>
     <div class="small-12 medium-offset-1 medium-10 large-offset-2 large-8 columns end">
@@ -8,7 +59,7 @@
       <a class="button scroll-to" href="#project-filters"><%= t('Read') %></a>
     </div>
   </div>
-</section>
+</section> -->
 <section class="project-filters small-text-center padding--horizontal--mini padding--top--mini padding--bottom--mini" id="project-filters">
   <div class="row row--full-width">
     <% current_site.the_post_type('project').post_type.post_tags.each do |tag| %>
@@ -16,22 +67,21 @@
     <% end %>
   </div>
 </section>
-<section class="section padding--top" id="major-projects">
+<section class="section padding--top" id="all-projects">
   <div class="no-project padding--bottom">
     <h4 class="heading-1"><%= t(:no_project) %></h4>
   </div>
   <div class="row row--full-width">
-    <% current_site.the_category('major').decorate.the_posts().reorder('posts.updated_at DESC').each do |post| %>
+    <% current_site.the_post_type('project').decorate.the_posts().reorder('posts.updated_at DESC').each do |post| %>
       <% post = post.decorate %>
       <% techs = post.the_tags %>
-      <div class="project project--major" data-techs="<% techs.each do |tech| %><%= tech.id %>,<% end %>">
+      <div class="project project--all" data-techs="<% techs.each do |tech| %><%= tech.id %>,<% end %>">
         <div class="section-table ">
           <% switch_side = cycle('switch-side ', '') %> 
           <div class="<%= switch_side  %>text-side">
             <div class="padding--vertical small-padding--horizontal--mini medium-padding--horizontal--maxi large-padding--horizontal--huge">
-              <h3 class="heading-3"><%= post.the_title %></h3>
-              <h2 class="padding--bottom--tiny"><%= post.the_field('introduction') %></h2>
-              <p class="small padding--bottom--mini text-grey"><%= post.the_field('technologies') %></p>
+              <h2 class="heading-2"><%= post.the_title %></h2>
+              <h3 class="padding--top--tiny padding--bottom"><%= post.the_field('introduction') %></h3>
               <p class="padding--bottom"><%= post.the_field('header') %></p>
               <a href="<%= post.the_url %>" class="button"><%= t('Read more') %></a>
             </div>
@@ -42,24 +92,24 @@
     <% end %>
   </div>
 </section>
-<section class="section" id="other-projects">
+<!-- <section class="section" id="other-projects">
   <div class="row row--full-width collapse small-text-center" data-equalizer>
-    <% current_site.the_category('minor').decorate.the_posts().reorder('posts.updated_at DESC').each do |post| %>
-      <% post = post.decorate %>
-      <% techs = post.the_tags %>
-      <div class="small-12 medium-6 large-4 columns end project project--other remove-equalize-on-small <%= cycle('bg-green text-white' , '', 'bg-grey-light') %>" data-techs="<% techs.each do |tech| %><%= tech.id %>,<% end %>" data-equalizer-watch>
-        <a href="<%= post.the_url %>" class="wrap-link">
+    <%# current_site.the_category('minor').decorate.the_posts().reorder('posts.updated_at DESC').each do |post| %>
+      <%# post = post.decorate %>
+      <%# techs = post.the_tags %>
+      <div class="small-12 medium-6 large-4 columns end project project--other remove-equalize-on-small <%#= cycle('bg-green text-white' , '', 'bg-grey-light') %>" data-techs="<%# techs.each do |tech| %><%#= tech.id %>,<%# end %>" data-equalizer-watch>
+        <a href="<%#= post.the_url %>" class="wrap-link">
           <div class="small-padding--horizontal large-padding--horizontal--maxi small-padding--vertical medium-padding--vertical--maxi">
             <div class="project--other__image-wrap">
-              <div class="project--other__image" style="<%= bgCover(post.the_thumb_url) %>"></div>
+              <div class="project--other__image" style="<%#= bgCover(post.the_thumb_url) %>"></div>
             </div>
-            <h3 class="heading-3 padding--top"><%= post.the_title %></h3>
-            <h2 class="padding--bottom--mini"><%= post.the_field('introduction') %></h2>
-            <p class="small padding--bottom"><%= post.the_field('technologies') %></p>
-            <span class="button button--light"><%= t('Read more') %></span>
+            <h3 class="heading-3 padding--top"><%#= post.the_title %></h3>
+            <h2 class="padding--bottom--mini"><%#= post.the_field('introduction') %></h2>
+            <p class="small padding--bottom"><%#= post.the_field('technologies') %></p>
+            <span class="button button--light"><%#= t('Read more') %></span>
           </div>
         </a>
       </div>
-    <% end %>
+    <%# end %>
   </div>
-</section>
+</section> -->
