@@ -19,7 +19,7 @@
         <%# end %>
       </div> -->
       <p class="big text-green padding--bottom--tiny"><%= t(:project_skills) %> <%= @post.the_field('technologies') %></p>
-      <h2 class="heading-2 padding--bottom"><%= @post.the_field('header') %></h2>
+      <h3 class="heading-3 padding--bottom"><%= @post.the_field('header') %></h3>
       <%= simple_format(@post.the_field('description')) %>
       <div class="single-project__links padding--top">
         <% @post.get_field_values('links').each do |hash| %>
@@ -49,9 +49,7 @@
                   <div class="project--other__image-wrap">
                     <div class="project--other__image" style="<%= bgCover(post.the_thumb_url) %>"></div>
                   </div>
-                  <h3 class="heading-3 padding--top"><%= post.the_title %></h3>
-                  <h2 class="padding--bottom--mini"><%= post.the_field('introduction') %></h2>
-                  <p class="small padding--bottom"><%= post.the_field('technologies') %></p>
+                  <h2 class="heading-2 padding--vertical--maxi"><%= post.the_title %></h2>
                   <span class="button button--light"><%= t('Read more') %></span>
                 </div>
               </a>
