@@ -13,8 +13,8 @@
   text-transform: uppercase;
   margin-bottom: 0;
   &:hover, &:focus {
-    background: $brown-light;
-    color: $black-light;
+    background: $green-lighter;
+    // color: $black-light;
     // color: $green;
     // border: solid 1px $green;
   }
@@ -22,7 +22,8 @@
     background: $grey-lightest;
     color: $black-light;
     &:hover, &:focus {
-      background: $brown-light;
+      background: $green-lightest;
+      color: $black-light;
       // border: solid 1px $grey-lightest;
     }
   }
