@@ -51,6 +51,7 @@ var scrollLink = function() {
     }
     $('html').addClass('scrolling');
     scrollToElement(target, offset);
+    $this.blur();
     return false;
   });
 };
