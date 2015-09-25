@@ -13,7 +13,7 @@
         <!-- END META SECTION -->
         <%= stylesheet_link_tag    'foundation', media: 'all', 'data-turbolinks-track' => true %>
         <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-        <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
         <%= raw the_head %>
     </head>
     <body class="<%= "#{@post.post_type.name} #{@post.the_slug}" if not @post.blank? %>">

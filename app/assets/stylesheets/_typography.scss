@@ -80,10 +80,10 @@ h1,
   }
 }
 
-h2,
-.heading-2 {
+h3,
+.heading-3 {
   @include sansSerif;
-  font-size: 24px;
+  font-size: 19px;
   line-height: 1.25em;
   letter-spacing: -0.01em;
   color: inherit;
@@ -92,13 +92,14 @@ h2,
   }
 }
 
-h3,
-.heading-3 {
+h2,
+.heading-2 {
   @include sansSerif;
-  font-size: 12px;
-  line-height: 1.83em;
+  font-size: 28px;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0;
+  line-height: 0.9em;
+  font-weight: 700;
   color: inherit;
 }
 
