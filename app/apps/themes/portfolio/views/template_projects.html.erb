@@ -1,7 +1,7 @@
 <section class="section">
   <div class="row row--full-width projects-landing">
     <div class="projects-landing__featured bg-green kwicks kwicks-horizontal" id="featured-projects">
-      <% current_site.the_category('major').decorate.the_posts().reorder('posts.updated_at DESC').limit(3).each do |post| %>
+      <% current_site.the_category('major').decorate.the_posts().limit(3).each do |post| %>
         <% orig = post %>
         <% post = post.decorate %>
         <% techs = post.the_tags %>
@@ -22,7 +22,7 @@
           </div>
         </div>
       <% end %>
-      <% current_site.the_category('major').decorate.the_posts().reorder('posts.updated_at DESC').limit(2).each do |post| %>
+      <% current_site.the_category('major').decorate.the_posts().limit(2).each do |post| %>
         <% orig = post %>
         <% post = post.decorate %>
         <% techs = post.the_tags %>
@@ -92,24 +92,3 @@
     <% end %>
   </div>
 </section>
-<!-- <section class="section" id="other-projects">
-  <div class="row row--full-width collapse small-text-center" data-equalizer>
-    <%# current_site.the_category('minor').decorate.the_posts().reorder('posts.updated_at DESC').each do |post| %>
-      <%# post = post.decorate %>
-      <%# techs = post.the_tags %>
-      <div class="small-12 medium-6 large-4 columns end project project--other remove-equalize-on-small <%#= cycle('bg-green text-white' , '', 'bg-grey-light') %>" data-techs="<%# techs.each do |tech| %><%#= tech.id %>,<%# end %>" data-equalizer-watch>
-        <a href="<%#= post.the_url %>" class="wrap-link">
-          <div class="small-padding--horizontal large-padding--horizontal--maxi small-padding--vertical medium-padding--vertical--maxi">
-            <div class="project--other__image-wrap">
-              <div class="project--other__image" style="<%#= bgCover(post.the_thumb_url) %>"></div>
-            </div>
-            <h3 class="heading-3 padding--top"><%#= post.the_title %></h3>
-            <h2 class="padding--bottom--mini"><%#= post.the_field('introduction') %></h2>
-            <p class="small padding--bottom"><%#= post.the_field('technologies') %></p>
-            <span class="button button--light"><%#= t('Read more') %></span>
-          </div>
-        </a>
-      </div>
-    <%# end %>
-  </div>
-</section> -->
