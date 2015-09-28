@@ -2,14 +2,6 @@
   <div class="row row--full-width">
     <div class="small-12 medium-12 large-12 columns">
       <div class="site-header">
-        <!-- <div class="site-branding">
-          <h1 class="site-title">
-            <a href="<%= @post.the_url() %>" rel="home">
-              <%= image_tag current_site.the_logo, class: "img-responsive" %>
-              <span class="hide"><%= current_site.the_title %></span>
-            </a>
-          </h1>
-        </div> -->
         <nav id="primary-navigation" class="primary-navigation" role="navigation">
           <%= raw my_draw_menu({callback_item:lambda{|args| 
             if current_site.the_post(current_site.options[:home_page]).the_url(as_path:true) == args[:link][:link]
@@ -35,11 +27,6 @@
       </div>
     </div>
   </div>
-  <nav class="mobile-navigation">
-    <div class="mobile-navigation__content">
-      <%= raw my_draw_menu() %>
-    </div>
-  </nav>
 </header>
 <div class="ie-disclaimer">
   <div class="ie-disclaimer__inner">
