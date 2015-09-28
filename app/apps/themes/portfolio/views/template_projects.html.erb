@@ -1,18 +1,14 @@
 <section class="section">
   <div class="row row--full-width projects-landing">
-    <div class="projects-landing__featured bg-green kwicks kwicks-horizontal" id="featured-projects">
+    <div class="projects-landing__featured kwicks kwicks-horizontal green-row bg-green" id="featured-projects">
       <% current_site.the_category('major').decorate.the_posts().limit(3).each do |post| %>
         <% orig = post %>
         <% post = post.decorate %>
         <% techs = post.the_tags %>
-        <div class="project project--featured padding--horizontal--tiny text-white" id="featured-project-<%= post.id %>">
+        <div class="project project--featured padding--horizontal--tiny green-row__item" id="featured-project-<%= post.id %>">
           <div class="project--featured__background"></div>
           <div class="project--featured__content small-text-center">
-            <div class="project--featured__picture-wrap padding--top">
-              <div class="project--featured__picture-frame">
-                <div class="project--featured__picture" style="<%= bgCover(post.the_thumb_url) %>"></div>
-              </div>
-            </div>
+            <div class="project--featured__picture" style="<%= bgCover(post.the_thumb_url) %>"></div>
             <h2 class="heading-2 project--featured__title padding--top padding--bottom--mini"><%= post.the_title %></h2>
             <h3 class="heading-3 large-padding--bottom--tiny project--featured__introduction small-padding--bottom"><%= post.the_field('introduction') %></h3>
             <!-- <p class="small padding--bottom--mini project--featured__technologies"><%= post.the_field('technologies') %></p> -->
@@ -26,14 +22,10 @@
         <% orig = post %>
         <% post = post.decorate %>
         <% techs = post.the_tags %>
-        <div class="project project--featured padding--horizontal--tiny text-white" id="featured-project-<%= post.id %>">
+        <div class="project project--featured padding--horizontal--tiny green-row__item" id="featured-project-<%= post.id %>">
           <div class="project--featured__background"></div>
           <div class="project--featured__content small-text-center">
-            <div class="project--featured__picture-wrap padding--top">
-              <div class="project--featured__picture-frame">
-                <div class="project--featured__picture" style="<%= bgCover(post.the_thumb_url) %>"></div>
-              </div>
-            </div>
+            <div class="project--featured__picture" style="<%= bgCover(post.the_thumb_url) %>"></div>
             <h2 class="heading-2 project--featured__title padding--top padding--bottom--mini"><%= post.the_title %></h2>
             <h3 class="heading-3 large-padding--bottom--tiny project--featured__introduction small-padding--bottom"><%= post.the_field('introduction') %></h3>
             <!-- <p class="small padding--bottom--mini project--featured__technologies"><%= post.the_field('technologies') %></p> -->
@@ -49,17 +41,6 @@
     </div>
   </div>
 </section>
-<!-- <section class="section">
-  <div class="row small-text-center padding--vertical--maxi">
-    <h2 class="small-12 columns heading-1 padding--bottom"><%= @post.the_field('descriptive-title') %></h2>
-    <div class="small-12 medium-offset-1 medium-10 large-offset-2 large-8 columns end">
-      <%= simple_format(@post.the_field('description')) %>
-    </div>
-    <div class="small-12 columns padding--top">
-      <a class="button scroll-to" href="#project-filters"><%= t('Read') %></a>
-    </div>
-  </div>
-</section> -->
 <section class="project-filters small-text-center padding--horizontal--mini padding--top--mini padding--bottom--mini" id="project-filters">
   <div class="row row--full-width">
     <% current_site.the_post_type('project').post_type.post_tags.each do |tag| %>
