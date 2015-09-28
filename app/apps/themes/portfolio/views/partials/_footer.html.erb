@@ -36,7 +36,7 @@
     <div class="small-12 medium-2 large-4 columns end locale-picker medium-text-right small-padding--top medium-padding--top--none">
       <% languages = current_site.get_languages %>
       <% languages.each do | lang | %>
-        <h3 class="locale-picker__link <% if lang == I18n.locale %>locale-picker__link--active<% end %>"><a class="parent-style" href="<%= url_to_fixed("url_for", {locale: lang}) %>"><%= lang %></a></h3>
+        <a class="locale-picker__link <% if lang == I18n.locale %>locale-picker__link--active<% end %>" href="<%= url_to_fixed("url_for", {locale: lang}) %>"><%= lang %></a>
         <% if not languages.last == lang %> | <% end %>
       <% end %>
     </div>
