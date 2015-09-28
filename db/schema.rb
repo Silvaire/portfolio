@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150611161134) do
+ActiveRecord::Schema.define(version: 20150926095310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,13 +80,36 @@ ActiveRecord::Schema.define(version: 20150611161134) do
   add_index "metas", ["object_class"], name: "index_metas_on_object_class", using: :btree
   add_index "metas", ["objectid"], name: "index_metas_on_objectid", using: :btree
 
+  create_table "plugins_attacks", force: :cascade do |t|
+    t.string   "path"
+    t.string   "browser_key"
+    t.integer  "site_id"
+    t.datetime "created_at"
+  end
+
+  add_index "plugins_attacks", ["browser_key"], name: "index_plugins_attacks_on_browser_key", using: :btree
+  add_index "plugins_attacks", ["path"], name: "index_plugins_attacks_on_path", using: :btree
+  add_index "plugins_attacks", ["site_id"], name: "index_plugins_attacks_on_site_id", using: :btree
+
+  create_table "plugins_contact_forms", force: :cascade do |t|
+    t.integer  "site_id"
+    t.integer  "count"
+    t.integer  "parent_id"
+    t.string   "name"
+    t.string   "slug"
+    t.text     "description"
+    t.text     "value"
+    t.text     "settings"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.string   "slug"
     t.text     "content"
     t.text     "content_filtered"
     t.string   "status",           default: "published"
-    t.integer  "comment_count",    default: 0
     t.datetime "published_at"
     t.integer  "post_parent"
     t.string   "visibility",       default: "public"
@@ -95,6 +118,8 @@ ActiveRecord::Schema.define(version: 20150611161134) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "post_order",       default: 0
+    t.integer  "taxonomy_id"
   end
 
   add_index "posts", ["post_class"], name: "index_posts_on_post_class", using: :btree
