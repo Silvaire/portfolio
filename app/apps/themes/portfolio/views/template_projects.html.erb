@@ -8,7 +8,9 @@
         <div class="project project--featured padding--horizontal--tiny green-row__item" id="featured-project-<%= post.id %>">
           <div class="project--featured__background"></div>
           <div class="project--featured__content small-text-center">
-            <div class="project--featured__picture" style="<%= bgCover(post.the_thumb_url) %>"></div>
+            <div class="project--featured__picture-wrap">
+              <div class="project--featured__picture" style="<%= bgCover(post.the_thumb_url) %>"></div>
+            </div>
             <h2 class="heading-2 project--featured__title padding--top padding--bottom--mini"><%= post.the_title %></h2>
             <h3 class="heading-3 large-padding--bottom--tiny project--featured__introduction small-padding--bottom"><%= post.the_field('introduction') %></h3>
             <!-- <p class="small padding--bottom--mini project--featured__technologies"><%= post.the_field('technologies') %></p> -->
@@ -25,7 +27,9 @@
         <div class="project project--featured padding--horizontal--tiny green-row__item" id="featured-project-<%= post.id %>">
           <div class="project--featured__background"></div>
           <div class="project--featured__content small-text-center">
-            <div class="project--featured__picture" style="<%= bgCover(post.the_thumb_url) %>"></div>
+            <div class="project--featured__picture-wrap">
+              <div class="project--featured__picture" style="<%= bgCover(post.the_thumb_url) %>"></div>
+            </div>
             <h2 class="heading-2 project--featured__title padding--top padding--bottom--mini"><%= post.the_title %></h2>
             <h3 class="heading-3 large-padding--bottom--tiny project--featured__introduction small-padding--bottom"><%= post.the_field('introduction') %></h3>
             <!-- <p class="small padding--bottom--mini project--featured__technologies"><%= post.the_field('technologies') %></p> -->

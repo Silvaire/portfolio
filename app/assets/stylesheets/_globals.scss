@@ -13,7 +13,7 @@ html {
 
 body {
   @extend %basefont;
-  background-color: $white;
+  background-color: $body-bg-color;
   height: auto;
   margin: 0 auto;
   min-height: 340px;

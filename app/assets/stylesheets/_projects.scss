@@ -35,17 +35,22 @@
     &:first-child {
       z-index: 5;
     }
-    &__picture {
-      @include transition(0.4s);
-      @include filter(grayscale(100%));
+    &__picture-wrap {
+      border-radius: 50%;
+      overflow: hidden;
       position: relative;
       margin: auto;
-      border-radius: 50%;
       top: 15%;
       width: 133px;
       height: 133px;
-      border: solid 3px;
+    }
+    &__picture {
+      @include transition(0.4s);
+      @include filter(grayscale(100%));
       border-radius: 50%;
+      width: 133px;
+      height: 133px;
+      border: solid 3px;
     }
     &__content {
       max-width: 275px;
@@ -119,6 +124,10 @@
     height: 450px;
   }
   &--other {
+    &__image-wrap {
+      border-radius: 50%;
+      overflow: hidden;
+    }
     &__image {
       @include transition(0.4s);
       @include filter(grayscale(100%));
@@ -128,7 +137,6 @@
       height: 133px;
       border: solid 3px;
       position: relative;
-      border-radius: 50%;
       // z-index: 3;
     }
     &:hover {
@@ -177,6 +185,15 @@
       left: 0;
       padding: 0 15px;
     }
+    .ie9 & {
+      &__image {
+        position: absolute;
+        height: 100%;
+      }
+      &__title {
+        // position: static;
+      }
+    }
   }
   &__categories {
     &__item {
@@ -190,6 +207,7 @@
     }
   }
   &__content {
+    background: $body-bg-color;
     position: relative;
     z-index: 2;
   }
