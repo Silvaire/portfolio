@@ -1,8 +1,8 @@
     <!DOCTYPE html>
-    <!--[if lt IE 7 ]> <html lang="<%= I18n.locale %>" class="ie6 ielt9 no-js"> <![endif]-->
-    <!--[if IE 7 ]>    <html lang="<%= I18n.locale %>" class="ie7 ielt9 no-js"> <![endif]-->
-    <!--[if IE 8 ]>    <html lang="<%= I18n.locale %>" class="ie8 ielt9 no-js"> <![endif]-->
-    <!--[if IE 9 ]>    <html lang="<%= I18n.locale %>" class="ie9 no-js"> <![endif]-->
+    <!--[if lt IE 7 ]> <html lang="<%= I18n.locale %>" class="ie6 ielt9"> <![endif]-->
+    <!--[if IE 7 ]>    <html lang="<%= I18n.locale %>" class="ie7 ielt9"> <![endif]-->
+    <!--[if IE 8 ]>    <html lang="<%= I18n.locale %>" class="ie8 ielt9"> <![endif]-->
+    <!--[if IE 9 ]>    <html lang="<%= I18n.locale %>" class="ie9"> <![endif]-->
     <!--[if (gt IE 9)|!(IE)]><!--> <html lang="<%= I18n.locale %>"> <!--<![endif]-->
     <head>
         <!-- META SECTION -->
@@ -16,7 +16,7 @@
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
         <%= raw the_head %>
     </head>
-    <body class="<%= "#{@post.post_type.name} #{@post.the_slug}" if not @post.blank? %>">
+    <body class="<%= "section-#{@post.post_type.decorate.the_slug} #{@post.the_slug}" if not @post.blank? %>">
 
     <!-- container -->
     <div class="container">
