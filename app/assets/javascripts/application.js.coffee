@@ -17,8 +17,6 @@
 #= require headroom.js/dist/headroom
 #= require headroom.js/dist/jQuery.headroom
 
-
-
 #= require plugins/jquery.royalslider.min
 #= require plugins/rAF
 #= require plugins/kwicks.min

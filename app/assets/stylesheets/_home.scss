@@ -1,24 +1,45 @@
+.section--homepage {
+  @include perspective(500px);
+  @include transform-origin(center center);
+  @include transform-style(preserve-3d);
+}
+
 .homepage {
   height: 700px;
   height: 100vh;
   margin-top: -$header-height;
   padding-top: $header-height;
   &__content {
-    @include transition(opacity 0.4s, padding-top 0.4s);
-    padding-top: 30px;
+    @include transition(opacity 0.8s 0s, padding-top 0.8s 0s);
+    padding-top: 50px;
     opacity: 0;
-    &.loaded {
+    .loaded & {
       padding-top: 0;
       opacity: 1;
     }
   }
-  &__background-picture {
-    @include blur(3px);
+  &__background {
+    @include transform-style(preserve-3d);
+    @include transition(transform 0.8s ease-out);
+    @include transform(translate3d(0, 0, -110px));
+    overflow: hidden;
     position: absolute;
-    top: -10px;
-    left: -10px;
-    bottom: -10px;
-    right: -10px;
+    top: calc(#{$header-height} - 11.1%);
+    left: -11.1%;
+    bottom: -11.1%;
+    right: -11.1%;
+    .loaded & {
+      @include transform(translate3d(0, 0, 0px));
+    }
+  }
+  &__background-picture {
+    @include transform-style(preserve-3d);
+    -webkit-filter: blur(3px); // Only blur on webkit, because this makes the movement super laggy on firefox
+    top: -3px;
+    left: -3px;
+    position: absolute;
+    right: -3px;
+    bottom: -3px;
   }
   &__title {
     font-size: 100px;
@@ -38,6 +59,9 @@
     &__title {
       font-size: 50px;
       font-weight: 100;
+    }
+    &__background {
+      top: $mobile-header-height;
     }
     &__content p {
       font-size: 15px;
