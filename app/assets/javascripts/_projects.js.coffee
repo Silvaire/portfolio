@@ -1,17 +1,17 @@
 initializeKwicks = ($projects) ->
-  $projects.addClass('loaded');
-  $('.kwicks').kwicks({
+  $projects.addClass('loaded')
+  $kwicks = $('.kwicks')
+  $kwicks.filter(':not(.initialized)').kwicks({
     maxSize : '40%',
     behavior: 'menu',
     spacing: 0,
     duration: 400,
     easing: "easeOutCubic"
   })
+  $kwicks.addClass('initialized')
 
 removeKwicks = ($projects) ->
-  $('.kwicks').kwicks('destroy')
-  $projects.each ->
-    $this.css({width:'', left:''});
+  $('.kwicks.initialized').kwicks('destroy').removeClass('initialized')
 
 enableMajorProjectsLanding = () ->
   $featuredProjects = $('.project--featured')
