@@ -1,2 +1,85 @@
-<%= @post.the_title %>
-<%= @post.the_field('descriptive-title') %>
+<section class="section section--about">
+  <div class="me">
+    <div class="me__summary">
+      <ul class="me__companies"></ul>
+      <ul class="me__studies"></ul>
+      <ul class="me__projects"></ul>
+      <ul class="me__languages"></ul>
+      <ul class="me__locations"></ul>
+      <ul class="me__skills"></ul>
+      <ul class="me__others"></ul>
+    </div>
+    <div class="timeline">
+      <div class="timeline__summary">
+        <div class="timeline__summary__item timeline__current-year"></div>
+        <div class="timeline__summary__item timeline__current-location"></div>
+        <div class="timeline__summary__item timeline__current-company"></div>
+        <div class="timeline__summary__item timeline__current-study"></div>
+      </div>
+      <div class="timeline__years">
+        <div class="timeline__years__content table__cell"></div>
+      </div>
+    </div>
+    <div class="me__data events">
+      <ul>
+        <% current_site.the_post_type('event').post_type.posts.sort_by_field('start-date', 'ASC').where(status:'published').each do |event| %>
+          <% event = event.decorate %>
+          
+          <li 
+            id="life-event-<%= event.id %>"
+            class="life-event events__item"
+            data-title="<%= event.the_title %>"
+            data-event-id="<%= event.id %>"
+            data-start-date="<%= event.the_field('start-date') %>"
+            data-end-date="<%= event.the_field('end-date') %>"
+            
+            data-company="<%= event.the_field('company') %>"
+            data-location="<%= event.the_field('location') %>"
+            data-study="<%= event.the_field('study') %>"
+            data-project="<%= event.the_field('project') %>"
+            data-skills="<%= event.the_field('skills') %>"
+            data-language="<%= event.the_field('language') %>"
+            data-tags='<% tags = event.the_tags %>[<% tags.each do |tag| %>"<%= tag.name %>"<% if not tags.last == tag %>,<% end %><% end %>]'
+            >
+            <div class="life-event__text">
+              <div class="life-event__title"><%= event.the_title %></div>
+              <!-- <div class="life-event__period">
+                <%= Date.strptime(event.the_field('start-date'), '%Y-%m-%d').strftime('%d.%m.%Y') %>
+                <% if event.the_field('end-date').blank? %>
+                  - <%= t("Today") %>
+                <% elsif event.the_field('start-date') != event.the_field('end-date') %>
+                  - <%= Date.strptime(event.the_field('end-date'), '%Y-%m-%d').strftime('%d.%m.%Y') %>
+                <% end %>
+              </div> -->
+              <!-- <div class="life-event__location"><%= event.the_field('location') %></div> -->
+              <div class="life-event__introduction"><%= event.the_field('introduction') %></div>
+              <div class="life-event__description"><%= simple_format(event.the_field('description')) %></div>
+              <div class="life-event__skills"><%= event.the_field('skills') %></div>
+              <div class="life-event__links">
+                <% links = event.get_field_values('links') %>
+                <% links.each do |string| %>
+                  <% hash = JSON.parse(string) %>
+                  <% if not hash['attr'].blank? and not hash['value'].blank? %>
+                    <a class="button life-event__link" href="<%= hash['value'] %>"><%= hash['attr'] %></a>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+            <div class="life-event__picture">
+              <img alt="<%= event.the_title %>" src="<%= event.the_field('picture') %>" />
+            </div>
+            
+            <!-- 
+            data-icon="<%= event.the_field('icon') %>"
+            data-introduction="<%= event.the_field('introduction') %>"
+            data-description="<%= simple_format(event.the_field('description')) %>"
+            data-picture="<%= event.the_field('picture') %>"
+            data-links='<% links = event.get_field_values('links') %>[<% links.each do |string| %><% hash = JSON.parse(string) %><% if not hash['attr'].blank? and not hash['value'].blank? %>["<%= hash['attr'] %>","<%= hash['value'] %>"]<% if not links.last == string %>,<% end %><% end %><% end %>]' 
+            -->
+
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</section>

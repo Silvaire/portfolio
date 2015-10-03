@@ -27,6 +27,7 @@
 #= require _home
 #= require _projectFilters
 #= require _projects
+#= require _me
 #= require _globals
 
 #= require_self
