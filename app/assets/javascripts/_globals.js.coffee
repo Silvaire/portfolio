@@ -1,8 +1,17 @@
+window.delay = (ms, func) -> setTimeout func, ms
+
 initializeHeadroom = () ->
   $("html").headroom()
 
+windowLoadChecker = ->
+  window.windowHasLoaded = false
+  $(window).load ->
+    window.windowHasLoaded = true
+
+
 $ ->
-  initializeHeadroom();
+  initializeHeadroom()
+  windowLoadChecker()
   $(document).foundation({
     reveal:
       opened: ->

@@ -12,6 +12,7 @@ $grey-dark: #58595b;
 $black-light: #363942;
 
 $brown-light: #D8CAA8;
+$brown: #d9b86c;
 
 $green-lightest: #DDEDDA;
 $green-lighter: #45BF55;
@@ -30,6 +31,8 @@ $header-height: 104px;
 $mini-header-height: 52px;
 $mobile-header-height: 60px;
 
+$metaLineWidth: 20px;
+
 // Define a color list that is then looped through to create BEM syntax
 $colorList: (
   'black': $black,
@@ -41,6 +44,7 @@ $colorList: (
   'black-light': $black-light,
   'green': $green,
   'brown-light': $brown-light,
+  'brown': $brown,
 
 );
 

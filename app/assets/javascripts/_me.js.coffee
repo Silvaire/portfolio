@@ -51,6 +51,8 @@ class Life
     this.years = {}
     this.$summary = $('.me__summary')
     this.$timeline = $('.timeline')
+    this.switchSide = 'switch-side'
+    this.changingEvent = false
 
   initializeAtLatestEvent: () ->
     this.activeEventIndex = 0
@@ -81,6 +83,7 @@ class Life
         index = this._array.length - 1
       previousActiveEventIndex = this.activeEventIndex
       this.activeEventIndex = index
+      this.movingForward = previousActiveEventIndex <= this.activeEventIndex
       this.updateTimelineMeta(this.activeEventIndex)
       if previousActiveEventIndex > this.activeEventIndex
         while previousActiveEventIndex > this.activeEventIndex
@@ -158,47 +161,118 @@ class Life
 
   updateTimelineMeta: (newActiveEventIndex) ->
     newActiveEvent = this.lifeEvents[this._array[newActiveEventIndex]]
-    this.currentYear = newActiveEvent.startYear()
+    this.currentEventYear = newActiveEvent.startYear()
     newLocation = null
     newCompany = null
     newStudy = null
+    newPreviousLocation = null
+    newPreviousCompany = null
+    newPreviousStudy = null
     index = newActiveEventIndex
-    while (not newLocation or not newCompany or not newStudy) and index >= 0
+    this.currentEventHasNext = newActiveEventIndex < this._array.length - 1
+    this.currentEventHasPrevious = newActiveEventIndex > 0
+    currentEventHasLocation = newActiveEvent.location?
+    currentEventHasStudy = newActiveEvent.study?
+    currentEventHasCompany = newActiveEvent.company?
+
+    updatesTempValues = (value, tempValue, tempPreviousValue, previousIsCurrent) ->
+      if not previousIsCurrent and tempValue and not tempPreviousValue
+        tempPreviousValue = value
+      if not tempValue and value
+        tempValue = value
+      if previousIsCurrent and tempValue and not tempPreviousValue
+        tempPreviousValue = tempValue
+      [tempValue,tempPreviousValue]
+
+    while (not newPreviousLocation or not newPreviousCompany or not newPreviousStudy) and index >= 0
       lifeEvent = this.lifeEvents[this._array[index]]
       if not lifeEvent.endDate or lifeEvent.endDate >= newActiveEvent.startDate
         location = lifeEvent.location
         company = lifeEvent.company
         study = lifeEvent.study
-        if not newLocation and location
-          newLocation = location
-        if not newCompany and company
-          newCompany = company
-        if not newStudy and study
-          newStudy = study
+        
+        [newLocation,newPreviousLocation] = updatesTempValues(location, newLocation, newPreviousLocation, !currentEventHasLocation)
+        [newCompany,newPreviousCompany] = updatesTempValues(company, newCompany, newPreviousCompany, !currentEventHasCompany)
+        [newStudy,newPreviousStudy] = updatesTempValues(study, newStudy, newPreviousStudy, !currentEventHasStudy)
+
       index--
-    this.currentLocation = newLocation
-    this.currentCompany = newCompany
-    this.currentStudy = newStudy
+    this.currentEventChangesLocation = newLocation != newPreviousLocation
+    this.currentEventChangesStudy = newStudy != newPreviousStudy
+    this.currentEventChangesCompany = newCompany != newPreviousCompany
+    this.currentEventLocation = newLocation
+    this.currentEventCompany = newCompany
+    this.currentEventStudy = newStudy
+    this.currentEventPreviousLocation = newPreviousLocation
+    this.currentEventPreviousCompany = newPreviousCompany
+    this.currentEventPreviousStudy = newPreviousStudy
     this.displayTimelineMeta()
 
   displayTimelineMeta: ->
-    newYear = "#{this.currentYear}"
-    $yearContainer = this.$timeline.find('.timeline__current-year')
+    $summary = this.$timeline.find('.timeline__summary')
+    if this.currentEventHasPrevious
+      $summary.removeClass('no-previous-event')
+    else 
+      $summary.addClass('no-previous-event')
+    if this.currentEventHasNext
+      $summary.removeClass('no-next-event')
+    else 
+      $summary.addClass('no-next-event')
+
+    newYear = "#{this.currentEventYear}"
+    $yearContainer = this.$timeline.find('.timeline__item--current-year')
     oldYear = $yearContainer.html()
-    $locationContainer = this.$timeline.find('.timeline__current-location')
-    oldLocation = $locationContainer.html()
-    $companyContainer = this.$timeline.find('.timeline__current-company')
-    oldCompany = $companyContainer.html()
-    $studyContainer = this.$timeline.find('.timeline__current-study')
-    oldStudy = $studyContainer.html()
+
     if oldYear != newYear
       $yearContainer.html(newYear)
-    if oldLocation != this.currentLocation
-      $locationContainer.html(this.currentLocation)
-    if oldCompany != this.currentCompany
-      $companyContainer.html(this.currentCompany)
-    if oldStudy != this.currentStudy
-      $studyContainer.html(this.currentStudy)
+
+    this.updateMetaLine('location', this.currentEventLocation, this.currentEventPreviousLocation, this.currentEventChangesLocation)
+    this.updateMetaLine('company', this.currentEventCompany, this.currentEventPreviousCompany, this.currentEventChangesCompany)
+    this.updateMetaLine('study', this.currentEventStudy, this.currentEventPreviousStudy, this.currentEventChangesStudy)
+
+  updateMetaLine: (type, newValue, newPreviousValue, valueChanges) ->
+    $lineCurrentContainer = this.$timeline.find('.timeline__item--current-' + type)
+    $currentTitle = $lineCurrentContainer.find('.timeline__item__title')
+    $linePreviousContainer = this.$timeline.find('.timeline__item--previous-' + type)
+    $previousTitle = $linePreviousContainer.find('.timeline__item__title')
+    lineCurrentBg = $lineCurrentContainer.attr('data-bg')
+    linePreviousBg = $linePreviousContainer.attr('data-bg')
+    oldCurrentValue = $currentTitle.attr('data-title')
+    oldPreviousValue = $previousTitle.attr('data-title')
+    if oldCurrentValue != newValue or oldPreviousValue != newPreviousValue
+      # displays the "previous value" part or not
+      # if valueChanges
+      #   $linePreviousContainer.removeClass('timeline__item--hidden')
+      # else
+      #   $linePreviousContainer.addClass('timeline__item--hidden')
+      # adjusts the bg colors
+      newBg = if newValue then 1 else 0
+      newPreviousBg = if newPreviousValue then 2 else 0
+      if this.movingForward
+        if newPreviousValue == oldCurrentValue and lineCurrentBg
+          newPreviousBg = lineCurrentBg
+        if newPreviousValue == newValue
+          newBg = newPreviousBg
+        else if newValue
+          newBg = newPreviousBg % 2 + 1
+      else
+        if oldPreviousValue == newValue and linePreviousBg
+          newBg = linePreviousBg
+        if newValue == newPreviousValue
+          newPreviousBg = newBg
+        else if newPreviousValue
+          newPreviousBg = newBg % 2 + 1
+
+      if newValue
+        $currentTitle.attr('data-title', newValue).addClass('has-title')
+      else
+        $currentTitle.removeClass('has-title').attr('data-title','')
+      if newPreviousValue
+        $previousTitle.attr('data-title', newPreviousValue).addClass('has-title')
+      else
+        $previousTitle.removeClass('has-title').attr('data-title','')
+      
+      $lineCurrentContainer.attr('data-bg', newBg)
+      $linePreviousContainer.attr('data-bg', newPreviousBg)
 
   goToYear: (year) ->
     if this.years[year] and this.years[year].length
@@ -216,9 +290,68 @@ class Life
   displayEventDetails: (id) ->
     $lifeEvents = $('.life-event')
     if not $lifeEvents.filter('#life-event-' + id + '.events__item--active').length
-      $lifeEvents.removeClass('events__item--active')
+      $lifeEvents.removeClass('events__item--active ' + this.switchSide)
       $lifeEvent = $('#life-event-' + id);
-      $lifeEvent.addClass('events__item--active')
+      $lifeEvent.addClass('events__item--active ' + this.switchSide)
+      this.switchSide = if this.switchSide.length then '' else 'switch-side'
+      # scrollToElement($lifeEvent)
+
+  enableScrollToSwitchEvent: () ->
+    myLife = this
+    $window = $(window)
+    # $window.disablescroll()
+    lastScrollTop = 0
+    $window.scroll ->
+      st = $window.scrollTop()
+      if not myLife.changingEvent
+        if st > lastScrollTop
+          # downscroll code
+          previousEventIndex = myLife.getPreviousEventIndex()
+          if previousEventIndex != null
+            $newActiveEvent = $('#life-event-' + myLife._array[previousEventIndex])
+            myLife.changingEvent = true
+            $window.disablescroll()
+            myLife.setActiveEvent(previousEventIndex)
+            window.delay 1500, ->
+              myLife.changingEvent = false
+              $window.disablescroll('undo')
+        else
+          # upscroll code
+          nextEventIndex = myLife.getNextEventIndex()
+          if nextEventIndex != null
+            $newActiveEvent = $('#life-event-' + myLife._array[previousEventIndex])
+            myLife.changingEvent = true
+            $window.disablescroll()
+            myLife.setActiveEvent(nextEventIndex)
+            window.delay 1500, ->
+              myLife.changingEvent = false
+              $window.disablescroll('undo')
+        lastScrollTop = st
+      else
+        window.scrollTo(0,lastScrollTop)
+        return false 
+
+setEventPictureSlicesCss = ->
+  $pictureContainers = $('.life-event__picture')
+  if $pictureContainers.length
+    $activePictureContainer = $('.events__item--active .life-event__picture')
+    activePictureContainerFontSize = parseFloat($activePictureContainer.css("font-size"))
+    containerWidthEm = $activePictureContainer.width() / activePictureContainerFontSize
+    containerHeightEm = $activePictureContainer.height() / activePictureContainerFontSize
+    sliceWidthEm = containerWidthEm / 10
+    $pictureContainers.each ->
+      $this = $(this)
+      $pictureFile = $this.find('.life-event__picture-file')
+      url = $pictureFile.attr('src')
+      ratio = $pictureFile.height() / $pictureFile.width()
+      for i in [0..9] by 1
+        $this.append('<div class="life-event__picture__slice life-event__picture__slice--' + i + '" style="background-image:url(\'' + url + '\');background-position:-' + sliceWidthEm * i + 'em 50%;left:' + sliceWidthEm * i + 'em;"></div>')
+      $pictureSlices = $this.find('.life-event__picture__slice')
+      fittedContainerWidthEm = containerWidthEm * ratio
+      $pictureSlices.css({'width':sliceWidthEm + 'em','height':fittedContainerWidthEm + 'em', 'top':(containerHeightEm - fittedContainerWidthEm)/2 + 'em'});
+    # for i in [0..9] by 1
+    #   $pictureSlices.filter('.life-event__picture__slice--' + i).css({'background-position':'-' + sliceWidthEm * i + 'em 50%','left': sliceWidthEm * i + 'em'})
+    
 
 
 initializeAboutMePage = ->
@@ -230,10 +363,20 @@ initializeAboutMePage = ->
       window.myLife.addEvent($(this)) # events need to be added chronologically
     window.myLife.initializeAtLatestEvent()
     window.myLife.enableYearLinks()
+    window.myLife.enableScrollToSwitchEvent()
+    if window.windowHasLoaded # check if the window had already finished loading
+      setEventPictureSlicesCss() 
+    else
+      $(window).load ->
+        setEventPictureSlicesCss()
+    
 
 
 $ ->  
   initializeAboutMePage()
+
+$(window).resize ->
+  setEventPictureSlicesCss()
 
 
   

@@ -20,7 +20,9 @@
 #= require plugins/jquery.royalslider.min
 #= require plugins/rAF
 #= require plugins/kwicks.min
+#= require plugins/disablescroll.min
 
+#= require _globals
 #= require _mobileMenu
 #= require _scrollToElement
 #= require _slideshows
@@ -28,6 +30,5 @@
 #= require _projectFilters
 #= require _projects
 #= require _me
-#= require _globals
 
 #= require_self

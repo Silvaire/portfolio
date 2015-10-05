@@ -16,9 +16,155 @@
   &__summary {
     position: absolute;
     width: 100%;
+    height: 100%;
+    &__inner {
+      width: $metaLineWidth * 3;
+      margin: auto;
+      position: relative;
+      height: 100%;
+      z-index: 10;
+    }
+    .time-now {
+      @include transition(height 0.5s);
+      @include linear-gradient($white, $white 5%, rgba($white,0.98) 10%, rgba($white, 0.9) 20%, rgba($white, 0.8) 30%, transparent, $fallback: transparent);
+      position: absolute;
+      top: 0;
+      height: 0;
+      width: 100%;
+      z-index: 12;
+    }
+    // &.no-next-event .time-now {
+    //   height: 25%;
+    // }
+  }
+  &__icon {
+    position: absolute;
+    top: -20px;
+    height: auto;
+    width: $metaLineWidth;
     text-align: center;
-    &__item {
-      display: inline-block;
+    font-size: 14px;
+    font-family: Ionicons;
+    &--location {
+      left: $metaLineWidth;
+    }
+    &--company {
+      left: $metaLineWidth * 2;
+    }
+  }
+  &__year-container {
+    @include transition(top 0.5s);
+    position: absolute;
+    height: 0;
+    width: 100%;
+    text-align: center;
+    top: 50%;
+    z-index: 11;
+    .no-previous-event & {
+      top: calc(100% - 20px);
+    }
+  }
+  &__item {
+    display: inline-block;
+    position: absolute;
+    width: $metaLineWidth;
+    font-size: 0;
+    &__title.has-title {
+      position: absolute;
+      opacity: 0;
+      height: 0;
+      top: 50%;
+      width: 500px;
+      left: -250px + $metaLineWidth / 2;
+      text-align: center;
+      &:after {
+        background: $white;
+        display: inline-block;
+        @include box-shadow(0px, 1px, 2px, rgba($black-light, 0.5));
+        content: attr(data-title);
+        position: relative;
+        height: 40px;
+        line-height: 40px;
+        padding: 0 5px;
+        font-size: 12px;
+        top: -20px;
+        z-index: 50;
+      }    
+    }
+    &:hover {
+      &:not([data-bg="0"]):after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba($white, 0.3);
+      }
+      .timeline__item__title {
+        opacity: 1;
+      }
+    }
+    &--current {
+      height: 100%;
+      .timeline__item__title {
+        top: 25%;
+      }
+    }
+    &--previous {
+      @include transition (height 0.5s);
+      top: 50%;
+      height: 50%;
+      .no-previous-event & {
+        height: 0;
+      }
+    }
+    // &--hidden {
+    //   display: none;
+    // }
+    &:hover .timeline__item__title {
+          
+    }
+    &--current-year {
+      @include box-shadow(0px, 1px, 2px, rgba($black-light, 0.5));
+      padding: 0 20px;
+      position: relative;
+      font-size: 15px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      background-color: white;
+      top: -20px;
+      width: auto;
+    }
+    &--current-study, &--previous-study {
+      &[data-bg="1"] {
+        background: $green;
+      }
+      &[data-bg="2"] {
+        background: $green-lighter;       
+      }
+    }
+    &--current-location, &--previous-location {
+      left: $metaLineWidth;
+      &[data-bg="1"] {
+        background: $brown;
+      }
+      &[data-bg="2"] {
+        background: $brown-light;       
+      }
+    }
+    &--current-company, &--previous-company {
+      left: $metaLineWidth * 2;
+      &[data-bg="1"] {
+        background: $green;
+      }
+      &[data-bg="2"] {
+        background: $green-lighter;       
+      }
+    }
+    &[data-bg="0"] {
+      background: $grey-lightest;
     }
   }
   &__years {
@@ -42,10 +188,8 @@
     text-align: center;
     line-height: 50px;
     color: $grey-light;
-    // background: $green-lighter;
     font-weight: 500;
     &:hover, &.timeline__year--active {
-      // background: $green;
       color: $green;
     }
   }
@@ -55,16 +199,62 @@
   height: calc(100vh - 300px);
   position: relative;
   &__item {
-    @include transition(opacity 0.4s);
     position: absolute;
     width: 100%;
     height: 100%;
-    background: red;
+    // background: red;
     z-index: 1;
-    opacity: 0;
     &.events__item--active {
-      opacity: 1;
       z-index: 2;
+    }
+  }
+}
+
+.life-event {
+  &__text {
+    @include transition(opacity 0.4s 0.5s);
+    position: absolute;
+    left: 0;
+    display: inline-block;
+    width: calc(50% - #{$metaLineWidth} * 3 / 2);
+    height: 100%;
+    opacity: 0;
+    .switch-side & {
+      left: calc(50% + #{$metaLineWidth} * 3 / 2);
+    }
+    .events__item--active & {
+      opacity: 1; 
+    }
+  }
+  &__picture {
+    position: absolute;
+    left: calc(50% + #{$metaLineWidth} * 3 / 2);
+    display: inline-block;
+    width: calc(50% - #{$metaLineWidth} * 3 / 2);
+    height: 100%;
+    font-size: 1em;
+    overflow: hidden;
+    &__slice {
+      position: absolute;
+      background-size: auto 100%;
+      height: 100%;
+      &:nth-child(odd) {
+        @include transform(translate3d(0,-100%,0));
+      }
+      &:nth-child(even) {
+        @include transform(translate3d(0,100%,0));
+      }
+      @for $i from 0 through 9 {
+        &--#{$i} {
+          @include transition(transform 0.5s #{random(8) / 10}s);
+        }
+      }
+      .events__item--active & {
+        @include transform(translate3d(0,0,0));
+      }
+    }
+    .switch-side & {
+      left: 0;
     }
   }
 }
