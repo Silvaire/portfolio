@@ -14,21 +14,25 @@ var scrollToElement = function(elem, padding, speed, easing) {
   removeScrollingClass = function() {
     return $('html').removeClass('scrolling');
   };
-  if ($(elem).length) {
+  if ($(elem).length && !$('html').hasClass('scrolling')) {
     elemOffset = $(elem).offset().top - $('body').offset().top;
+    $('html').addClass('scrolling');
     return mainElement.animate({
       scrollTop: (elemOffset - padding) + "px"
     }, speed, easing, removeScrollingClass);
-  } else if (elem === '#top') {
+  } else if (elem === '#top' && !$('html').hasClass('scrolling')) {
+    $('html').addClass('scrolling');
     return mainElement.animate({
       scrollTop: 0
     }, speed, easing, removeScrollingClass);
-  } else if (elem === '#bottom') {
+  } else if (elem === '#bottom' && !$('html').hasClass('scrolling')) {
     wheight = $window.height();
+    $('html').addClass('scrolling');
     return mainElement.animate({
       scrollTop: wheight
     }, speed, easing, removeScrollingClass);
-  } else if (elem === '#down') {
+  } else if (elem === '#down' && !$('html').hasClass('scrolling')) {
+    $('html').addClass('scrolling');
     return mainElement.animate({
       scrollTop: "" + ($window.scrollTop() + 300)
     }, speed, easing, removeScrollingClass);
