@@ -1,3 +1,157 @@
+@include keyframes(date-scroll-forward) {
+    0%   {top:50%;}
+    50%  {top:110%;}
+    50.01%  {top:-10%;}
+    100% {top:50%;}
+}
+
+@include keyframes(date-scroll-backwards) {
+    0%   {top:50%;}
+    50%  {top:-10%;}
+    50.01%  {top:110%;}
+    100% {top:50%;}
+}
+
+@include keyframes(first-date-scroll-forward) {
+    0%   {top:100%;}
+    30%  {top:110%;}
+    30.01%  {top:-10%;}
+    100% {top:50%;}
+}
+
+@include keyframes(first-date-scroll-backwards) {
+    0%   {top:50%;}
+    70%  {top:-10%;}
+    70.01%  {top:110%;}
+    100% {top:100%;}
+}
+
+
+
+// @include keyframes(current-scroll-forward) {
+//     0%   {height:50%;}
+//     50%  {top:110%;}
+//     50.01%  {top:-10%;}
+//     100% {top:50%;}
+// }
+
+// @include keyframes(current-scroll-backwards) {
+//     0%   {top:50%;}
+//     50%  {top:-10%;}
+//     50.01%  {top:110%;}
+//     100% {top:50%;}
+// }
+
+// @include keyframes(first-current-scroll-forward) {
+//     0%   {top:100%;}
+//     50%  {top:110%;}
+//     50.01%  {top:-10%;}
+//     100% {top:50%;}
+// }
+
+// @include keyframes(first-current-scroll-backwards) {
+//     0%   {top:50%;}
+//     50%  {top:-10%;}
+//     50.01%  {top:110%;}
+//     100% {top:100%;}
+// }
+
+
+
+
+@include keyframes(previous-scroll-forward) {
+    0%   {top:50%;height: 50%;}
+    50%  {top:110%;height: 0;}
+    50.00000000001%  {top:-10%; height: 110%;}
+    100% {top:50%; height: 50%;}
+}
+
+@include keyframes(previous-scroll-backwards) {
+    0%   {top:50%;height: 50%;}
+    50%  {top:-10%; height: 110%;}
+    50.00000000001%  {top:110%;height: 0;}
+    100% {top:50%; height: 50%;}
+}
+
+@include keyframes(first-previous-scroll-forward) {
+    0%   {top:0;height: 0;}
+    30%  {top:0;height: 0;}
+    30.00000000001%  {top:-10%; height: 110%;}
+    100% {top:50%; height: 50%;}
+}
+
+@include keyframes(first-previous-scroll-backwards) {
+    0%   {top:50%;height: 50%}
+    70%  {top:-10%;height: 110%;}
+    70.00000000001%  {top:-10%; height: 0;}
+    100% {top:-10%; height: 0;}
+}
+
+
+
+.date-scroll-forward {
+  @include animation(date-scroll-forward 1s 1);
+}
+
+.date-scroll-backwards {
+  @include animation(date-scroll-backwards 1s 1);
+}
+
+.first-date-scroll-forward {
+  @include animation(first-date-scroll-forward 1s 1);
+}
+
+.first-date-scroll-backwards {
+  @include animation(first-date-scroll-backwards 1s 1);
+}
+
+
+
+// .current-scroll-forward {
+//   @include animation(current-scroll-forward 1s 1);
+// }
+
+// .current-scroll-backwards {
+//   @include animation(current-scroll-backwards 1s 1);
+// }
+
+// .first-current-scroll-forward {
+//   @include animation(first-current-scroll-forward 1s 1);
+// }
+
+// .first-current-scroll-backwards {
+//   @include animation(first-current-scroll-backwards 1s 1);
+// }
+
+
+
+.previous-scroll-forward {
+  @include animation(previous-scroll-forward 1s 1);
+}
+
+.previous-scroll-backwards {
+  @include animation(previous-scroll-backwards 1s 1);
+}
+
+.first-previous-scroll-forward {
+  @include animation(first-previous-scroll-forward 1s 1);
+}
+
+.first-previous-scroll-backwards {
+  @include animation(first-previous-scroll-backwards 1s 1);
+}
+
+
+.section--about {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
 .me {
   &__summary {
     height: calc(100vh - 100px);
@@ -13,10 +167,31 @@
 }
 
 .timeline {
+  &__icons {
+    font-size: 0;
+    height: 0;
+  }
+  &__icon {
+    position: relative;
+    top: -20px;
+    height: auto;
+    display: inline-block;
+    width: $metaLineWidth;
+    text-align: center;
+    font-size: 14px;
+    font-family: Ionicons;
+    &--location {
+      // left: $metaLineWidth;
+    }
+    &--company {
+      // left: $metaLineWidth * 2;
+    }
+  }
   &__summary {
     position: absolute;
     width: 100%;
     height: 100%;
+    overflow: hidden;
     &__inner {
       width: $metaLineWidth * 3;
       margin: auto;
@@ -25,35 +200,39 @@
       z-index: 10;
     }
     .time-now {
-      @include transition(height 0.5s);
-      @include linear-gradient($white, $white 5%, rgba($white,0.98) 10%, rgba($white, 0.9) 20%, rgba($white, 0.8) 30%, transparent, $fallback: transparent);
+      @include transition(top 0.5s, height 0.5s);
       position: absolute;
       top: 0;
       height: 0;
       width: 100%;
       z-index: 12;
+      background: $white;
+      &:before, &:after {
+        @include transition(top 0.5s, height 0.5s);
+        position: absolute;
+        content: '';
+        top: 0;
+        height: 0;
+        width: 100%;
+        background: $white;
+      }
     }
-    // &.no-next-event .time-now {
-    //   height: 25%;
-    // }
+    &.no-next-event .time-now {
+      top: 5px;
+      height: 5px;
+      &:before {
+        opacity: 0.8;
+        top: -5px;
+        height: 5px;
+      }
+      &:after {
+        top: 10px;
+        height: 5px;
+      }
+    }
   }
-  &__icon {
-    position: absolute;
-    top: -20px;
-    height: auto;
-    width: $metaLineWidth;
-    text-align: center;
-    font-size: 14px;
-    font-family: Ionicons;
-    &--location {
-      left: $metaLineWidth;
-    }
-    &--company {
-      left: $metaLineWidth * 2;
-    }
-  }
-  &__year-container {
-    @include transition(top 0.5s);
+  &__date-container {
+    // @include transition(top 0.5s);
     position: absolute;
     height: 0;
     width: 100%;
@@ -61,7 +240,7 @@
     top: 50%;
     z-index: 11;
     .no-previous-event & {
-      top: calc(100% - 20px);
+      top: calc(100% - 21px);
     }
   }
   &__item {
@@ -112,7 +291,7 @@
       }
     }
     &--previous {
-      @include transition (height 0.5s);
+      // @include transition (height 0.5s);
       top: 50%;
       height: 50%;
       .no-previous-event & {
@@ -125,7 +304,7 @@
     &:hover .timeline__item__title {
           
     }
-    &--current-year {
+    &--current-date {
       @include box-shadow(0px, 1px, 2px, rgba($black-light, 0.5));
       padding: 0 20px;
       position: relative;
@@ -183,12 +362,18 @@
     height: 50px;
     margin: 5px;
     border-radius: 50%;
-    padding: 0;
     border: solid 1px;
+    padding: 0;
     text-align: center;
     line-height: 50px;
     color: $grey-light;
     font-weight: 500;
+    &.timeline__year--active[data-svg-border] {
+      border: none;
+    }
+    &:active, &:focus {
+      color: $grey-light;
+    }
     &:hover, &.timeline__year--active {
       color: $green;
     }
@@ -212,17 +397,32 @@
 
 .life-event {
   &__text {
-    @include transition(opacity 0.4s 0.5s);
+    @include transition(opacity 0.4s 0.1s, padding-left 0.4s 0.1s);
     position: absolute;
     left: 0;
     display: inline-block;
     width: calc(50% - #{$metaLineWidth} * 3 / 2);
     height: 100%;
     opacity: 0;
+    padding-left: 75px;
     .switch-side & {
       left: calc(50% + #{$metaLineWidth} * 3 / 2);
     }
     .events__item--active & {
+      @include transition(opacity 0.4s 1s, padding-left 0.4s 1s);
+      opacity: 1;
+      margin-left: 0;
+    }
+  }
+  &__title {
+    @include transition(opacity 0.4s 0.1s, margin-left 0.4s 0.1s);
+    opacity: 0;
+    position: relative;
+    z-index: 18;
+    margin-left: -75px;
+    .events__item--active & {
+      @include transition(opacity 0.4s 1s, margin-left 0.4s 1s);
+      margin-left: 0;
       opacity: 1; 
     }
   }
@@ -251,6 +451,16 @@
       }
       .events__item--active & {
         @include transform(translate3d(0,0,0));
+      }
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 100%;
+        left: 0;
+        height: 100%;
+        background: rgba($black, 0.5);
+        z-index: 15;
       }
     }
     .switch-side & {

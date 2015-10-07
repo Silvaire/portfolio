@@ -29,6 +29,9 @@ body {
   .ielt9 & {
     overflow: hidden;
   }
+  &.scroll-locked {
+    overflow: hidden;
+  }
 }
 
 main {

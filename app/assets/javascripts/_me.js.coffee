@@ -10,6 +10,9 @@ class LifeEvent
     startDate = $event.data('start-date')
     if startDate.length
       this.startDate = new Date(startDate)
+    startMonth = $event.data('start-month')
+    if startMonth.length
+      this.startMonth = startMonth
     endDate = $event.data('end-date')
     if endDate.length
       this.endDate = new Date(endDate) 
@@ -85,6 +88,7 @@ class Life
       this.activeEventIndex = index
       this.movingForward = previousActiveEventIndex <= this.activeEventIndex
       this.updateTimelineMeta(this.activeEventIndex)
+      this.updateTimelineYears(this.activeEventIndex)
       if previousActiveEventIndex > this.activeEventIndex
         while previousActiveEventIndex > this.activeEventIndex
           this.hideEventFromSummary(this._array[previousActiveEventIndex])
@@ -154,14 +158,14 @@ class Life
     $year = $years.find('#year-' + year)
     if $year.length
       $year = $year.first()
-      $year.data('event-nb', $year.data('event-nb') + 1)
+      $year.data('event-nb', $year.data('event-nb') + 1).attr('data-svg-border','1')
     else
       $years.prepend('<a href="#" class="timeline__year" data-event-nb="1" data-year="' + year + '" id="year-' + year + '">' + year + '</a>')
 
 
   updateTimelineMeta: (newActiveEventIndex) ->
     newActiveEvent = this.lifeEvents[this._array[newActiveEventIndex]]
-    this.currentEventYear = newActiveEvent.startYear()
+    this.currentEventDate = newActiveEvent.startMonth + '. ' + newActiveEvent.startYear()
     newLocation = null
     newCompany = null
     newStudy = null
@@ -215,15 +219,17 @@ class Life
       $summary.addClass('no-previous-event')
     if this.currentEventHasNext
       $summary.removeClass('no-next-event')
-    else 
-      $summary.addClass('no-next-event')
+    else
+      window.delay 500, -> # delay to change value in the middle of the scrolling animation
+        $summary.addClass('no-next-event')
 
-    newYear = "#{this.currentEventYear}"
-    $yearContainer = this.$timeline.find('.timeline__item--current-year')
-    oldYear = $yearContainer.html()
+    newDate = "#{this.currentEventDate}"
+    $dateContainer = this.$timeline.find('.timeline__item--current-date')
+    oldDate = $dateContainer.html()
 
-    if oldYear != newYear
-      $yearContainer.html(newYear)
+    if oldDate != newDate
+      window.delay 500, -> # delay to change value in the middle of the scrolling animation
+        $dateContainer.html(newDate)
 
     this.updateMetaLine('location', this.currentEventLocation, this.currentEventPreviousLocation, this.currentEventChangesLocation)
     this.updateMetaLine('company', this.currentEventCompany, this.currentEventPreviousCompany, this.currentEventChangesCompany)
@@ -263,19 +269,25 @@ class Life
           newPreviousBg = newBg % 2 + 1
 
       if newValue
-        $currentTitle.attr('data-title', newValue).addClass('has-title')
+        window.delay 500, -> # delay to change value in the middle of the scrolling animation
+          $currentTitle.attr('data-title', newValue).addClass('has-title')
       else
-        $currentTitle.removeClass('has-title').attr('data-title','')
+        window.delay 500, -> # delay to change value in the middle of the scrolling animation
+          $currentTitle.removeClass('has-title').attr('data-title','')
       if newPreviousValue
-        $previousTitle.attr('data-title', newPreviousValue).addClass('has-title')
+        window.delay 500, -> # delay to change value in the middle of the scrolling animation
+          $previousTitle.attr('data-title', newPreviousValue).addClass('has-title')
       else
-        $previousTitle.removeClass('has-title').attr('data-title','')
+        window.delay 500, -> # delay to change value in the middle of the scrolling animation
+          $previousTitle.removeClass('has-title').attr('data-title','')
       
-      $lineCurrentContainer.attr('data-bg', newBg)
-      $linePreviousContainer.attr('data-bg', newPreviousBg)
+      window.delay 500, -> # delay to change value in the middle of the scrolling animation
+        $lineCurrentContainer.attr('data-bg', newBg)
+        $linePreviousContainer.attr('data-bg', newPreviousBg)
 
   goToYear: (year) ->
     if this.years[year] and this.years[year].length
+      scrollToElement(this.$timeline)
       this.setActiveEvent(this.years[year][0])
 
 
@@ -287,6 +299,13 @@ class Life
         myLife.goToYear($(this).data('year'))
         return false
 
+  updateTimelineYears: (currentEventIndex) ->
+    currentEvent = this.lifeEvents[this._array[currentEventIndex]]
+    year = currentEvent.startYear()
+    $timelineYears = $('.timeline__year')
+    $timelineYears.removeClass('timeline__year--active')
+    $timelineYears.filter('[data-year=' + year + ']').addClass('timeline__year--active');
+
   displayEventDetails: (id) ->
     $lifeEvents = $('.life-event')
     if not $lifeEvents.filter('#life-event-' + id + '.events__item--active').length
@@ -294,42 +313,132 @@ class Life
       $lifeEvent = $('#life-event-' + id);
       $lifeEvent.addClass('events__item--active ' + this.switchSide)
       this.switchSide = if this.switchSide.length then '' else 'switch-side'
-      # scrollToElement($lifeEvent)
 
   enableScrollToSwitchEvent: () ->
     myLife = this
+    $timeline = myLife.$timeline
     $window = $(window)
-    # $window.disablescroll()
-    lastScrollTop = 0
-    $window.scroll ->
-      st = $window.scrollTop()
+    scrollKeys = {32: 1, 33: 1, 34: 1, 35: 1, 36: 1, 37: 1, 38: 1, 39: 1, 40: 1}
+    
+    preventScrolling = (e) ->
+      e = e || window.event
+      if e.preventDefault
+        e.preventDefault()
+      e.returnValue = false
+      updatesTimelineAccordingToScrollDirection(e)
+
+    preventScrollingForKeys = (e) ->
+      if (scrollKeys[e.keyCode])
+        if e.preventDefault
+          e.preventDefault()
+        e.returnValue = false
+        updatesTimelineAccordingToScrollDirection(e)
+
+    updatesTimelineAccordingToScrollDirection = (e) ->
       if not myLife.changingEvent
-        if st > lastScrollTop
+        myLife.changingEvent = true
+        $aboutSection = $('.section--about')
+        $dateContainer = $('.timeline__date-container')
+        # $currentMetaLines = $('.timeline__item--current')
+        $previousMetaLines = $('.timeline__item--previous')
+        # windowScrollTop = $(window).scrollTop()
+        if e.deltaY > 0 or e.keyCode in [32,34,35,39,40]
           # downscroll code
-          previousEventIndex = myLife.getPreviousEventIndex()
-          if previousEventIndex != null
-            $newActiveEvent = $('#life-event-' + myLife._array[previousEventIndex])
-            myLife.changingEvent = true
-            $window.disablescroll()
-            myLife.setActiveEvent(previousEventIndex)
+          if $aboutSection.hasClass('at-top')
+            scrollToElement($timeline)
+            $aboutSection.removeClass('at-top').addClass('at-timeline')
             window.delay 1500, ->
               myLife.changingEvent = false
-              $window.disablescroll('undo')
+          else
+            previousEventIndex = myLife.getPreviousEventIndex()
+            if previousEventIndex != null #and windowScrollTop < $timeline.offset().top
+              $newActiveEvent = $('#life-event-' + myLife._array[previousEventIndex])
+              myLife.setActiveEvent(previousEventIndex)
+              if myLife.currentEventHasPrevious
+                # $currentMetaLines.addClass('current-scroll-backwards')
+                $previousMetaLines.addClass('previous-scroll-backwards')
+                $dateContainer.addClass('date-scroll-backwards')
+              else
+                # $currentMetaLines.addClass('first-current-scroll-backwards')
+                $previousMetaLines.addClass('first-previous-scroll-backwards')
+                $dateContainer.addClass('first-date-scroll-backwards')
+              window.delay 1000, ->
+                # $currentMetaLines.removeClass('current-scroll-backwards').removeClass('first-current-scroll-backwards')
+                $previousMetaLines.removeClass('previous-scroll-backwards').removeClass('first-previous-scroll-backwards')
+                $dateContainer.removeClass('date-scroll-backwards').removeClass('first-date-scroll-backwards')
+                myLife.changingEvent = false
+            else
+              scrollToElement('#bottom')
+              $aboutSection.removeClass('at-timeline').addClass('at-bottom')
+              window.delay 1500, ->
+                myLife.changingEvent = false
         else
           # upscroll code
-          nextEventIndex = myLife.getNextEventIndex()
-          if nextEventIndex != null
-            $newActiveEvent = $('#life-event-' + myLife._array[previousEventIndex])
-            myLife.changingEvent = true
-            $window.disablescroll()
-            myLife.setActiveEvent(nextEventIndex)
+          if $aboutSection.hasClass('at-bottom') and $timeline.offset().top < $(window).scrollTop()
+            scrollToElement($timeline)
+            $aboutSection.removeClass('at-bottom').addClass('at-timeline')
             window.delay 1500, ->
-              myLife.changingEvent = false
-              $window.disablescroll('undo')
-        lastScrollTop = st
-      else
-        window.scrollTo(0,lastScrollTop)
-        return false 
+                myLife.changingEvent = false
+          else
+            nextEventIndex = myLife.getNextEventIndex()
+            if nextEventIndex != null #and windowScrollTop + $window.height() > $timeline.offset().top
+              $newActiveEvent = $('#life-event-' + myLife._array[previousEventIndex])
+              if myLife.currentEventHasPrevious
+                # $currentMetaLines.addClass('current-scroll-forward')
+                $previousMetaLines.addClass('previous-scroll-forward')
+                $dateContainer.addClass('date-scroll-forward')
+              else
+                # $currentMetaLines.addClass('first-current-scroll-forward')
+                $previousMetaLines.addClass('first-previous-scroll-forward')
+                $dateContainer.addClass('first-date-scroll-forward')
+              myLife.setActiveEvent(nextEventIndex)
+              window.delay 1000, ->
+                # $currentMetaLines.removeClass('current-scroll-forward').removeClass('first-current-scroll-forward')
+                $previousMetaLines.removeClass('previous-scroll-forward').removeClass('first-previous-scroll-forward')
+                $dateContainer.removeClass('date-scroll-forward').removeClass('first-date-scroll-forward')
+                myLife.changingEvent = false
+            else
+              scrollToElement('#top')
+              $aboutSection.removeClass('at-bottom').removeClass('at-timeline').addClass('at-top')
+              window.delay 1500, ->
+                myLife.changingEvent = false
+      return false
+
+    $('body').addClass('scroll-locked')
+
+    if (window.addEventListener) # older FF
+      window.addEventListener('DOMMouseScroll', preventScrolling, false)
+    window.onwheel = preventScrolling # modern standard
+    window.onmousewheel = document.onmousewheel = preventScrolling # older browsers, IE
+    window.ontouchmove  = preventScrolling # mobile
+    document.onkeydown  = preventScrollingForKeys
+    # $window.scroll ->
+    #   st = $window.scrollTop()
+      # if not myLife.changingEvent
+      #   if st > lastScrollTop
+      #     # downscroll code
+      #     previousEventIndex = myLife.getPreviousEventIndex()
+      #     if previousEventIndex != null
+      #       $newActiveEvent = $('#life-event-' + myLife._array[previousEventIndex])
+      #       $window.disablescroll()
+      #       myLife.setActiveEvent(previousEventIndex)
+      #       window.delay 1500, ->
+      #         myLife.changingEvent = false
+      #         $window.disablescroll('undo')
+      #   else
+      #     # upscroll code
+      #     nextEventIndex = myLife.getNextEventIndex()
+      #     if nextEventIndex != null
+      #       $newActiveEvent = $('#life-event-' + myLife._array[previousEventIndex])
+      #       $window.disablescroll()
+      #       myLife.setActiveEvent(nextEventIndex)
+      #       window.delay 1500, ->
+      #         myLife.changingEvent = false
+      #         $window.disablescroll('undo')
+      #   lastScrollTop = st
+    #   else
+    #     window.scrollTo(0,lastScrollTop)
+    #     return false 
 
 setEventPictureSlicesCss = ->
   $pictureContainers = $('.life-event__picture')
@@ -347,10 +456,8 @@ setEventPictureSlicesCss = ->
       for i in [0..9] by 1
         $this.append('<div class="life-event__picture__slice life-event__picture__slice--' + i + '" style="background-image:url(\'' + url + '\');background-position:-' + sliceWidthEm * i + 'em 50%;left:' + sliceWidthEm * i + 'em;"></div>')
       $pictureSlices = $this.find('.life-event__picture__slice')
-      fittedContainerWidthEm = containerWidthEm * ratio
-      $pictureSlices.css({'width':sliceWidthEm + 'em','height':fittedContainerWidthEm + 'em', 'top':(containerHeightEm - fittedContainerWidthEm)/2 + 'em'});
-    # for i in [0..9] by 1
-    #   $pictureSlices.filter('.life-event__picture__slice--' + i).css({'background-position':'-' + sliceWidthEm * i + 'em 50%','left': sliceWidthEm * i + 'em'})
+      fittedContainerWidthEm = Math.max(containerWidthEm * ratio, containerHeightEm) # in case the section is too high for the picture, makes the picture even bigger
+      $pictureSlices.css({'width':sliceWidthEm + 0.2 + 'em','height':fittedContainerWidthEm + 'em', 'top':(containerHeightEm - fittedContainerWidthEm)/2 + 'em'}) # adds 0.2 em for overlap, so that there's never a white pixel
     
 
 

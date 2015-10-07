@@ -1,4 +1,4 @@
-<section class="section section--about">
+<section class="section section--about at-top">
   <div class="me">
     <div class="me__summary">
       <ul class=" nostyle me__companies"></ul>
@@ -11,24 +11,29 @@
     </div>
     <div class="me__data events">
       <div class="timeline">
+        <div class="timeline__icons small-text-center">
+          <i class="ion-university timeline__icon timeline__icon--study"></i>
+          <i class="ion-ios-location timeline__icon timeline__icon--location"></i>
+          <i class="ion-briefcase timeline__icon timeline__icon--company"></i>
+        </div>
         <div class="timeline__summary">
           <div class="timeline__summary__inner">
             <div class="time-now"></div>
-            <i class="ion-university timeline__icon timeline__icon--study"></i>
+            
             <div class="timeline__item timeline__item--current timeline__item--current-study">
               <div class="timeline__item__title"></div>
             </div>
             <div class="timeline__item timeline__item--previous timeline__item--previous-study">
               <div class="timeline__item__title"></div>
             </div>
-            <i class="ion-ios-location timeline__icon timeline__icon--location"></i>
+            
             <div class="timeline__item timeline__item--current timeline__item--current-location">
               <div class="timeline__item__title"></div>
             </div>
             <div class="timeline__item timeline__item--previous timeline__item--previous-location">
               <div class="timeline__item__title"></div>
             </div>
-            <i class="ion-briefcase timeline__icon timeline__icon--company"></i>
+            
             <div class="timeline__item timeline__item--current timeline__item--current-company">
               <div class="timeline__item__title"></div>
             </div>
@@ -36,8 +41,8 @@
               <div class="timeline__item__title"></div>
             </div>
           </div>
-          <div class="timeline__year-container">
-            <div class="timeline__item timeline__item--current timeline__item--current-year"></div>
+          <div class="timeline__date-container">
+            <div class="timeline__item timeline__item--current timeline__item--current-date"></div>
           </div>
         </div>
         <div class="timeline__years">
@@ -54,6 +59,7 @@
             data-title="<%= event.the_title %>"
             data-event-id="<%= event.id %>"
             data-start-date="<%= event.the_field('start-date') %>"
+            data-start-month="<%= t(Date.strptime(event.the_field('start-date'), '%Y-%m-%d').strftime('%b')) %>"
             data-end-date="<%= event.the_field('end-date') %>"
             
             data-company="<%= event.the_field('company') %>"
@@ -67,7 +73,7 @@
             <div class="life-event__text small-text-center">
               <div class="table">
                 <div class="table__cell">
-                  <div class="life-event__title"><%= event.the_title %></div>
+                  <!-- <div class="life-event__title"><%= event.the_title %></div> -->
                   <!-- <div class="life-event__period">
                     <%= Date.strptime(event.the_field('start-date'), '%Y-%m-%d').strftime('%d.%m.%Y') %>
                     <% if event.the_field('end-date').blank? %>
@@ -94,6 +100,11 @@
             </div>
             <% if not event.the_field('picture').blank? %>
               <div class="life-event__picture">
+                <div class="table">
+                  <div class="table__cell small-text-center text-white">
+                    <h2 class="heading-1 big life-event__title"><%= event.the_title %></h2>
+                  </div>
+                </div>
                 <img class="hide life-event__picture-file" src="<%= event.the_field('picture') %>" />
               </div>
             <% end %>
