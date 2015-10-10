@@ -355,6 +355,7 @@
     z-index: 10;
   }
   &__year {
+    position: relative;
     vertical-align: middle;
     display: block;
     width: 50px;
@@ -362,20 +363,27 @@
     height: 50px;
     margin: 5px;
     border-radius: 50%;
-    border: solid 1px;
     padding: 0;
     text-align: center;
     line-height: 50px;
     color: $grey-light;
     font-weight: 500;
-    &.timeline__year--active[data-svg-border] {
-      border: none;
+    border: solid 1px;
+    .border-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
     }
     &:active, &:focus {
       color: $grey-light;
     }
     &:hover, &.timeline__year--active {
       color: $green;
+    }
+    &.timeline__year--active {
+      border: none;
     }
   }
 }

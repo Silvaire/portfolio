@@ -115,8 +115,11 @@ class Life
     eventYear = lifeEvent.startDate.getFullYear()
     if this.years[eventYear]?
       this.years[eventYear].push(eventIndex)
+      lifeEvent.inYearIndex = this.years[eventYear].length
     else
+      lifeEvent.inYearIndex = 1
       this.years[eventYear] = [eventIndex]
+
     #build here the HTML
     this.addYearToTimeline(eventYear)
     this.addEventToSummary(lifeEvent.id)
@@ -158,9 +161,9 @@ class Life
     $year = $years.find('#year-' + year)
     if $year.length
       $year = $year.first()
-      $year.data('event-nb', $year.data('event-nb') + 1).attr('data-svg-border','1')
+      $year.attr('data-event-nb', parseInt($year.attr('data-event-nb')) + 1)
     else
-      $years.prepend('<a href="#" class="timeline__year" data-event-nb="1" data-year="' + year + '" id="year-' + year + '">' + year + '</a>')
+      $years.prepend('<a href="#" class="timeline__year" data-event-nb="1" data-year="' + year + '" id="year-' + year + '">' + year + '<canvas width="150" height="150" class="border-canvas"></canvas></a>')
 
 
   updateTimelineMeta: (newActiveEventIndex) ->
@@ -304,7 +307,63 @@ class Life
     year = currentEvent.startYear()
     $timelineYears = $('.timeline__year')
     $timelineYears.removeClass('timeline__year--active')
-    $timelineYears.filter('[data-year=' + year + ']').addClass('timeline__year--active');
+    $newYear = $timelineYears.filter('[data-year=' + year + ']')
+    $newYear.addClass('timeline__year--active');
+    eventInNewYear = $newYear.data('event-nb')
+    inYearIndex = currentEvent.inYearIndex
+    $('.border-canvas').removeClass('border-canvas--active').each ->
+      canvas = $(this)[0]
+      context = canvas.getContext('2d')
+      context.clearRect(0, 0, canvas.width, canvas.height)
+    $canvas = $('.timeline__year--active .border-canvas')
+    $canvas.addClass('border-canvas--active')
+    canvas = $canvas[0]
+    context = canvas.getContext('2d')
+    centerX = canvas.width / 2
+    centerY = canvas.height / 2
+    radius = (canvas.width / 2) - 3
+
+    # grey circle on activation
+    context.beginPath()
+    context.lineWidth = 4
+    context.imageSmoothingEnabled = true
+    context.strokeStyle = '#ccc'
+    context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false)
+    context.stroke()
+
+
+    context.beginPath()
+    context.strokeStyle = '#044C29'
+    context.imageSmoothingEnabled = true
+    if this.movingForward
+      endValue = (2 * Math.PI * (inYearIndex-1)/eventInNewYear) - (Math.PI / 2)
+      curPerc = ((inYearIndex-1)/eventInNewYear * 100) + 5
+      endPercent = inYearIndex/eventInNewYear * 100
+    else
+      endValue = (2 * Math.PI * (inYearIndex+1)/eventInNewYear) - (Math.PI / 2)
+      curPerc = ((inYearIndex+1)/eventInNewYear * 100)
+      endPercent = (inYearIndex/eventInNewYear * 100) + 5
+    context.arc(centerX, centerY, radius, -(Math.PI / 2) , endValue, false)
+    context.stroke()
+
+    animate = (current, forward) ->
+      context.beginPath()
+      context.imageSmoothingEnabled = true
+      if forward or eventInNewYear == 1
+        context.strokeStyle = '#044C29'
+        curPerc = curPerc + 5
+      else
+        context.strokeStyle = '#ccc'
+        curPerc = curPerc - 5
+      context.arc(centerX, centerY, radius, 2 * (current-0.05) * Math.PI - (Math.PI / 2), 2 * current * Math.PI - (Math.PI / 2), false)
+      context.stroke()
+      if (forward and curPerc <= endPercent) or (not forward and curPerc >= endPercent)
+        if $canvas.hasClass('border-canvas--active')
+          requestAnimationFrame ->
+            animate(curPerc/100, forward)
+        else
+          context.clearRect(0, 0, canvas.width, canvas.height)
+    animate(curPerc/100, this.movingForward)
 
   displayEventDetails: (id) ->
     $lifeEvents = $('.life-event')

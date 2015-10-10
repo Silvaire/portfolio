@@ -53,7 +53,6 @@ var scrollLink = function() {
     if ($this.data('offset')) {
       offset = offset + $this.data('offset');
     }
-    $('html').addClass('scrolling');
     scrollToElement(target, offset);
     $this.blur();
     return false;
