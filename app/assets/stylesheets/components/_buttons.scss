@@ -18,6 +18,9 @@
     // color: $green;
     // border: solid 1px $green;
   }
+  &:active {
+    @include transform(scale(0.99));
+  }
   &--light {
     background: $grey-lightest;
     color: $black-light;
