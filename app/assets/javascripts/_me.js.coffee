@@ -169,6 +169,10 @@ class Life
   updateTimelineMeta: (newActiveEventIndex) ->
     newActiveEvent = this.lifeEvents[this._array[newActiveEventIndex]]
     this.currentEventDate = newActiveEvent.startMonth + '. ' + newActiveEvent.startYear()
+
+    # Updates the date displayed on the button
+    this.updateSrollButtonBetweenTimelineAndSummary()
+
     newLocation = null
     newCompany = null
     newStudy = null
@@ -290,7 +294,7 @@ class Life
 
   goToYear: (year) ->
     if this.years[year] and this.years[year].length
-      scrollToElement(this.$timeline)
+      this.scrollToTimeline()
       this.setActiveEvent(this.years[year][0])
 
 
@@ -305,6 +309,7 @@ class Life
   updateTimelineYears: (currentEventIndex) ->
     currentEvent = this.lifeEvents[this._array[currentEventIndex]]
     year = currentEvent.startYear()
+
     $timelineYears = $('.timeline__year')
     $timelineYears.removeClass('timeline__year--active')
     $newYear = $timelineYears.filter('[data-year=' + year + ']')
@@ -404,8 +409,7 @@ class Life
         if e.deltaY > 0 or e.keyCode in [32,34,35,39,40]
           # downscroll code
           if $aboutSection.hasClass('at-top')
-            scrollToElement($timeline)
-            $aboutSection.removeClass('at-top').addClass('at-timeline')
+            myLife.scrollToTimeline()
             window.delay 1500, ->
               myLife.changingEvent = false
           else
@@ -427,15 +431,14 @@ class Life
                 $dateContainer.removeClass('date-scroll-backwards').removeClass('first-date-scroll-backwards')
                 myLife.changingEvent = false
             else
-              scrollToElement('#bottom')
+              scrollToElement('footer')
               $aboutSection.removeClass('at-timeline').addClass('at-bottom')
               window.delay 1500, ->
                 myLife.changingEvent = false
         else
           # upscroll code
-          if $aboutSection.hasClass('at-bottom') and $timeline.offset().top < $(window).scrollTop()
-            scrollToElement($timeline)
-            $aboutSection.removeClass('at-bottom').addClass('at-timeline')
+          if $aboutSection.hasClass('at-bottom')# and $timeline.offset().top < $(window).scrollTop() # was added when 'at-bottom' was also 'at-timeline'
+            myLife.scrollToTimeline()
             window.delay 1500, ->
                 myLife.changingEvent = false
           else
@@ -457,8 +460,8 @@ class Life
                 $dateContainer.removeClass('date-scroll-forward').removeClass('first-date-scroll-forward')
                 myLife.changingEvent = false
             else
-              scrollToElement('#top')
-              $aboutSection.removeClass('at-bottom').removeClass('at-timeline').addClass('at-top')
+              $('.me__summary__scroll-button').click() # instead of scrolling up, we click the button to update its text
+              $aboutSection.removeClass('at-timeline').addClass('at-top')
               window.delay 1500, ->
                 myLife.changingEvent = false
       return false
@@ -499,6 +502,38 @@ class Life
     #     window.scrollTo(0,lastScrollTop)
     #     return false 
 
+  updateSrollButtonBetweenTimelineAndSummary: ->
+    $scrollButtonContainer = $('.me__summary__scroll-container')
+    if $scrollButtonContainer.attr('data-state') == 'timeline'
+      $scrollButton = $('.me__summary__scroll-button')
+      $scrollButton.html($scrollButtonContainer.data('see-summary') + ' ' + this.currentEventDate)
+
+
+  enableSrollButtonBetweenTimelineAndSummary: () ->
+    $scrollButtonContainer = $('.me__summary__scroll-container')
+    if $scrollButtonContainer.length
+      myLife = this
+      $timeline = this.$timeline
+      $scrollButtonContainer.click ->
+        $this = $(this)
+        $scrollButton = $this.find('.me__summary__scroll-button')
+        if $this.attr('data-state') == 'summary'
+          $this.attr('data-state', 'timeline')
+          $scrollButton.html($scrollButtonContainer.data('see-summary') + ' ' + myLife.currentEventDate)
+          myLife.scrollToTimeline()
+        else
+          $this.attr('data-state', 'summary')
+          $scrollButton.html($this.data('see-timeline'))
+          scrollToElement('body')
+          $('.section--about').addClass('at-top').removeClass('at-bottom').removeClass('at-timeline')
+
+  scrollToTimeline: () ->
+    $('.section--about').removeClass('at-top').removeClass('at-bottom').addClass('at-timeline')
+    scrollToElement(this.$timeline, 52 + 80 + 1)
+    $scrollButtonContainer = $('.me__summary__scroll-container').attr('data-state', 'timeline')
+    this.updateSrollButtonBetweenTimelineAndSummary()
+        
+
 setEventPictureSlicesCss = ->
   $pictureContainers = $('.life-event__picture')
   if $pictureContainers.length
@@ -517,8 +552,6 @@ setEventPictureSlicesCss = ->
       $pictureSlices = $this.find('.life-event__picture__slice')
       fittedContainerWidthEm = Math.max(containerWidthEm * ratio, containerHeightEm) # in case the section is too high for the picture, makes the picture even bigger
       $pictureSlices.css({'width':sliceWidthEm + 0.2 + 'em','height':fittedContainerWidthEm + 'em', 'top':(containerHeightEm - fittedContainerWidthEm)/2 + 'em'}) # adds 0.2 em for overlap, so that there's never a white pixel
-    
-
 
 initializeAboutMePage = ->
   $meData = $('.me__data')
@@ -535,6 +568,7 @@ initializeAboutMePage = ->
     else
       $(window).load ->
         setEventPictureSlicesCss()
+    window.myLife.enableSrollButtonBetweenTimelineAndSummary()
     
 
 

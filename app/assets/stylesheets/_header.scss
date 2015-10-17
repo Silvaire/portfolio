@@ -41,7 +41,7 @@
       height: 64px;
       display: inline-block;
     }
-    .headroom--not-top.headroom--unpinned & {
+    .headroom--not-top.headroom--unpinned body:not(.scroll-locked) & {
       ul {
         li {
           a {

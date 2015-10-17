@@ -28,37 +28,6 @@
 
 
 
-// @include keyframes(current-scroll-forward) {
-//     0%   {height:50%;}
-//     50%  {top:110%;}
-//     50.01%  {top:-10%;}
-//     100% {top:50%;}
-// }
-
-// @include keyframes(current-scroll-backwards) {
-//     0%   {top:50%;}
-//     50%  {top:-10%;}
-//     50.01%  {top:110%;}
-//     100% {top:50%;}
-// }
-
-// @include keyframes(first-current-scroll-forward) {
-//     0%   {top:100%;}
-//     50%  {top:110%;}
-//     50.01%  {top:-10%;}
-//     100% {top:50%;}
-// }
-
-// @include keyframes(first-current-scroll-backwards) {
-//     0%   {top:50%;}
-//     50%  {top:-10%;}
-//     50.01%  {top:110%;}
-//     100% {top:100%;}
-// }
-
-
-
-
 @include keyframes(previous-scroll-forward) {
     0%   {top:50%;height: 50%;}
     50%  {top:110%;height: 0;}
@@ -106,25 +75,6 @@
 }
 
 
-
-// .current-scroll-forward {
-//   @include animation(current-scroll-forward 1s 1);
-// }
-
-// .current-scroll-backwards {
-//   @include animation(current-scroll-backwards 1s 1);
-// }
-
-// .first-current-scroll-forward {
-//   @include animation(first-current-scroll-forward 1s 1);
-// }
-
-// .first-current-scroll-backwards {
-//   @include animation(first-current-scroll-backwards 1s 1);
-// }
-
-
-
 .previous-scroll-forward {
   @include animation(previous-scroll-forward 1s 1);
 }
@@ -154,13 +104,62 @@
 
 .me {
   &__summary {
-    height: calc(100vh - 100px);
+    position: relative;
+    height: calc(100vh + 30px); //30px for the timeline icons
     margin-top: -$header-height;
     padding-top: $header-height;
-    // background: blue;
+    &__content {
+      height: calc(100% - (30px + 50px));
+    }
     &__item {
       &.me__summary__item--hidden {
         display: none;
+      }
+    }
+    &__scroll-container {
+      position: absolute;
+      bottom: 30px;
+      height: 50px;
+      width: 100%;
+      left: 0;
+      text-align: center;
+    }
+    &__scroll-button {
+      @include sansSerif;
+      text-transform: uppercase;
+      font-weight: 700;
+      position: relative;
+      height: 50px;
+      color: $white;
+      line-height: 20px;
+      background-color: $green;
+      cursor: pointer;
+      font-size: 13px;
+      &:before {
+        font-family: Ionicons;
+        position: absolute;
+        left: 0;
+        width: 100%;
+        text-align: center;
+      }
+      &:hover {
+        background-color: lighten($green, 1%);
+      }
+      [data-state="summary"] & {
+        @include box-shadow(0, 2px, 2px, rgba($green-dark,0.6), true);
+        padding-top: 5px;
+        &:before {
+          content: '\f123';
+          top: 25px;
+        }
+      }
+      [data-state="timeline"] & {
+        @include box-shadow(0, -2px, 2px, rgba($green-dark,0.6), true);
+        padding-top: 25px;
+        &:before {
+          content: '\f126';
+          top: 5px;
+        }
       }
     }
   }
@@ -173,7 +172,7 @@
   }
   &__icon {
     position: relative;
-    top: -20px;
+    top: -25px;
     height: auto;
     display: inline-block;
     width: $metaLineWidth;
@@ -315,6 +314,9 @@
       background-color: white;
       top: -20px;
       width: auto;
+      &:after {
+        display: none;
+      }
     }
     &--current-study, &--previous-study {
       &[data-bg="1"] {
@@ -349,8 +351,8 @@
   &__years {
     position: fixed;
     right: 30px;
-    top: 0;
-    height: 100%;
+    top: $header-height;
+    height: calc(100% - #{$header-height});
     display: table;
     z-index: 10;
   }
@@ -389,7 +391,7 @@
 }
 
 .events {
-  height: calc(100vh - 300px);
+  height: calc(100vh - #{$header-height} - 80px); // 80 for the timeline icons and the back-to-top
   position: relative;
   &__item {
     position: absolute;
