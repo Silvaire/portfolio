@@ -39,8 +39,8 @@
           <% current_site.the_post_type('project').the_posts().where.not(id:@post.id).reorder('RANDOM()').limit(3).each do |post|  %>
             <% post = post.decorate %>
             <div class="small-12 medium-6 large-4 columns end green-row__item project--other small-padding--vertical--mini large--padding--vertical">
-              <a href="<%= post.the_url %>" class="wrap-link">
-                <div class="small-padding--horizontal large-padding--horizontal--maxi small-padding--vertical medium-padding--vertical--maxi remove-equalize-on-small" data-equalizer-watch>
+              <a href="<%= post.the_url %>">
+                <div class="project--other__content small-padding--horizontal large-padding--horizontal--maxi small-padding--vertical medium-padding--vertical--maxi remove-equalize-on-small" data-equalizer-watch>
                   <div class="project--other__image-wrap">
                     <div class="project--other__image" style="<%= bgCover(post.the_thumb_url) %>"></div>
                   </div>
@@ -53,8 +53,8 @@
           <% current_site.the_post_type('project').the_posts().where.not(id:@post.id).reorder('RANDOM()').limit(1).each do |post|  %>
             <% post = post.decorate %>
             <div class="small-12 medium-6 large-4 columns end green-row__item project--other small-padding--vertical--mini large--padding--vertical">
-              <a href="<%= post.the_url %>" class="wrap-link">
-                <div class="small-padding--horizontal large-padding--horizontal--maxi small-padding--vertical medium-padding--vertical--maxi remove-equalize-on-small" data-equalizer-watch>
+              <a href="<%= post.the_url %>">
+                <div class="project--other__content small-padding--horizontal large-padding--horizontal--maxi small-padding--vertical medium-padding--vertical--maxi remove-equalize-on-small" data-equalizer-watch>
                   <div class="project--other__image-wrap">
                     <div class="project--other__image" style="<%= bgCover(post.the_thumb_url) %>"></div>
                   </div>

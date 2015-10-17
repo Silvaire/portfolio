@@ -1,8 +1,10 @@
 .green-row {
   &__item {
     position: relative;
-    color: $white;
     z-index: 1;
+    & > a, & > a:hover {
+      color: $white;
+    }
     &:before {
       content: ' ';
       position: absolute;

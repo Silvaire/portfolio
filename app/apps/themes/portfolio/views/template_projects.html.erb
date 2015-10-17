@@ -6,21 +6,23 @@
         <% post = post.decorate %>
         <% techs = post.the_tags %>
         <div class="project project--featured padding--horizontal--tiny green-row__item" id="featured-project-<%= post.id %>">
-          <div class="project--featured__background"></div>
-          <div class="project--featured__content large-text-center">
-            <div class="project--featured__illustration small-padding--top medium-padding--none">
-              <div class="project--featured__picture-wrap">
-                <div class="project--featured__picture" style="<%= bgCover(post.the_thumb_url) %>"></div>
+          <a href="<%= post.the_url %>">  
+            <div class="project--featured__background"></div>
+            <div class="project--featured__content large-text-center">
+              <div class="project--featured__illustration small-padding--top medium-padding--none">
+                <div class="project--featured__picture-wrap">
+                  <div class="project--featured__picture" style="<%= bgCover(post.the_thumb_url) %>"></div>
+                </div>
+              </div>
+              <div class="project--featured__text small-text-center">
+                <h2 class="heading-2 project--featured__title padding--top padding--bottom--mini"><%= post.the_title %></h2>
+                <h3 class="heading-3 large-padding--bottom--tiny project--featured__introduction small-padding--bottom"><%= post.the_field('introduction') %></h3>
+                <div class="project--featured__button padding--bottom">
+                  <span class="button button--light"><%= t('Read more') %></span>
+                </div>
               </div>
             </div>
-            <div class="project--featured__text small-text-center">
-              <h2 class="heading-2 project--featured__title padding--top padding--bottom--mini"><%= post.the_title %></h2>
-              <h3 class="heading-3 large-padding--bottom--tiny project--featured__introduction small-padding--bottom"><%= post.the_field('introduction') %></h3>
-              <div class="project--featured__button padding--bottom">
-                <a href="<%= post.the_url %>" class="button button--light"><%= t('Read more') %></a>
-              </div>
-            </div>
-          </div>
+          </a>
         </div>
       <% end %>
       <% current_site.the_category('major').decorate.the_posts().limit(2).each do |post| %>
@@ -28,21 +30,23 @@
         <% post = post.decorate %>
         <% techs = post.the_tags %>
         <div class="project project--featured padding--horizontal--tiny green-row__item" id="featured-project-<%= post.id %>">
-          <div class="project--featured__background"></div>
-          <div class="project--featured__content large-text-center">
-            <div class="project--featured__illustration small-padding--top medium-padding--none">
-              <div class="project--featured__picture-wrap">
-                <div class="project--featured__picture" style="<%= bgCover(post.the_thumb_url) %>"></div>
+          <a href="<%= post.the_url %>">  
+            <div class="project--featured__background"></div>
+            <div class="project--featured__content large-text-center">
+              <div class="project--featured__illustration small-padding--top medium-padding--none">
+                <div class="project--featured__picture-wrap">
+                  <div class="project--featured__picture" style="<%= bgCover(post.the_thumb_url) %>"></div>
+                </div>
+              </div>
+              <div class="project--featured__text small-text-center">
+                <h2 class="heading-2 project--featured__title padding--top padding--bottom--mini"><%= post.the_title %></h2>
+                <h3 class="heading-3 large-padding--bottom--tiny project--featured__introduction small-padding--bottom"><%= post.the_field('introduction') %></h3>
+                <div class="project--featured__button padding--bottom">
+                  <span class="button button--light"><%= t('Read more') %></span>
+                </div>
               </div>
             </div>
-            <div class="project--featured__text small-text-center">
-              <h2 class="heading-2 project--featured__title padding--top padding--bottom--mini"><%= post.the_title %></h2>
-              <h3 class="heading-3 large-padding--bottom--tiny project--featured__introduction small-padding--bottom"><%= post.the_field('introduction') %></h3>
-              <div class="project--featured__button padding--bottom">
-                <a href="<%= post.the_url %>" class="button button--light"><%= t('Read more') %></a>
-              </div>
-            </div>
-          </div>
+          </a>
         </div>
       <% end %>
     </div>

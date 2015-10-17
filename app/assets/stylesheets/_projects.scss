@@ -156,6 +156,9 @@
     height: 450px;
   }
   &--other {
+    &__content {
+      position: relative;
+    }
     &__image-wrap {
       border-radius: 50%;
       overflow: hidden;
