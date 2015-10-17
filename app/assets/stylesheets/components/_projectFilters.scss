@@ -4,6 +4,7 @@
   top: $mini-header-height - 5px;
   font-size: 0;
   &__button {
+    @include transition(color 0.3s);
     display: inline-block;
     margin: 3px;
     color: $grey;
