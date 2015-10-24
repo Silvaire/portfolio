@@ -1,3 +1,10 @@
+@include keyframes(icon-bounce) {
+    0%   {top:0;}
+    33%  {top:-2px;}
+    66%  {top:5px;}
+    100% {top:0;}
+}
+
 .button {
   @include transition(none);
   @include user-select(none);
@@ -52,6 +59,25 @@
       }
       .button {
         opacity: 1;
+      }
+    }
+  }
+  &--empty {
+    background: transparent;
+    border: solid 2px;
+    color: $green;
+    &:hover, &:focus {
+      background: transparent;
+      color: $green-lighter;
+    }
+  }
+  &--with-icon {
+    &:hover {
+      i {
+        @include hwa;
+        @include animation(icon-bounce 1s infinite);
+        @include animation-play-state(running);
+        position: relative;
       }
     }
   }
