@@ -7,18 +7,23 @@
     <div class="small-12 medium-5 large-3 columns small-padding--top medium-padding--top--none">
       <div class="social-links">
         <% if not current_site.the_field('linkedin').blank? %>
-          <a class="social-links__item" target="_blank" href="<%= current_site.the_field('linkedin') %>">
+          <a class="social-links__item" target="_blank" href="<%= current_site.the_field('linkedin') %>" title="linkedIn">
             <i class="ion-social-linkedin"></i>
           </a>
         <% end %>
         <% if not current_site.the_field('twitter').blank? %>
-          <a class="social-links__item" target="_blank" href="<%= current_site.the_field('twitter') %>">
+          <a class="social-links__item" target="_blank" href="<%= current_site.the_field('twitter') %>" title="Twitter">
             <i class="ion-social-twitter"></i>
           </a>
         <% end %>
         <% if not current_site.the_field('github').blank? %>
-          <a class="social-links__item" target="_blank" href="<%= current_site.the_field('github') %>">
+          <a class="social-links__item" target="_blank" href="<%= current_site.the_field('github') %>" title="Github">
             <i class="ion-social-github"></i>
+          </a>
+        <% end %>
+        <% if not current_site.the_field('resume').blank? %>
+          <a href="<%= current_site.the_field('resume') %>" download target="_blank" class="social-links__item" title="<%= t("Download resume") %>">
+            <i class="ion-document-text"></i>
           </a>
         <% end %>
       </div>
