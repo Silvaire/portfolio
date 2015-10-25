@@ -1,63 +1,3 @@
-@include keyframes(date-scroll-forward) {
-    0%   {top:50%;}
-    50%  {top:110%;}
-    50.01%  {top:-10%;}
-    100% {top:50%;}
-}
-
-@include keyframes(date-scroll-backwards) {
-    0%   {top:50%;}
-    50%  {top:-10%;}
-    50.01%  {top:110%;}
-    100% {top:50%;}
-}
-
-@include keyframes(first-date-scroll-forward) {
-    0%   {top:100%;}
-    30%  {top:110%;}
-    30.01%  {top:-10%;}
-    100% {top:50%;}
-}
-
-@include keyframes(first-date-scroll-backwards) {
-    0%   {top:50%;}
-    70%  {top:-10%;}
-    70.01%  {top:110%;}
-    100% {top:100%;}
-}
-
-
-
-@include keyframes(previous-scroll-forward) {
-    0%   {top:50%;height: 50%;}
-    50%  {top:110%;height: 0;}
-    50.00000000001%  {top:-10%; height: 110%;}
-    100% {top:50%; height: 50%;}
-}
-
-@include keyframes(previous-scroll-backwards) {
-    0%   {top:50%;height: 50%;}
-    50%  {top:-10%; height: 110%;}
-    50.00000000001%  {top:110%;height: 0;}
-    100% {top:50%; height: 50%;}
-}
-
-@include keyframes(first-previous-scroll-forward) {
-    0%   {top:0;height: 0;}
-    30%  {top:0;height: 0;}
-    30.00000000001%  {top:-10%; height: 110%;}
-    100% {top:50%; height: 50%;}
-}
-
-@include keyframes(first-previous-scroll-backwards) {
-    0%   {top:50%;height: 50%}
-    70%  {top:-10%;height: 110%;}
-    70.00000000001%  {top:-10%; height: 0;}
-    100% {top:-10%; height: 0;}
-}
-
-
-
 .date-scroll-forward {
   @include animation(date-scroll-forward 1s 1);
 }
@@ -103,82 +43,242 @@
 }
 
 .me {
+  &__popup {
+    @include transition(left 0.4s);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+    left: -100%;
+    &__wrap {
+      display: table;
+      height: 100%;
+      width: 100%;
+    }
+    &__container {
+      display: table-cell;
+      vertical-align: middle;
+      padding: 30px;
+    }
+    &__inner {
+      padding: 30px;
+      background: $white;
+      border: solid 2px $black-light;
+      position: relative;
+    }
+    &__close {
+      position: absolute;
+      right: 15px;
+      top: 0;
+      color: $grey;
+      font-size: 25px;
+      cursor: pointer;
+      &:hover {
+        color: $grey-dark;
+      }
+    }
+    &--open {
+      left: 0;
+      .me__popup {
+        &__inner {
+          // left: 0;
+        }
+      }
+    }
+  }
   &__summary {
     position: relative;
-    height: calc(100vh + 30px); //30px for the timeline icons
+    height: 100vh;
     margin-top: -$header-height;
     padding-top: $header-height;
     &__content {
-      height: calc(100% - (30px + 50px));
+      height: 100%;
+    }
+    & &__topic {
+      @include transform(scale(1));
+      @include transition(transform 0.2s, box-shadow 0.2s);
+      @include hwa;
+      @include box-shadow(0, 3px, 9px, -5px, rgba($black-light,0.8));
+      margin: 15px;
+      background: $grey-lightest;
+      padding: 15px;
+      cursor: pointer;
+      ul {
+        width: calc(100% - (50px));
+        margin-left: 50px;
+        & > :not(:first-child) {
+          display: none;
+        }
+      }
+      &:hover {
+        @include box-shadow(0, 5px, 10px, -6px, rgba($black-light,0.9));
+        @include transform(scale(1.07));
+      }
+      &.shrink-card {
+        @include animation(shrink-card 0.7s 1);
+        @include animation-play-state(running);
+      }
+      &:after {
+        content: '...';
+        display: inline-block;
+        height: 30px;
+        line-height: 30px;
+        width: 100%;
+        text-align: center;
+      }
+    }
+    &__icon {
+      @include box-shadow(2px,1px,2px,-1px,rgba($grey-dark,0.3));
+      position: absolute;
+      top: 0;
+      height: 100%;
+      left: 0;
+      width: 50px;
+      font-size: 25px;
+      text-align: center;
+      color: $grey-dark;
     }
     &__item {
       &.me__summary__item--hidden {
         display: none;
       }
     }
+    &__date {
+      display: inline-block;
+      font-size: 11px;
+      margin-right: 10px;
+      color: $grey;
+    }
+    &__meta {
+      display: inline-block;
+      // font-size: 11px;
+      // margin-right: 10px;
+      // color: $grey; 
+    }
+    &__picture {
+      @include transition(opacity 0.4s);
+      @include opacity(1);
+      height: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: top;
+    }
+    &__open-popup {
+      // &__button {
+      //   @include transition(bottom 0.4s);
+      //   position: absolute;
+      //   width: 100%;
+      //   bottom: -46px;
+      //   z-index: 1;
+      // }
+      &:hover {
+        .me__summary {
+          // &__download-resume__button {
+          //   bottom: 30px;
+          //   i {
+          //     @include hwa;
+          //     @include animation(icon-bounce 1s infinite);
+          //     @include animation-play-state(running);
+          //     position: relative;
+          //   }
+          // }
+          &__picture {
+            @include opacity(0.8);
+          }
+        }
+      }
+    }
     &__scroll-container {
       position: absolute;
-      bottom: 0px;
+      bottom: 5px;
       width: 100%;
       left: 0;
       text-align: center;
     }
-    &__scroll-button {
-      @include sansSerif;
-      text-transform: uppercase;
-      font-weight: 700;
+    &__scroll-icon {
       position: relative;
-      height: 80px;
-      color: $grey-light;
-      line-height: 20px;
-      background-color: $green;
+      font-size: 25px;
+      color: $green;
       cursor: pointer;
-      font-size: 12px;
-      &:before {
-        font-family: Ionicons;
-        position: absolute;
-        left: 0;
-        width: 100%;
-        text-align: center;
-      }
+      padding: 10px;
       &:hover {
-        background-color: lighten($green, 1%);
-      }
-      [data-state="summary"] & {
-        @include box-shadow(0, 2px, 2px, rgba($green-dark,0.6), true);
-        padding-top: 25px;
-        &:before {
-          content: '\f126';
-          top: 5px;
-        }
-      }
-      [data-state="timeline"] & {
-        @include box-shadow(0, -2px, 2px, rgba($green-dark,0.6), true);
-        padding-top: 5px;
-        &:before {
-          content: '\f123';
-          top: 25px;
-        }
+        @extend .animated-icon--jump;
       }
     }
+    // &__scroll-button {
+    //   @include sansSerif;
+    //   text-transform: uppercase;
+    //   font-weight: 700;
+    //   position: relative;
+    //   height: 80px;
+    //   color: $grey-light;
+    //   line-height: 20px;
+    //   background-color: $green;
+    //   cursor: pointer;
+    //   font-size: 12px;
+    //   z-index: 2;
+    //   &:before {
+    //     font-family: Ionicons;
+    //     position: absolute;
+    //     left: 0;
+    //     width: 100%;
+    //     text-align: center;
+    //   }
+    //   &:hover {
+    //     background-color: lighten($green, 1%);
+    //   }
+    //   [data-state="summary"] & {
+    //     @include box-shadow(0, 2px, 2px, 0, rgba($green-dark,0.6), true);
+    //     padding-top: 25px;
+    //     &:before {
+    //       content: '\f126';
+    //       top: 5px;
+    //     }
+    //   }
+    //   [data-state="timeline"] & {
+    //     @include box-shadow(0, -2px, 2px, 0, rgba($green-dark,0.6), true);
+    //     padding-top: 5px;
+    //     &:before {
+    //       content: '\f123';
+    //       top: 25px;
+    //     }
+    //   }
+    // }
   }
 }
 
 .timeline {
   &__icons {
+    @include transition(bottom 0.5s 0s);
     font-size: 0;
     height: 0;
+    position: absolute;
+    width: 100%;
+    bottom: 30px;
+    .no-previous-event & {
+      @include transition(bottom 0.5s 0.5s);
+      bottom: 65px;
+    }
   }
   &__icon {
     position: relative;
-    top: -25px;
-    height: auto;
+    top: 0;
+    height: 18px;
     display: inline-block;
-    width: $metaLineWidth;
+    width: $metaLineWidth - 2px;
+    margin: auto 1px;
     text-align: center;
-    font-size: 14px;
+    font-size: 12px;
+    line-height: 14px;
+    padding: 2px;
     color: $white;
+    background: $black-light;
+    border-radius: 50%;
     font-family: Ionicons;
+    z-index: 30;
+    &:before {
+      margin-left: 1px;
+    }
     &--location {
       // left: $metaLineWidth;
     }
@@ -258,7 +358,7 @@
       &:after {
         background: $white;
         display: inline-block;
-        @include box-shadow(0px, 1px, 2px, rgba($black-light, 0.5));
+        @include box-shadow(0px, 1px, 2px, 0, rgba($black-light, 0.5));
         content: attr(data-title);
         position: relative;
         height: 40px;
@@ -304,7 +404,7 @@
           
     }
     &--current-date {
-      @include box-shadow(0px, 1px, 2px, rgba($black-light, 0.5));
+      @include box-shadow(0px, 1px, 2px, 0, rgba($black-light, 0.5));
       padding: 0 20px;
       position: relative;
       font-size: 15px;
@@ -391,8 +491,10 @@
 }
 
 .events {
-  height: calc(100vh - #{$header-height} - 80px); // 80 for the timeline icons and the back-to-top
+  height: calc(100vh - #{$header-height});
   position: relative;
+  background: $white;
+  z-index: 1;
   &__item {
     position: absolute;
     width: 100%;
@@ -445,6 +547,7 @@
     font-size: 1em;
     overflow: hidden;
     &__slice {
+      // @include filter(grayscale(100%));
       position: absolute;
       background-size: auto 100%;
       height: 100%;

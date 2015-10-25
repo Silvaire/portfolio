@@ -16,6 +16,9 @@ class LifeEvent
     endDate = $event.data('end-date')
     if endDate.length
       this.endDate = new Date(endDate) 
+    endMonth = $event.data('end-month')
+    if endMonth.length
+      this.endMonth = endMonth
     # this.icon = $event.data('icon')
     # this.introduction = $event.data('introduction')
     # this.description = $event.data('description')
@@ -45,6 +48,8 @@ class LifeEvent
 
   startYear: ->
     return this.startDate.getFullYear()
+  endYear: ->
+    return this.endDate.getFullYear()
 
 class Life
   constructor: (@name) ->
@@ -60,6 +65,16 @@ class Life
   initializeAtLatestEvent: () ->
     this.activeEventIndex = 0
     this.setActiveEvent(this._array.length - 1)
+
+  canChangeEvent: () ->
+    if this.changingEvent == false
+      this.changingEvent = true
+      myLife = this
+      window.delay 1000, ->
+        myLife.changingEvent = false
+      return false
+    else
+      return true
 
   getPreviousEventIndex: () ->
     activeIndex = this.activeEventIndex
@@ -128,12 +143,21 @@ class Life
     lifeEvent = this.lifeEvents[id]
     if lifeEvent != null
       tags = lifeEvent.tags
+      startYear = lifeEvent.startYear()
+      if lifeEvent.endDate?
+        endYear = lifeEvent.endYear()
+        if startYear == endYear
+          date = lifeEvent.startMonth + '. - ' + lifeEvent.endMonth + '. ' + endYear
+        else
+          date = lifeEvent.startMonth + '. ' + startYear + ' - ' + lifeEvent.endMonth + '. ' + endYear
+      else
+        date = lifeEvent.startMonth + '. ' + startYear + ' - ' + 'Today'
       if tags.include? "Work"
         $companiesContainer = this.$summary.find('.me__companies')
-        $companiesContainer.prepend('<li class="me__summary__item me__company from-event-' + lifeEvent.id + '">' + lifeEvent.company + '</li>')
+        $companiesContainer.prepend('<li class="me__summary__item me__company from-event-' + lifeEvent.id + '"><span class="me__summary__date">' + date + '</span>' + lifeEvent.title + ', <span class="me__summary__meta">' + lifeEvent.company + '</span></li>')
       if tags.include? "Studies"
         $studiesContainer = this.$summary.find('.me__studies')
-        $studiesContainer.prepend('<li class="me__summary__item me__study from-event-' + lifeEvent.id + '">' + lifeEvent.study + '</li>')
+        $studiesContainer.prepend('<li class="me__summary__item me__study from-event-' + lifeEvent.id + '"><span class="me__summary__date">' + date + '</span>' + lifeEvent.title + ', <span class="me__summary__meta">' + lifeEvent.study + '</li>')
       if tags.include? "Language"
         $languagesContainer = this.$summary.find('.me__languages')
         $languagesContainer.prepend('<li class="me__summary__item me__language from-event-' + lifeEvent.id + '">' + lifeEvent.language + '</li>')
@@ -142,13 +166,13 @@ class Life
         $skillsContainer.prepend('<li class="me__summary__item me__skill from-event-' + lifeEvent.id + '">' + lifeEvent.skills + '</li>')
       if tags.include? "Project"
         $projectsContainer = this.$summary.find('.me__projects')
-        $projectsContainer.prepend('<li class="me__summary__item me__project from-event-' + lifeEvent.id + '">' + lifeEvent.project + '</li>')
-      if tags.include? "Location"
-        $locationsContainer = this.$summary.find('.me__locations')
-        $locationsContainer.prepend('<li class="me__summary__item me__location from-event-' + lifeEvent.id + '">' + lifeEvent.location + '</li>')
+        $projectsContainer.prepend('<li class="me__summary__item me__project from-event-' + lifeEvent.id + '"><span class="me__summary__date">' + date + '</span>' + lifeEvent.title + ', <span class="me__summary__meta">' + lifeEvent.project + '</li>')
+      # if tags.include? "Location"
+      #   $locationsContainer = this.$summary.find('.me__locations')
+      #   $locationsContainer.prepend('<li class="me__summary__item me__location from-event-' + lifeEvent.id + '"><span class="me__summary__date">' + date + '</span>' + lifeEvent.location + '</li>')
       if tags.include? "Other"
         $otherContainer = this.$summary.find('.me__others')
-        $otherContainer.prepend('<li class="me__summary__item me__other from-event-' + lifeEvent.id + '">' + lifeEvent.title + '</li>')
+        $otherContainer.prepend('<li class="me__summary__item me__other from-event-' + lifeEvent.id + '"><span class="me__summary__date">' + date + '</span>' + lifeEvent.title + '</li>')
         
   hideEventFromSummary: (id) ->
     $('.from-event-' + id).addClass('me__summary__item--hidden')
@@ -383,6 +407,16 @@ class Life
     $timeline = myLife.$timeline
     $window = $(window)
     scrollKeys = {32: 1, 33: 1, 34: 1, 35: 1, 36: 1, 37: 1, 38: 1, 39: 1, 40: 1}
+
+    prevTime = 0
+    preventMultipleEventsFromKineticScrolling = (e) ->
+      curTime = new Date().getTime()
+      if prevTime?
+        timeDiff = curTime-prevTime
+        if timeDiff > 100
+          preventScrolling(e)
+          # console.log('New kinetic scroll has started!')
+        prevTime = curTime
     
     preventScrolling = (e) ->
       e = e || window.event
@@ -399,8 +433,15 @@ class Life
         updatesTimelineAccordingToScrollDirection(e)
 
     updatesTimelineAccordingToScrollDirection = (e) ->
-      if not myLife.changingEvent
-        myLife.changingEvent = true
+      if e.deltaY > 0 or e.keyCode in [32,34,35,39,40]
+        $('.scroll-down-count').html(parseInt($('.scroll-down-count').html()) + 1)
+      else if e.deltaY < 0 or e.keyCode in [33,36,37,38]
+        $('.scroll-up-count').html(parseInt($('.scroll-up-count').html()) + 1)
+      if not myLife.canChangeEvent()
+        if e.deltaY > 0 or e.keyCode in [32,34,35,39,40]
+          $('.scroll-down-filter-count').html(parseInt($('.scroll-down-filter-count').html()) + 1)
+        else if e.deltaY < 0 or e.keyCode in [33,36,37,38]
+          $('.scroll-up-filter-count').html(parseInt($('.scroll-up-filter-count').html()) + 1)
         $aboutSection = $('.section--about')
         $dateContainer = $('.timeline__date-container')
         # $currentMetaLines = $('.timeline__item--current')
@@ -410,8 +451,6 @@ class Life
           # downscroll code
           if $aboutSection.hasClass('at-top')
             myLife.scrollToTimeline()
-            window.delay 1500, ->
-              myLife.changingEvent = false
           else
             previousEventIndex = myLife.getPreviousEventIndex()
             if previousEventIndex != null #and windowScrollTop < $timeline.offset().top
@@ -429,18 +468,13 @@ class Life
                 # $currentMetaLines.removeClass('current-scroll-backwards').removeClass('first-current-scroll-backwards')
                 $previousMetaLines.removeClass('previous-scroll-backwards').removeClass('first-previous-scroll-backwards')
                 $dateContainer.removeClass('date-scroll-backwards').removeClass('first-date-scroll-backwards')
-                myLife.changingEvent = false
             else
               scrollToElement('footer')
               $aboutSection.removeClass('at-timeline').addClass('at-bottom')
-              window.delay 1500, ->
-                myLife.changingEvent = false
-        else
+        else if e.deltaY < 0 or e.keyCode in [33,36,37,38]
           # upscroll code
           if $aboutSection.hasClass('at-bottom')# and $timeline.offset().top < $(window).scrollTop() # was added when 'at-bottom' was also 'at-timeline'
             myLife.scrollToTimeline()
-            window.delay 1500, ->
-                myLife.changingEvent = false
           else
             nextEventIndex = myLife.getNextEventIndex()
             if nextEventIndex != null #and windowScrollTop + $window.height() > $timeline.offset().top
@@ -458,49 +492,20 @@ class Life
                 # $currentMetaLines.removeClass('current-scroll-forward').removeClass('first-current-scroll-forward')
                 $previousMetaLines.removeClass('previous-scroll-forward').removeClass('first-previous-scroll-forward')
                 $dateContainer.removeClass('date-scroll-forward').removeClass('first-date-scroll-forward')
-                myLife.changingEvent = false
             else
-              $('.me__summary__scroll-button').click() # instead of scrolling up, we click the button to update its text
+              # $('.me__summary__scroll-button').click() # instead of scrolling up, we click the button to update its text
+              scrollToElement('body')
               $aboutSection.removeClass('at-timeline').addClass('at-top')
-              window.delay 1500, ->
-                myLife.changingEvent = false
       return false
 
     $('body').addClass('scroll-locked')
 
     if (window.addEventListener) # older FF
-      window.addEventListener('DOMMouseScroll', preventScrolling, false)
-    window.onwheel = preventScrolling # modern standard
-    window.onmousewheel = document.onmousewheel = preventScrolling # older browsers, IE
+      window.addEventListener('DOMMouseScroll', preventMultipleEventsFromKineticScrolling, false)
+    window.onwheel = preventMultipleEventsFromKineticScrolling # modern standard
+    window.onmousewheel = document.onmousewheel = preventMultipleEventsFromKineticScrolling # older browsers, IE
     window.ontouchmove  = preventScrolling # mobile
     document.onkeydown  = preventScrollingForKeys
-    # $window.scroll ->
-    #   st = $window.scrollTop()
-      # if not myLife.changingEvent
-      #   if st > lastScrollTop
-      #     # downscroll code
-      #     previousEventIndex = myLife.getPreviousEventIndex()
-      #     if previousEventIndex != null
-      #       $newActiveEvent = $('#life-event-' + myLife._array[previousEventIndex])
-      #       $window.disablescroll()
-      #       myLife.setActiveEvent(previousEventIndex)
-      #       window.delay 1500, ->
-      #         myLife.changingEvent = false
-      #         $window.disablescroll('undo')
-      #   else
-      #     # upscroll code
-      #     nextEventIndex = myLife.getNextEventIndex()
-      #     if nextEventIndex != null
-      #       $newActiveEvent = $('#life-event-' + myLife._array[previousEventIndex])
-      #       $window.disablescroll()
-      #       myLife.setActiveEvent(nextEventIndex)
-      #       window.delay 1500, ->
-      #         myLife.changingEvent = false
-      #         $window.disablescroll('undo')
-      #   lastScrollTop = st
-    #   else
-    #     window.scrollTo(0,lastScrollTop)
-    #     return false 
 
   updateSrollButtonBetweenTimelineAndSummary: ->
     $scrollButtonContainer = $('.me__summary__scroll-container')
@@ -517,19 +522,20 @@ class Life
       $scrollButtonContainer.click ->
         $this = $(this)
         $scrollButton = $this.find('.me__summary__scroll-button')
-        if $this.attr('data-state') == 'summary'
-          $this.attr('data-state', 'timeline')
-          $scrollButton.html($scrollButtonContainer.data('see-summary') + ' ' + myLife.currentEventDate)
-          myLife.scrollToTimeline()
-        else
-          $this.attr('data-state', 'summary')
-          $scrollButton.html($this.data('see-timeline'))
-          scrollToElement('body')
-          $('.section--about').addClass('at-top').removeClass('at-bottom').removeClass('at-timeline')
+        myLife.scrollToTimeline()
+        # if $this.attr('data-state') == 'summary'
+        #   $this.attr('data-state', 'timeline')
+        #   $scrollButton.html($scrollButtonContainer.data('see-summary') + ' ' + myLife.currentEventDate)
+        #   myLife.scrollToTimeline()
+        # else
+        #   $this.attr('data-state', 'summary')
+        #   $scrollButton.html($this.data('see-timeline'))
+        #   scrollToElement('body')
+        #   $('.section--about').addClass('at-top').removeClass('at-bottom').removeClass('at-timeline')
 
   scrollToTimeline: () ->
     $('.section--about').removeClass('at-top').removeClass('at-bottom').addClass('at-timeline')
-    scrollToElement(this.$timeline, 52 + 80 + 1)
+    scrollToElement(this.$timeline, 52)
     $scrollButtonContainer = $('.me__summary__scroll-container').attr('data-state', 'timeline')
     this.updateSrollButtonBetweenTimelineAndSummary()
         
@@ -553,6 +559,26 @@ setEventPictureSlicesCss = ->
       fittedContainerWidthEm = Math.max(containerWidthEm * ratio, containerHeightEm) # in case the section is too high for the picture, makes the picture even bigger
       $pictureSlices.css({'width':sliceWidthEm + 0.2 + 'em','height':fittedContainerWidthEm + 'em', 'top':(containerHeightEm - fittedContainerWidthEm)/2 + 'em'}) # adds 0.2 em for overlap, so that there's never a white pixel
 
+enableTopicCards = ->
+  $topicCards = $('.me__summary__topic')
+  if $topicCards.length
+    $topicCards.mouseenter ->
+      $(this).removeClass('shrink-card')
+    $topicCards.mouseleave ->
+      $(this).addClass('shrink-card')
+
+enableMePopup = ->
+  $mePopup = $('.me__popup')
+  if $mePopup.length
+    $openPopup = $('.me__summary__open-popup')
+    $openPopup.click ->
+      $mePopup.addClass('me__popup--open')
+      return false
+    $closePopup = $('.me__popup__close')
+    $closePopup.click ->
+      $mePopup.removeClass('me__popup--open')
+      return false
+
 initializeAboutMePage = ->
   $meData = $('.me__data')
   if $meData.length
@@ -569,6 +595,8 @@ initializeAboutMePage = ->
       $(window).load ->
         setEventPictureSlicesCss()
     window.myLife.enableSrollButtonBetweenTimelineAndSummary()
+    enableTopicCards()
+    enableMePopup()
     
 
 

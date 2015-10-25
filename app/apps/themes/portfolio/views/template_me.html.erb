@@ -1,31 +1,146 @@
+<div class="debug" style="position:fixed;bottom:0;right:0;z-index:100000;">
+  <div>u:<span class="scroll-up-count">0</span></div>
+  <div>d:<span class="scroll-down-count">0</span></div>
+  <div>uf:<span class="scroll-up-filter-count">0</span></div>
+  <div>df:<span class="scroll-down-filter-count">0</span></div>
+</div>
 <section class="section section--about at-top">
   <div class="me">
     <div class="me__summary">
-      <div class="me__summary__content row row--full-width">
-        <div class="small-12 large-6 columns">
-          <ul class=" nostyle me__companies"></ul>
-          <ul class=" nostyle me__studies"></ul>
-          <ul class=" nostyle me__projects"></ul>
-          <ul class=" nostyle me__languages"></ul>
-          <ul class=" nostyle me__locations"></ul>
-          <ul class=" nostyle me__skills"></ul>
-          <ul class=" nostyle me__others"></ul>
+      <div class="me__summary__content row row--full-width collapse">
+        <div class="small-12 medium-7 large-8 columns fill-parent--height">
+          <div class="me__popup">
+            <div class="me__popup__wrap">
+              <div class="me__popup__container">
+                <div class="me__popup__inner">
+                  <p class="me__popup__close">&times;</p>
+                  <h2 class=" heading-1 me__popup__title padding--vertical small-text-center">
+                    <%= @post.the_field('descriptive-title') %>
+                  </h2>
+                  <div class="me__popup__content small-text-center padding--bottom">
+                    <%= simple_format(@post.the_field('description')) %>
+                  </div>
+                  <% if not current_site.the_field('resume').blank? %>
+                    <div class="small-text-center">
+                      <a href="<%= current_site.the_field('resume') %>" class="button" download target="_blank">
+                        <%= t("Download resume") %>
+                      </a>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="table">
+            <div class="table__cell">
+              <div class="row padding">
+                <div class="small-12 large-6 columns ">
+                  <div class="me__summary__topic">  
+                    <div class="me__summary__icon">
+                      <div class="table">
+                        <div class="table__cell">
+                          <i class="ion-briefcase"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <ul class="nostyle me__companies">
+                    </ul>
+                  </div>
+                </div>
+                <div class="small-12 large-6 columns ">
+                  <div class="me__summary__topic">  
+                    <div class="me__summary__icon">
+                      <div class="table">
+                        <div class="table__cell">
+                          <i class="ion-university"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <ul class="nostyle me__studies">
+                    </ul>
+                  </div>
+                </div>
+                <div class="small-12 large-6 columns ">
+                  <div class="me__summary__topic">  
+                    <div class="me__summary__icon">
+                      <div class="table">
+                        <div class="table__cell">
+                          <i class="ion-wrench"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <ul class="nostyle me__projects">
+                    </ul>
+                  </div>
+                </div>
+                <div class="small-12 large-6 columns ">
+                  <div class="me__summary__topic">  
+                    <div class="me__summary__icon">
+                      <div class="table">
+                        <div class="table__cell">
+                          <i class="ion-earth"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <ul class="nostyle me__languages">
+                    </ul>
+                  </div>
+                </div>
+                <!-- <div class="small-12 large-6 columns ">
+                  <div class="me__summary__topic">  
+                    <ul class="nostyle me__locations">
+                    </ul>
+                  </div>
+                </div> -->
+                <div class="small-12 large-6 columns ">
+                  <div class="me__summary__topic">  
+                    <div class="me__summary__icon">
+                      <div class="table">
+                        <div class="table__cell">
+                          <i class="ion-ios-gear"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <ul class="nostyle me__skills">
+                    </ul>
+                  </div>
+                </div>
+                <div class="small-12 large-6 columns ">
+                  <div class="me__summary__topic">  
+                    <div class="me__summary__icon">
+                      <div class="table">
+                        <div class="table__cell">
+                          <i class="ion-android-color-palette"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <ul class="nostyle me__others">
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="small-12 large-6 columns">
+        <div class="small-12 medium-5 large-4 columns fill-parent--height hide-for-small-only">
+          <a href="#" class="me__summary__open-popup">
+            <div class="me__summary__picture" style="background-image:url('<%= @post.the_field('picture') %>');"></div>
+          </a>
         </div>
       </div>
       <div class="me__summary__scroll-container" data-state="summary" data-see-summary="<%= t('Summary in') %>" data-see-timeline="<%= t('Timeline') %>">
-        <div class="me__summary__scroll-button"><%= t('Timeline') %></div>
+        <i class="ion-chevron-down me__summary__scroll-icon"></i>
+        <!-- <div class="me__summary__scroll-button"><%= t('Timeline') %></div> -->
       </div>
     </div>
     <div class="me__data events">
       <div class="timeline">
-        <div class="timeline__icons small-text-center">
-          <i class="ion-university timeline__icon timeline__icon--study"></i>
-          <i class="ion-ios-location timeline__icon timeline__icon--location"></i>
-          <i class="ion-briefcase timeline__icon timeline__icon--company"></i>
-        </div>
         <div class="timeline__summary">
+          <div class="timeline__icons small-text-center">
+            <i class="ion-university timeline__icon timeline__icon--study"></i>
+            <i class="ion-ios-location timeline__icon timeline__icon--location"></i>
+            <i class="ion-briefcase timeline__icon timeline__icon--company"></i>
+          </div>
           <div class="timeline__summary__inner">
             <div class="time-now"></div>
             
@@ -70,7 +185,7 @@
             data-start-date="<%= event.the_field('start-date') %>"
             data-start-month="<%= t(Date.strptime(event.the_field('start-date'), '%Y-%m-%d').strftime('%b')) %>"
             data-end-date="<%= event.the_field('end-date') %>"
-            
+            data-end-month="<% if not event.the_field('end-date').blank? %><%= t(Date.strptime(event.the_field('end-date'), '%Y-%m-%d').strftime('%b')) %><% end %>"
             data-company="<%= event.the_field('company') %>"
             data-location="<%= event.the_field('location') %>"
             data-study="<%= event.the_field('study') %>"
@@ -111,7 +226,7 @@
               <div class="life-event__picture">
                 <div class="table">
                   <div class="table__cell small-text-center text-white">
-                    <h2 class="heading-1 big life-event__title"><%= event.the_title %></h2>
+                    <h2 class="heading-2 big life-event__title large-padding--horizontal--huge"><%= event.the_title %></h2>
                   </div>
                 </div>
                 <img class="hide life-event__picture-file" src="<%= event.the_field('picture') %>" />

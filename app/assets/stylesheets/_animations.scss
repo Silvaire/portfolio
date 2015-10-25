@@ -1,0 +1,81 @@
+@include keyframes(icon-bounce) {
+    0%   {top:0;}
+    33%  {top:-2px;}
+    66%  {top:5px;}
+    100% {top:0;}
+}
+
+
+@include keyframes(date-scroll-forward) {
+    0%   {top:50%;}
+    50%  {top:110%;}
+    50.01%  {top:-10%;}
+    100% {top:50%;}
+}
+
+@include keyframes(date-scroll-backwards) {
+    0%   {top:50%;}
+    50%  {top:-10%;}
+    50.01%  {top:110%;}
+    100% {top:50%;}
+}
+
+@include keyframes(first-date-scroll-forward) {
+    0%   {top:100%;}
+    30%  {top:110%;}
+    30.01%  {top:-10%;}
+    100% {top:50%;}
+}
+
+@include keyframes(first-date-scroll-backwards) {
+    0%   {top:50%;}
+    70%  {top:-10%;}
+    70.01%  {top:110%;}
+    100% {top:100%;}
+}
+
+
+
+@include keyframes(previous-scroll-forward) {
+    0%   {top:50%;height: 50%;}
+    50%  {top:110%;height: 0;}
+    50.00000000001%  {top:-10%; height: 110%;}
+    100% {top:50%; height: 50%;}
+}
+
+@include keyframes(previous-scroll-backwards) {
+    0%   {top:50%;height: 50%;}
+    50%  {top:-10%; height: 110%;}
+    50.00000000001%  {top:110%;height: 0;}
+    100% {top:50%; height: 50%;}
+}
+
+@include keyframes(first-previous-scroll-forward) {
+    0%   {top:0;height: 0;}
+    30%  {top:0;height: 0;}
+    30.00000000001%  {top:-10%; height: 110%;}
+    100% {top:50%; height: 50%;}
+}
+
+@include keyframes(first-previous-scroll-backwards) {
+    0%   {top:50%;height: 50%}
+    70%  {top:-10%;height: 110%;}
+    70.00000000001%  {top:-10%; height: 0;}
+    100% {top:-10%; height: 0;}
+}
+
+
+@include keyframes(shrink-card) {
+    0%    {@include transform(scale(1.07));
+    }
+    25%   {@include transform(scale(0.98));
+    }
+    50%   {@include transform(scale(1.02));
+    }
+    75%   {@include transform(scale(0.99));
+    }
+    // 80%   {@include transform(scale(1.02));
+    // }
+    100%  {@include transform(scale(1));
+    }
+}

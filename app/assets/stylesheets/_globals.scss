@@ -235,6 +235,15 @@ table {
   }
 }
 
+.fill-parent {
+  &--height {
+    height: 100%;
+  }
+  &--width {
+    width: 100%;
+  }
+}
+
 // Spacer: is used with text-align: justify to get elements evenly positoned
 .spacer {
   display: inline-block;
@@ -269,6 +278,15 @@ hr {
 
 .nowrap {
   white-space: nowrap;
+}
+
+.animated-icon {
+  &--jump {
+    @include hwa;
+    @include animation(icon-bounce 1s infinite);
+    @include animation-play-state(running);
+    position: relative;
+  }
 }
 
 @include mq(mediumDown) {

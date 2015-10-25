@@ -95,6 +95,16 @@ h2,
   line-height: 0.9em;
   font-weight: 700;
   color: inherit;
+  &.big {
+    font-size: 32px;
+  }
+  @include mq(small) {
+    font-size: 25px;
+    @include sansSerif;
+    &.big {
+      font-size: 28px;
+    }
+  }
 }
 
 p,
