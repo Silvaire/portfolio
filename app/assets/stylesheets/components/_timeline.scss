@@ -61,10 +61,12 @@
       padding: 30px;
     }
     &__inner {
+      @include box-shadow(0, 0, 50px, -10px, rgba($black-light, 0.8));
       padding: 30px;
       background: $white;
-      border: solid 2px $black-light;
       position: relative;
+      max-height: 100%;
+      overflow-y: auto;
     }
     &__close {
       position: absolute;

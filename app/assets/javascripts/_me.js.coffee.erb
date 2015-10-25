@@ -419,18 +419,20 @@ class Life
         prevTime = curTime
     
     preventScrolling = (e) ->
-      e = e || window.event
-      if e.preventDefault
-        e.preventDefault()
-      e.returnValue = false
-      updatesTimelineAccordingToScrollDirection(e)
-
-    preventScrollingForKeys = (e) ->
-      if (scrollKeys[e.keyCode])
+      if !$(e.target).is('.scroll-enabled, .scroll-enabled *')
+        e = e || window.event
         if e.preventDefault
           e.preventDefault()
         e.returnValue = false
         updatesTimelineAccordingToScrollDirection(e)
+
+    preventScrollingForKeys = (e) ->
+      if !$(e.target).is('.scroll-enabled, .scroll-enabled *')
+        if (scrollKeys[e.keyCode])
+          if e.preventDefault
+            e.preventDefault()
+          e.returnValue = false
+          updatesTimelineAccordingToScrollDirection(e)
 
     updatesTimelineAccordingToScrollDirection = (e) ->
       if e.deltaY > 0 or e.keyCode in [32,34,35,39,40]
