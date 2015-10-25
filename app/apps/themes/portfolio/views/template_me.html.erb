@@ -114,6 +114,14 @@
                   </div>
                 </div>
               </div>
+              <% if not current_site.the_field('resume').blank? %>
+                <div class="small-text-center padding--top--mini">
+                  <a href="<%= current_site.the_field('resume') %>" class="button button--with-icon" download target="_blank">
+                    <%= t("Download resume") %>
+                    <i class="ion-android-arrow-down"></i>
+                  </a>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>
@@ -127,11 +135,6 @@
                 <%= simple_format(@post.the_field('description')) %>
               </div>
               <div class="small-text-center">
-                <% if not current_site.the_field('resume').blank? %>
-                  <a href="<%= current_site.the_field('resume') %>" class="button" download target="_blank">
-                    <%= t("Download resume") %>
-                  </a>
-                <% end %>
                 <a href="mailto:<%= current_site.the_field('email') %>" class="button">
                   <i class="ion-android-mail"></i>
                   <%= t('Contact me') %>
