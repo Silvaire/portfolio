@@ -30,6 +30,9 @@ class LifeEvent
     location = $event.data('location')
     if location.length
       this.location = location
+    description = $event.data('description')
+    if description.length
+      this.description = description
     study = $event.data('study')
     if study.length
       this.study = study
@@ -154,25 +157,43 @@ class Life
         date = lifeEvent.startMonth + '. ' + startYear + ' - ' + 'Today'
       if tags.include? "Work"
         $companiesContainer = this.$summary.find('.me__companies')
-        $companiesContainer.prepend('<li class="me__summary__item me__company from-event-' + lifeEvent.id + '"><span class="me__summary__date">' + date + '</span>' + lifeEvent.title + ', <span class="me__summary__meta">' + lifeEvent.company + '</span></li>')
+        $companiesContent = this.$summary.find('.me__topic__content--companies')
+        newItem = '<div class="me__summary__item me__company from-event-' + lifeEvent.id + '"><span class="me__summary__meta">' + date + ', ' + lifeEvent.company + '</span>' + lifeEvent.title + '</div>'
+        detailedItem = '<div class="me__summary__item--detailed me__company from-event-' + lifeEvent.id + '"><span class="me__summary__meta">' + date + ', ' + lifeEvent.company + '</span>' + lifeEvent.title + '<div class="me__summary__description">' + lifeEvent.description + '</div></div>'
+        $companiesContainer.html(newItem)
+        $companiesContent.prepend(detailedItem)
       if tags.include? "Studies"
         $studiesContainer = this.$summary.find('.me__studies')
-        $studiesContainer.prepend('<li class="me__summary__item me__study from-event-' + lifeEvent.id + '"><span class="me__summary__date">' + date + '</span>' + lifeEvent.title + ', <span class="me__summary__meta">' + lifeEvent.study + '</li>')
+        $studiesContent = this.$summary.find('.me__topic__content--studies')
+        newItem = '<div class="me__summary__item me__study from-event-' + lifeEvent.id + '"><span class="me__summary__meta">' + date + ', ' + lifeEvent.study + '</span>' + lifeEvent.title + '</div>'
+        detailedItem = '<div class="me__summary__item--detailed me__study from-event-' + lifeEvent.id + '"><span class="me__summary__meta">' + date + ', ' + lifeEvent.study + '</span>' + lifeEvent.title + '<div class="me__summary__description">' + lifeEvent.description + '</div></div>'
+        $studiesContainer.html(newItem)
+        $studiesContent.prepend(detailedItem)
       if tags.include? "Language"
         $languagesContainer = this.$summary.find('.me__languages')
-        $languagesContainer.prepend('<li class="me__summary__item me__language from-event-' + lifeEvent.id + '">' + lifeEvent.language + '</li>')
+        newItem = '<span class="me__summary__item me__language from-event-' + lifeEvent.id + '">' + lifeEvent.language + ' </span>'
+        $languagesContainer.prepend(newItem)
       if tags.include? "Skills"
         $skillsContainer = this.$summary.find('.me__skills')
-        $skillsContainer.prepend('<li class="me__summary__item me__skill from-event-' + lifeEvent.id + '">' + lifeEvent.skills + '</li>')
+        newItem = '<span class="me__summary__item me__skill from-event-' + lifeEvent.id + '">' + lifeEvent.skills + '</span>'
+        $skillsContainer.prepend(newItem)
       if tags.include? "Project"
         $projectsContainer = this.$summary.find('.me__projects')
-        $projectsContainer.prepend('<li class="me__summary__item me__project from-event-' + lifeEvent.id + '"><span class="me__summary__date">' + date + '</span>' + lifeEvent.title + ', <span class="me__summary__meta">' + lifeEvent.project + '</li>')
+        $projectsContent = this.$summary.find('.me__topic__content--projects')
+        newItem = '<div class="me__summary__item me__project from-event-' + lifeEvent.id + '"><span class="me__summary__meta">' + date + ', ' + lifeEvent.project + '</span>' + lifeEvent.title + '</div>'
+        detailedItem = '<div class="me__summary__item--detailed me__projects from-event-' + lifeEvent.id + '"><span class="me__summary__meta">' + date + ', ' + lifeEvent.projects + '</span>' + lifeEvent.title + '<div class="me__summary__description">' + lifeEvent.description + '</div></div>'
+        $projectsContainer.html(newItem)
+        $projectsContent.prepend(detailedItem)
       # if tags.include? "Location"
       #   $locationsContainer = this.$summary.find('.me__locations')
-      #   $locationsContainer.prepend('<li class="me__summary__item me__location from-event-' + lifeEvent.id + '"><span class="me__summary__date">' + date + '</span>' + lifeEvent.location + '</li>')
+      #   $locationsContainer.html('<div class="me__summary__item me__location from-event-' + lifeEvent.id + '"><span class="me__summary__meta">' + date + '</span>' + lifeEvent.location + '</div>')
       if tags.include? "Other"
         $otherContainer = this.$summary.find('.me__others')
-        $otherContainer.prepend('<li class="me__summary__item me__other from-event-' + lifeEvent.id + '"><span class="me__summary__date">' + date + '</span>' + lifeEvent.title + '</li>')
+        $otherContent = this.$summary.find('.me__topic__content--others')
+        newItem = '<div class="me__summary__item me__other from-event-' + lifeEvent.id + '"><span class="me__summary__meta">' + date + '</span>' + lifeEvent.title + '</div>'
+        detailedItem = '<div class="me__summary__item me__other from-event-' + lifeEvent.id + '"><span class="me__summary__meta">' + date + '</span>' + lifeEvent.title + '<div class="me__summary__description">' + lifeEvent.description + '</div></div>'
+        $otherContainer.html(newItem)
+        $otherContent.prepend(detailedItem)
         
   hideEventFromSummary: (id) ->
     $('.from-event-' + id).addClass('me__summary__item--hidden')
@@ -435,15 +456,7 @@ class Life
           updatesTimelineAccordingToScrollDirection(e)
 
     updatesTimelineAccordingToScrollDirection = (e) ->
-      if e.deltaY > 0 or e.keyCode in [32,34,35,39,40]
-        $('.scroll-down-count').html(parseInt($('.scroll-down-count').html()) + 1)
-      else if e.deltaY < 0 or e.keyCode in [33,36,37,38]
-        $('.scroll-up-count').html(parseInt($('.scroll-up-count').html()) + 1)
       if not myLife.canChangeEvent()
-        if e.deltaY > 0 or e.keyCode in [32,34,35,39,40]
-          $('.scroll-down-filter-count').html(parseInt($('.scroll-down-filter-count').html()) + 1)
-        else if e.deltaY < 0 or e.keyCode in [33,36,37,38]
-          $('.scroll-up-filter-count').html(parseInt($('.scroll-up-filter-count').html()) + 1)
         $aboutSection = $('.section--about')
         $dateContainer = $('.timeline__date-container')
         # $currentMetaLines = $('.timeline__item--current')
@@ -564,10 +577,15 @@ setEventPictureSlicesCss = ->
 enableTopicCards = ->
   $topicCards = $('.me__summary__topic')
   if $topicCards.length
+    $mePopup = $('.me__popup')
     $topicCards.mouseenter ->
       $(this).removeClass('shrink-card')
     $topicCards.mouseleave ->
       $(this).addClass('shrink-card')
+    $topicCards.filter('.me__summary__topic--with-more').click ->
+      $this = $(this)
+      $mePopup.addClass('me__popup--open')
+      $mePopup.find('.me__popup__content').html('<h3 class="heading-3 small-text-center padding--bottom">' + $this.data('topic') + '</h3>' + $this.find('.me__topic__content').html())
 
 enableMePopup = ->
   $mePopup = $('.me__popup')
@@ -575,11 +593,11 @@ enableMePopup = ->
     $openPopup = $('.me__summary__open-popup')
     $openPopup.click ->
       $mePopup.addClass('me__popup--open')
-      return false
-    $closePopup = $('.me__popup__close')
-    $closePopup.click ->
-      $mePopup.removeClass('me__popup--open')
-      return false
+      $mePopup.find('.me__popup__content').html($('.me_summary__content').html())
+    $closePopup = $('.me__popup__close, .me__popup')
+    $closePopup.click (e) ->
+      if !$(e.target).is('.me__popup__inner, .me__popup__inner :not(.me__popup__close)')
+        $mePopup.removeClass('me__popup--open')
 
 initializeAboutMePage = ->
   $meData = $('.me__data')

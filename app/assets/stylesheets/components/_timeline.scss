@@ -65,6 +65,7 @@
       padding: 30px;
       background: $white;
       position: relative;
+      min-height: 300px;
       max-height: 100%;
       overflow-y: auto;
     }
@@ -103,30 +104,31 @@
       @include box-shadow(0, 3px, 9px, -5px, rgba($black-light,0.8));
       margin: 15px;
       background: $grey-lightest;
-      padding: 15px;
-      cursor: pointer;
-      ul {
-        width: calc(100% - (50px));
-        margin-left: 50px;
-        & > :not(:first-child) {
-          display: none;
+      padding: 7px 15px;
+      min-height: 50px;
+      &--with-more {
+        cursor: pointer;
+        &:hover {
+          @include box-shadow(0, 5px, 10px, -6px, rgba($black-light,0.9));
+          @include transform(scale(1.07));
+          &:after {
+            color: $grey-dark;
+          }
         }
-      }
-      &:hover {
-        @include box-shadow(0, 5px, 10px, -6px, rgba($black-light,0.9));
-        @include transform(scale(1.07));
-      }
-      &.shrink-card {
-        @include animation(shrink-card 0.7s 1);
-        @include animation-play-state(running);
-      }
-      &:after {
-        content: '...';
-        display: inline-block;
-        height: 30px;
-        line-height: 30px;
-        width: 100%;
-        text-align: center;
+        &.shrink-card {
+          @include animation(shrink-card 0.7s 1);
+          @include animation-play-state(running);
+        }
+        &:after {
+          content: '\f48a';
+          font-family: Ionicons;
+          position: absolute;
+          display: inline-block;
+          bottom: 1px;
+          right: 7px;
+          color: $grey;
+          text-align: center;
+        }
       }
     }
     &__icon {
@@ -141,15 +143,31 @@
       color: $grey-dark;
     }
     &__item {
+      margin-left: 50px;
       &.me__summary__item--hidden {
         display: none;
       }
+      &--detailed {
+        padding-bottom: 5px;
+        .me__summary {
+          &__meta {
+            width: 200px;
+          }
+          &__description {
+            margin-left: 200px;
+            p {
+              font-size: 12px;
+              line-height: 1.2em;
+            }
+          }
+        }
+      }
     }
-    &__date {
+    &__meta {
       display: inline-block;
       font-size: 11px;
-      margin-right: 10px;
-      color: $grey;
+      width: 100%;
+      color: $grey-dark;
     }
     &__meta {
       display: inline-block;
@@ -166,6 +184,7 @@
       background-position: top;
     }
     &__open-popup {
+      cursor: pointer;
       // &__button {
       //   @include transition(bottom 0.4s);
       //   position: absolute;

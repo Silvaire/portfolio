@@ -1,9 +1,3 @@
-<div class="debug" style="position:fixed;bottom:0;right:0;z-index:100000;">
-  <div>u:<span class="scroll-up-count">0</span></div>
-  <div>d:<span class="scroll-down-count">0</span></div>
-  <div>uf:<span class="scroll-up-filter-count">0</span></div>
-  <div>df:<span class="scroll-down-filter-count">0</span></div>
-</div>
 <section class="section section--about at-top">
   <div class="me">
     <div class="me__summary">
@@ -14,19 +8,8 @@
               <div class="me__popup__container">
                 <div class="me__popup__inner scroll-enabled">
                   <p class="me__popup__close">&times;</p>
-                  <h2 class=" heading-1 me__popup__title padding--vertical small-text-center">
-                    <%= @post.the_field('descriptive-title') %>
-                  </h2>
-                  <div class="me__popup__content small-text-center padding--bottom">
-                    <%= simple_format(@post.the_field('description')) %>
+                  <div class="me__popup__content">
                   </div>
-                  <% if not current_site.the_field('resume').blank? %>
-                    <div class="small-text-center">
-                      <a href="<%= current_site.the_field('resume') %>" class="button" download target="_blank">
-                        <%= t("Download resume") %>
-                      </a>
-                    </div>
-                  <% end %>
                 </div>
               </div>
             </div>
@@ -35,7 +18,7 @@
             <div class="table__cell">
               <div class="row padding">
                 <div class="small-12 large-6 columns ">
-                  <div class="me__summary__topic">  
+                  <div class="me__summary__topic me__summary__topic--with-more" data-topic="<i class='padding--right--mini ion-briefcase'></i><%= t('Work experience') %>">  
                     <div class="me__summary__icon">
                       <div class="table">
                         <div class="table__cell">
@@ -43,12 +26,14 @@
                         </div>
                       </div>
                     </div>
-                    <ul class="nostyle me__companies">
-                    </ul>
+                    <div class="nostyle me__companies">
+                    </div>
+                    <div class="me__topic__content me__topic__content--companies hide">
+                    </div>
                   </div>
                 </div>
                 <div class="small-12 large-6 columns ">
-                  <div class="me__summary__topic">  
+                  <div class="me__summary__topic me__summary__topic--with-more" data-topic="<i class='padding--right--mini ion-university'></i><%= t('Studies') %>">  
                     <div class="me__summary__icon">
                       <div class="table">
                         <div class="table__cell">
@@ -56,21 +41,10 @@
                         </div>
                       </div>
                     </div>
-                    <ul class="nostyle me__studies">
-                    </ul>
-                  </div>
-                </div>
-                <div class="small-12 large-6 columns ">
-                  <div class="me__summary__topic">  
-                    <div class="me__summary__icon">
-                      <div class="table">
-                        <div class="table__cell">
-                          <i class="ion-wrench"></i>
-                        </div>
-                      </div>
+                    <div class="nostyle me__studies">
                     </div>
-                    <ul class="nostyle me__projects">
-                    </ul>
+                    <div class="me__topic__content me__topic__content--studies hide">
+                    </div>
                   </div>
                 </div>
                 <div class="small-12 large-6 columns ">
@@ -82,14 +56,14 @@
                         </div>
                       </div>
                     </div>
-                    <ul class="nostyle me__languages">
-                    </ul>
+                    <div class="nostyle me__languages">
+                    </div>
                   </div>
                 </div>
                 <!-- <div class="small-12 large-6 columns ">
                   <div class="me__summary__topic">  
-                    <ul class="nostyle me__locations">
-                    </ul>
+                    <div class="nostyle me__locations">
+                    </div>
                   </div>
                 </div> -->
                 <div class="small-12 large-6 columns ">
@@ -101,12 +75,27 @@
                         </div>
                       </div>
                     </div>
-                    <ul class="nostyle me__skills">
-                    </ul>
+                    <div class="nostyle me__skills">
+                    </div>
                   </div>
                 </div>
                 <div class="small-12 large-6 columns ">
-                  <div class="me__summary__topic">  
+                  <div class="me__summary__topic me__summary__topic--with-more" data-topic="<i class='padding--right--mini ion-wrench'></i><%= t('Projects') %>">  
+                    <div class="me__summary__icon">
+                      <div class="table">
+                        <div class="table__cell">
+                          <i class="ion-wrench"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="nostyle me__projects">
+                    </div>
+                    <div class="me__topic__content me__topic__content--projects hide">
+                    </div>
+                  </div>
+                </div>
+                <div class="small-12 large-6 columns ">
+                  <div class="me__summary__topic me__summary__topic--with-more" data-topic="<i class='padding--right--mini ion-android-color-palette'></i><%= t('Other interests') %>">  
                     <div class="me__summary__icon">
                       <div class="table">
                         <div class="table__cell">
@@ -114,8 +103,10 @@
                         </div>
                       </div>
                     </div>
-                    <ul class="nostyle me__others">
-                    </ul>
+                    <div class="nostyle me__others">
+                    </div>
+                    <div class="me__topic__content me__topic__content--others hide">
+                    </div>
                   </div>
                 </div>
               </div>
@@ -123,9 +114,28 @@
           </div>
         </div>
         <div class="small-12 medium-5 large-4 columns fill-parent--height hide-for-small-only">
-          <a href="#" class="me__summary__open-popup">
+          <div class="me__summary__open-popup fill-parent--height">
+            <div class="me_summary__content hide">
+              <h2 class=" heading-1 me__popup__title padding--vertical small-text-center">
+                <%= @post.the_field('descriptive-title') %>
+              </h2>
+              <div class="me__popup__content small-text-center padding--bottom">
+                <%= simple_format(@post.the_field('description')) %>
+              </div>
+              <div class="small-text-center">
+                <% if not current_site.the_field('resume').blank? %>
+                  <a href="<%= current_site.the_field('resume') %>" class="button" download target="_blank">
+                    <%= t("Download resume") %>
+                  </a>
+                <% end %>
+                <a href="mailto:<%= current_site.the_field('email') %>" class="button">
+                  <i class="ion-android-mail"></i>
+                  <%= t('Contact me') %>
+                </a>
+              </div>
+            </div>
             <div class="me__summary__picture" style="background-image:url('<%= @post.the_field('picture') %>');"></div>
-          </a>
+          </div>
         </div>
       </div>
       <div class="me__summary__scroll-container" data-state="summary" data-see-summary="<%= t('Summary in') %>" data-see-timeline="<%= t('Timeline') %>">
@@ -186,6 +196,7 @@
             data-start-month="<%= t(Date.strptime(event.the_field('start-date'), '%Y-%m-%d').strftime('%b')) %>"
             data-end-date="<%= event.the_field('end-date') %>"
             data-end-month="<% if not event.the_field('end-date').blank? %><%= t(Date.strptime(event.the_field('end-date'), '%Y-%m-%d').strftime('%b')) %><% end %>"
+            data-description="<%= simple_format(event.the_field('description')) %>"
             data-company="<%= event.the_field('company') %>"
             data-location="<%= event.the_field('location') %>"
             data-study="<%= event.the_field('study') %>"
