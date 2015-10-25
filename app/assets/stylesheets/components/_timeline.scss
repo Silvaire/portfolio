@@ -94,6 +94,10 @@
     height: 100vh;
     margin-top: -$header-height;
     padding-top: $header-height;
+    &__header {
+      position: absolute;
+      width: 100%;
+    }
     &__content {
       height: 100%;
     }

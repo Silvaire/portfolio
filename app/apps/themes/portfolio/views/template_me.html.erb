@@ -3,6 +3,10 @@
     <div class="me__summary">
       <div class="me__summary__content row row--full-width collapse">
         <div class="small-12 medium-7 large-8 columns fill-parent--height">
+          <div class="me__summary__header small-text-center padding--vertical">
+            <h2 class="me__summary__title big heading-1 padding--bottom--mini"><%= @post.the_field('descriptive-title') %></h2>
+            <p class="me__summary__introduction"><%= @post.the_field('introduction') %></p>
+          </div>
           <div class="me__popup">
             <div class="me__popup__wrap">
               <div class="me__popup__container">
