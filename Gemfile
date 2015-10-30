@@ -43,6 +43,27 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+## BEGIN CAMALEON GEMS (FOR HEROKU)
+
+gem 'protected_attributes' # used for dynamic attributes (newer versions will be deprecated)
+gem 'bcrypt' # rails password security
+gem 'mini_magick' # image library (resize, crop, captcha, ..)
+gem 'will_paginate' # list pagination
+gem 'will_paginate-bootstrap' # list pagination for bootstrap
+
+# others
+gem 'el_finder' # media manager
+gem 'cancancan', '~> 1.10' # user permissions
+gem 'meta-tags' # seo meta tags generatos
+gem 'draper', '~> 1.3' # decorators
+
+gem 'rufus-scheduler', '~> 3.1.1' # crontab
+gem "dynamic_sitemaps" # sitemaps
+gem 'actionpack-page_caching' # page caching
+gem 'mobu' # mobile detect
+
+## END CAMALEON GEMS (FOR HEROKU)
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -56,6 +77,13 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  ## BEGIN CAMALEON GEMS (FOR HEROKU)
+  
+  gem 'thin'
+  gem 'tzinfo-data'
+  
+  ## END CAMALEON GEMS (FOR HEROKU)
 end
 
 
