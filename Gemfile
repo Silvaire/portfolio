@@ -44,6 +44,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 ## BEGIN CAMALEON GEMS (FOR HEROKU)
+# These gems where copied from ./lib/Gemfile_camaleon to make the Gemfile and Gemfile.lock consistant for heroku
 
 gem 'protected_attributes' # used for dynamic attributes (newer versions will be deprecated)
 gem 'bcrypt' # rails password security
