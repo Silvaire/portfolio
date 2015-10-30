@@ -19,7 +19,7 @@ gem 'mobu' # mobile detect
 
 # fix for windows users
 group :development do
-  gem 'thin', platforms: [:mingw, :mswin]
-  gem 'tzinfo-data', platforms: [:mingw, :mswin]
+  gem 'thin'
+  gem 'tzinfo-data'
 end
 ##################### END CUSTOM GEMS ######################
