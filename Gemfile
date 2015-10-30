@@ -87,6 +87,8 @@ group :development, :test do
   ## END CAMALEON GEMS (FOR HEROKU)
 end
 
+gem 'rails_12factor', group: :production
+
 
 
 #################### Camaleon CMS include all gems for plugins and themes #################### 
