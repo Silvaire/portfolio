@@ -2,7 +2,6 @@
   @include perspective(500px);
   @include transform-origin(center center);
   @include transform-style(preserve-3d);
-  overflow: hidden;
 }
 
 .homepage {
@@ -55,6 +54,9 @@
 }
 
 @include mq(small) {
+  .section--homepage {
+    overflow: hidden;
+  }
   .homepage {
     margin-top: 0;
     padding: 30px 0;
