@@ -12,6 +12,9 @@
   text-align: center;
   text-transform: uppercase;
   margin-bottom: 0;
+  &:focus {
+    background-color: $green;
+  }
   &:hover {
     background: $green-lighter;
     // color: $black-light;
