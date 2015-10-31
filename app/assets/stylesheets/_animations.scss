@@ -8,29 +8,33 @@
 
 @include keyframes(date-scroll-forward) {
     0%   {top:50%;}
+    50.000000000001%  {top:-10%;} // Safari rounds this, which then needs to be ignored by same percent under
     50%  {top:110%;}
-    50.0001%  {top:-10%;}
+    50.0001%  {top:-10%;} // maximum Safari sensitivity
     100% {top:50%;}
 }
 
 @include keyframes(date-scroll-backwards) {
     0%   {top:50%;}
+    50.000000000001%  {top:110%;} // Safari rounds this, which then needs to be ignored by same percent under
     50%  {top:-10%;}
-    50.0001%  {top:110%;}
+    50.0001%  {top:110%;} // maximum Safari sensitivity
     100% {top:50%;}
 }
 
 @include keyframes(first-date-scroll-forward) {
     0%   {top:100%;}
+    30.000000000001%  {top:-10%;} // Safari rounds this, which then needs to be ignored by same percent under
     30%  {top:110%;}
-    30.0001%  {top:-10%;}
+    30.0001%  {top:-10%;} // maximum Safari sensitivity
     100% {top:50%;}
 }
 
 @include keyframes(first-date-scroll-backwards) {
     0%   {top:50%;}
+    70.000000000001%  {top:110%;} // Safari rounds this, which then needs to be ignored by same percent under
     70%  {top:-10%;}
-    70.0001%  {top:110%;}
+    70.0001%  {top:110%;} // maximum Safari sensitivity
     100% {top:100%;}
 }
 
@@ -38,29 +42,33 @@
 
 @include keyframes(previous-scroll-forward) {
     0%   {top:50%;height: 50%;}
+    50.000000000001%  {top:-10%; height: 110%;} // Safari rounds this, which then needs to be ignored by same percent under
     50%  {top:110%;height: 0;}
-    50.0001%  {top:-10%; height: 110%;}
+    50.0001%  {top:-10%; height: 110%;} // maximum Safari sensitivity
     100% {top:50%; height: 50%;}
 }
 
 @include keyframes(previous-scroll-backwards) {
     0%   {top:50%;height: 50%;}
+    50.000000000001%  {top:110%;height: 0;} // Safari rounds this, which then needs to be ignored by same percent under
     50%  {top:-10%; height: 110%;}
-    50.0001%  {top:110%;height: 0;}
+    50.0001%  {top:110%;height: 0;} // maximum Safari sensitivity
     100% {top:50%; height: 50%;}
 }
 
 @include keyframes(first-previous-scroll-forward) {
     0%   {top:0;height: 0;}
+    30.000000000001%  {top:-10%; height: 110%;} // Safari rounds this, which then needs to be ignored by same percent under
     30%  {top:0;height: 0;}
-    30.0001%  {top:-10%; height: 110%;}
+    30.0001%  {top:-10%; height: 110%;} // maximum Safari sensitivity
     100% {top:50%; height: 50%;}
 }
 
 @include keyframes(first-previous-scroll-backwards) {
     0%   {top:50%;height: 50%}
+    70.000000000001%  {top:-10%; height: 0;} // Safari rounds this, which then needs to be ignored by same percent under
     70%  {top:-10%;height: 110%;}
-    70.0001%  {top:-10%; height: 0;}
+    70.0001%  {top:-10%; height: 0;} // maximum Safari sensitivity
     100% {top:-10%; height: 0;}
 }
 
