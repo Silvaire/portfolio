@@ -30,4 +30,12 @@ module Themes::Portfolio::MainHelper
     # post = params[:post].decorate
     # post_type = params[:post_type].decorate
   end
+
+  def on_render_sitemap(r)
+    r[:skip_tag_ids] =  PostTag.all.pluck(:id)
+    r[:skip_post_ids] =  PostType.find_by(slug:'event').posts.pluck(:id)
+    r[:skip_posttype_ids] = PostType.all.pluck(:id)
+    r[:skip_cat_ids] = Category.all.pluck(:id)
+    return r
+  end
 end

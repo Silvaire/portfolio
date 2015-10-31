@@ -10,6 +10,8 @@
     "on_inactive": ["portfolio_on_uninstall_theme"],
     "on_theme_settings": ["portfolio_settings"],
     "created_post": ["after_post_save"],
-    "updated_post": ["after_post_save"]
+    "updated_post": ["after_post_save"],
+    "on_render_sitemap": ["on_render_sitemap"]
+
   }
 }
