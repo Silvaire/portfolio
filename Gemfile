@@ -15,6 +15,8 @@ gem 'ionicons-rails'
 
 gem 'decorators', '~> 2.0.1'
 
+gem 'newrelic_rpm'
+
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
