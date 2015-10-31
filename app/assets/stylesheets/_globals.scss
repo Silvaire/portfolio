@@ -29,8 +29,10 @@ body {
   .ielt9 & {
     overflow: hidden;
   }
-  &.me__popup--open {
-    overflow: hidden;
+  @include mq(small) {
+    &.me__popup--open {
+      overflow: hidden;
+    }
   }
   @include mq(large) {
     &.large-scroll-locked {
