@@ -7,7 +7,7 @@ gem 'rails', '4.2.4'
 
 gem 'pg'
 
-gem 'camaleon_cms', git: "git://github.com/Silvaire/camaleon-cms"
+gem 'camaleon_cms'
 gem 'post_reorder'
 
 gem 'bourbon'
