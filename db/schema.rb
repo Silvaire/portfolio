@@ -120,30 +120,6 @@ ActiveRecord::Schema.define(version: 20150930115030) do
 
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
 
-  create_table "plugins_attacks", force: :cascade do |t|
-    t.string   "path"
-    t.string   "browser_key"
-    t.integer  "site_id"
-    t.datetime "created_at"
-  end
-
-  add_index "plugins_attacks", ["browser_key"], name: "index_plugins_attacks_on_browser_key", using: :btree
-  add_index "plugins_attacks", ["path"], name: "index_plugins_attacks_on_path", using: :btree
-  add_index "plugins_attacks", ["site_id"], name: "index_plugins_attacks_on_site_id", using: :btree
-
-  create_table "plugins_contact_forms", force: :cascade do |t|
-    t.integer  "site_id"
-    t.integer  "count"
-    t.integer  "parent_id"
-    t.string   "name"
-    t.string   "slug"
-    t.text     "description"
-    t.text     "value"
-    t.text     "settings"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.string   "slug"
