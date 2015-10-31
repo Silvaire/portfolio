@@ -581,29 +581,29 @@ enableTopicCards = ->
   $topicCards = $('.me__summary__topic')
   if $topicCards.length
     $mePopup = $('.me__popup')
-    $content = $('.me__summary__content')
+    $body = $('body.section-page.about')
     $topicCards.mouseenter ->
       $(this).removeClass('shrink-card')
     $topicCards.mouseleave ->
       $(this).addClass('shrink-card')
     $topicCards.filter('.me__summary__topic--with-more').click ->
       $this = $(this)
-      $content.addClass('me__popup--open')
+      $body.addClass('me__popup--open')
       $mePopup.find('.me__popup__content').html('<h3 class="heading-3 small-text-center padding--bottom">' + $this.data('topic') + '</h3>' + $this.find('.me__topic__content').html())
 
 enableMePopup = ->
   $mePopup = $('.me__popup')
   if $mePopup.length
     $openPopup = $('.me__summary__open-popup')
-    $content = $('.me__summary__content')
+    $body = $('body.section-page.about')
     $summaryHeader = $('.me__summary__header')
     $openPopup.click ->
-      $content.addClass('me__popup--open')
+      $body.addClass('me__popup--open')
       $mePopup.find('.me__popup__content').html($('.me_summary__content').html())
     $closePopup = $('.me__popup__close, .me__popup')
     $closePopup.click (e) ->
       if !$(e.target).is('.me__popup__inner, .me__popup__inner :not(.me__popup__close)')
-        $content.removeClass('me__popup--open')
+        $body.removeClass('me__popup--open')
     $summaryHeader.click ->
       $openPopup.click()
 

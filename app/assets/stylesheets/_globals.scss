@@ -29,7 +29,7 @@ body {
   .ielt9 & {
     overflow: hidden;
   }
-  &.scroll-locked {
+  &.me__popup--open {
     overflow: hidden;
   }
   @include mq(large) {
