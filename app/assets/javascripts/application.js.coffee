@@ -30,5 +30,6 @@
 #= require _projectFilters
 #= require _projects
 #= require _me
+#= require _googleAnalytics
 
 #= require_self
