@@ -20,7 +20,7 @@
         <div class="single-project__links padding--top">
           <% @post.get_field_values('links').each do |hash| %>
             <% hash = JSON.parse(hash) %>
-            <a class="button button--small" target="_blank" href="<%= hash["value"] %>"><%= hash["attr"] %></a>
+            <a class="button button--small js-tracking-event single-project__links__button" target="_blank" href="<%= hash["value"] %>"><%= hash["attr"] %></a>
           <% end %>
         </div>
       </div>
@@ -39,21 +39,7 @@
           <% current_site.the_post_type('project').the_posts().where.not(id:@post.id).reorder('RANDOM()').limit(3).each do |post|  %>
             <% post = post.decorate %>
             <div class="small-12 medium-6 large-4 columns end green-row__item project--other small-padding--vertical--mini large--padding--vertical">
-              <a href="<%= post.the_url %>">
-                <div class="project--other__content small-padding--horizontal large-padding--horizontal--maxi small-padding--vertical medium-padding--vertical--maxi remove-equalize-on-small" data-equalizer-watch>
-                  <div class="project--other__image-wrap">
-                    <div class="project--other__image" style="<%= bgCover(post.the_thumb_url) %>"></div>
-                  </div>
-                  <h2 class="heading-2 padding--vertical--maxi"><%= post.the_title %></h2>
-                  <span class="button button--light"><%= t('Read more') %></span>
-                </div>
-              </a>
-            </div>
-          <% end %>
-          <% current_site.the_post_type('project').the_posts().where.not(id:@post.id).reorder('RANDOM()').limit(1).each do |post|  %>
-            <% post = post.decorate %>
-            <div class="small-12 medium-6 large-4 columns end green-row__item project--other small-padding--vertical--mini large--padding--vertical">
-              <a href="<%= post.the_url %>">
+              <a href="<%= post.the_url %>" class="single-project__suggested-project__link js-tracking-event" data-title="<%= post.the_title %>">
                 <div class="project--other__content small-padding--horizontal large-padding--horizontal--maxi small-padding--vertical medium-padding--vertical--maxi remove-equalize-on-small" data-equalizer-watch>
                   <div class="project--other__image-wrap">
                     <div class="project--other__image" style="<%= bgCover(post.the_thumb_url) %>"></div>

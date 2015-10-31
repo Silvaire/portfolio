@@ -6,31 +6,7 @@
         <% post = post.decorate %>
         <% techs = post.the_tags %>
         <div class="project project--featured padding--horizontal--tiny green-row__item" id="featured-project-<%= post.id %>">
-          <a href="<%= post.the_url %>">  
-            <div class="project--featured__background"></div>
-            <div class="project--featured__content large-text-center">
-              <div class="project--featured__illustration small-padding--top medium-padding--none">
-                <div class="project--featured__picture-wrap">
-                  <div class="project--featured__picture" style="<%= bgCover(post.the_thumb_url) %>"></div>
-                </div>
-              </div>
-              <div class="project--featured__text small-text-center">
-                <h2 class="heading-2 project--featured__title padding--top padding--bottom--mini"><%= post.the_title %></h2>
-                <h3 class="heading-3 large-padding--bottom--tiny project--featured__introduction small-padding--bottom"><%= post.the_field('introduction') %></h3>
-                <div class="project--featured__button padding--bottom">
-                  <span class="button button--light"><%= t('Read more') %></span>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-      <% end %>
-      <% current_site.the_category('major').decorate.the_posts().limit(2).each do |post| %>
-        <% orig = post %>
-        <% post = post.decorate %>
-        <% techs = post.the_tags %>
-        <div class="project project--featured padding--horizontal--tiny green-row__item" id="featured-project-<%= post.id %>">
-          <a href="<%= post.the_url %>">  
+          <a href="<%= post.the_url %>" class="js-tracking-event project--featured__link" data-title="<%= post.the_title %>">  
             <div class="project--featured__background"></div>
             <div class="project--featured__content large-text-center">
               <div class="project--featured__illustration small-padding--top medium-padding--none">
@@ -51,14 +27,14 @@
       <% end %>
     </div>
     <div class="small-12 columns projects-landing__read-more small-text-center">
-      <a class="button scroll-to" href="#project-filters"><%= t('See all projects') %></a>
+      <a class="button scroll-to js-tracking-event see-all-prokects__button" href="#project-filters"><%= t('See all projects') %></a>
     </div>
   </div>
 </section>
 <section class="project-filters small-text-center padding--horizontal--mini padding--top--mini padding--bottom--mini" id="project-filters">
   <div class="row row--full-width">
     <% current_site.the_post_type('project').post_type.post_tags.each do |tag| %>
-      <a href="#" class="project-filters__button" data-id="<%= tag.id %>"><%= t(tag.name) %></a>
+      <a href="#" class="project-filters__button js-tracking-event" data-id="<%= tag.id %>"><%= t(tag.name) %></a>
     <% end %>
   </div>
 </section>
@@ -78,7 +54,7 @@
               <h2 class="heading-2"><%= post.the_title %></h2>
               <h3 class="padding--top--tiny padding--bottom"><%= post.the_field('introduction') %></h3>
               <p class="padding--bottom"><%= post.the_field('header') %></p>
-              <a href="<%= post.the_url %>" class="button"><%= t('Read more') %></a>
+              <a href="<%= post.the_url %>" class="button js-tracking-event project--all__button" data-title="<%= post.the_title %>"><%= t('Read more') %></a>
             </div>
           </div>
           <div class="<%= switch_side  %>img-side" style="<%= bgCover(post.the_thumb_url) %>"></div>

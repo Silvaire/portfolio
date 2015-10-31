@@ -5,7 +5,7 @@
   </div>
   <% post = current_site.the_post_type('project').the_posts().reorder('RANDOM()').limit(1).first.decorate %>
   <div class="project--other small-padding--vertical">
-    <a href="<%= post.the_url %>" class="wrap-link">
+    <a href="<%= post.the_url %>" class="wrap-link js-tracking-event suggested-project-404">
       <div class="row text-white bg-green" data-equalizer>
         <div class="small-12 medium-4 large-3 columns end">
           <div class="table remove-equalize-on-small small-padding--top medium-padding--none" data-equalizer-watch>
@@ -25,6 +25,6 @@
     </a>
   </div>
   <div class="row small-text-center">
-    <a href="<%= url_to_fixed("root_url") %>" class="button"><%= t("Just bring me home") %></a>
+    <a href="<%= url_to_fixed("root_url") %>" class="button js-tracking-event back-home-404"><%= t("Just bring me home") %></a>
   </div>
 </section>

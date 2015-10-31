@@ -11,8 +11,8 @@
             <%= simple_format(@post.the_field('description')) %>
           </div>
           <div class="homepage__links">
-            <a class="button button--light" href="<%= current_site.the_post('projects').the_url %>"><%= t('See my projects') %></a>
-            <a class="button button--light" href="<%= current_site.the_post('about').the_url %>"><%= t('More about me') %></a>
+            <a class="button button--light js-tracking-event homepage__link" href="<%= current_site.the_post('projects').the_url %>" data-target="projects"><%= t('See my projects') %></a>
+            <a class="button button--light js-tracking-event homepage__link" href="<%= current_site.the_post('about').the_url %>" data-target="about"><%= t('More about me') %></a>
           </div>
         </div>
       </div>

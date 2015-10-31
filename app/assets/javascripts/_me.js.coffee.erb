@@ -348,7 +348,9 @@ class Life
     if $years.length
       myLife = this
       $years.find('.timeline__year').click ->
-        myLife.goToYear($(this).data('year'))
+        year = $(this).data('year')
+        myLife.goToYear(year)
+        ga('send', 'event', 'changeEvent', 'year-click', 'year: ' + year )
         return false
 
   updateTimelineYears: (currentEventIndex) ->
@@ -472,8 +474,8 @@ class Life
           else
             previousEventIndex = myLife.getPreviousEventIndex()
             if previousEventIndex != null #and windowScrollTop < $timeline.offset().top
-              $newActiveEvent = $('#life-event-' + myLife._array[previousEventIndex])
               myLife.setActiveEvent(previousEventIndex)
+              ga('send', 'event', 'changeEvent', 'scroll', 'event: ' + myLife.lifeEvents[myLife._array[previousEventIndex]].title )
               if myLife.currentEventHasPrevious
                 # $currentMetaLines.addClass('current-scroll-backwards')
                 $previousMetaLines.addClass('previous-scroll-backwards')
@@ -488,6 +490,7 @@ class Life
                 $dateContainer.removeClass('date-scroll-backwards').removeClass('first-date-scroll-backwards')
             else
               scrollToElement('footer')
+              ga('send', 'event', 'changeEvent', 'scroll', 'footer')
               $aboutSection.removeClass('at-timeline').addClass('at-bottom')
         else if e.deltaY < 0 or e.keyCode in [33,36,37,38]
           # upscroll code
@@ -496,7 +499,6 @@ class Life
           else
             nextEventIndex = myLife.getNextEventIndex()
             if nextEventIndex != null #and windowScrollTop + $window.height() > $timeline.offset().top
-              $newActiveEvent = $('#life-event-' + myLife._array[previousEventIndex])
               if myLife.currentEventHasPrevious
                 # $currentMetaLines.addClass('current-scroll-forward')
                 $previousMetaLines.addClass('previous-scroll-forward')
@@ -506,6 +508,7 @@ class Life
                 $previousMetaLines.addClass('first-previous-scroll-forward')
                 $dateContainer.addClass('first-date-scroll-forward')
               myLife.setActiveEvent(nextEventIndex)
+              ga('send', 'event', 'changeEvent', 'scroll', 'event: ' + myLife.lifeEvents[myLife._array[nextEventIndex]].title )
               window.delay 1000, ->
                 # $currentMetaLines.removeClass('current-scroll-forward').removeClass('first-current-scroll-forward')
                 $previousMetaLines.removeClass('previous-scroll-forward').removeClass('first-previous-scroll-forward')
@@ -513,6 +516,7 @@ class Life
             else
               # $('.me__summary__scroll-button').click() # instead of scrolling up, we click the button to update its text
               scrollToElement('body')
+              ga('send', 'event', 'changeEvent', 'scroll', 'header')
               $aboutSection.removeClass('at-timeline').addClass('at-top')
       return false
 

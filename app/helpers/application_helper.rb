@@ -30,7 +30,7 @@ module ApplicationHelper
                 link_current:     'current-link', # class for current menu link
                 link_before:      '', # content before link
                 link_after:       '', # content after link
-                link_class:       'menu_link', # class for all menu links
+                link_class:       'primary-navigation__link js-tracking-event', # class for all menu links
                 link_class_parent:"dropdown-toggle", # class for all menu links that contain sub items
                 levels:            -1, # max of levels to recover, -1 => return all levels
                 container_prepend:      '', # content prepend for menu container

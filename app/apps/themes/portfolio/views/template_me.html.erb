@@ -22,7 +22,7 @@
             <div class="table__cell">
               <div class="row padding">
                 <div class="small-12 large-6 columns ">
-                  <div class="me__summary__topic me__summary__topic--with-more" data-topic="<i class='padding--right--mini ion-briefcase'></i><%= t('Work experience') %>">  
+                  <div class="me__summary__topic me__summary__topic--with-more js-tracking-event" data-topic="<i class='padding--right--mini ion-briefcase'></i><%= t('Work experience') %>" data-title="<%= t('Work experience') %>">  
                     <div class="me__summary__icon">
                       <div class="table">
                         <div class="table__cell">
@@ -37,7 +37,7 @@
                   </div>
                 </div>
                 <div class="small-12 large-6 columns ">
-                  <div class="me__summary__topic me__summary__topic--with-more" data-topic="<i class='padding--right--mini ion-university'></i><%= t('Studies') %>">  
+                  <div class="me__summary__topic me__summary__topic--with-more js-tracking-event" data-topic="<i class='padding--right--mini ion-university'></i><%= t('Studies') %>" data-title="<%= t('Studies') %>">  
                     <div class="me__summary__icon">
                       <div class="table">
                         <div class="table__cell">
@@ -84,7 +84,7 @@
                   </div>
                 </div>
                 <div class="small-12 large-6 columns ">
-                  <div class="me__summary__topic me__summary__topic--with-more" data-topic="<i class='padding--right--mini ion-wrench'></i><%= t('Projects') %>">  
+                  <div class="me__summary__topic me__summary__topic--with-more js-tracking-event" data-topic="<i class='padding--right--mini ion-wrench'></i><%= t('Projects') %>" data-title="<%= t('Projects') %>">
                     <div class="me__summary__icon">
                       <div class="table">
                         <div class="table__cell">
@@ -99,7 +99,7 @@
                   </div>
                 </div>
                 <div class="small-12 large-6 columns ">
-                  <div class="me__summary__topic me__summary__topic--with-more" data-topic="<i class='padding--right--mini ion-android-color-palette'></i><%= t('Other interests') %>">  
+                  <div class="me__summary__topic me__summary__topic--with-more js-tracking-event" data-topic="<i class='padding--right--mini ion-android-color-palette'></i><%= t('Other interests') %>" data-title="<%= t('Other interests') %>">  
                     <div class="me__summary__icon">
                       <div class="table">
                         <div class="table__cell">
@@ -116,7 +116,7 @@
               </div>
               <% if not current_site.the_field('resume').blank? %>
                 <div class="small-text-center padding--top--mini">
-                  <a href="<%= current_site.the_field('resume') %>" class="button button--with-icon" download target="_blank">
+                  <a href="<%= current_site.the_field('resume') %>" class="button button--with-icon js-tracking-event me__download-resume__button" download target="_blank">
                     <%= t("Download resume") %>
                     <i class="ion-android-arrow-down"></i>
                   </a>
@@ -126,7 +126,7 @@
           </div>
         </div>
         <div class="small-12 medium-6 large-4 columns fill-parent--height hide-for-small-only me__summary__open-popup-wrap">
-          <div class="me__summary__open-popup fill-parent--height">
+          <div class="me__summary__open-popup fill-parent--height js-tracking-event">
             <div class="me_summary__content hide">
               <h2 class=" heading-1 me__popup__title padding--vertical small-text-center">
                 <%= @post.the_field('descriptive-title') %>
