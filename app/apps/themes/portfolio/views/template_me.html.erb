@@ -230,7 +230,7 @@
               </div>
               <% if not event.the_field('picture').blank? %>
                 <div class="life-event__picture-bg" style="<%= bgCover(event.the_field('picture')) %>" ></div>
-                <img class="life-event__picture-file" src="<%= event.the_field('picture') %>" />
+                <img class="life-event__picture-file" src="<%= event.the_field('picture') %>" alt="event-picture"/>
               <% end %>
             </div>
             <div class="life-event__text small-padding--top--mini small-padding--bottom large-padding--none small-text-center">
