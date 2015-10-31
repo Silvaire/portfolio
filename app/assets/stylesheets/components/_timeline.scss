@@ -1,33 +1,41 @@
 .date-scroll-forward {
+  @include hwa;
   @include animation(date-scroll-forward 1s 1);
 }
 
 .date-scroll-backwards {
+  @include hwa;
   @include animation(date-scroll-backwards 1s 1);
 }
 
 .first-date-scroll-forward {
+  @include hwa;
   @include animation(first-date-scroll-forward 1s 1);
 }
 
 .first-date-scroll-backwards {
+  @include hwa;
   @include animation(first-date-scroll-backwards 1s 1);
 }
 
 
 .previous-scroll-forward {
+  @include hwa;
   @include animation(previous-scroll-forward 1s 1);
 }
 
 .previous-scroll-backwards {
+  @include hwa;
   @include animation(previous-scroll-backwards 1s 1);
 }
 
 .first-previous-scroll-forward {
+  @include hwa;
   @include animation(first-previous-scroll-forward 1s 1);
 }
 
 .first-previous-scroll-backwards {
+  @include hwa;
   @include animation(first-previous-scroll-backwards 1s 1);
 }
 
@@ -38,18 +46,25 @@
   height: 100%;
   top: 0;
   left: 0;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
+  // overflow-y: auto;
+  // -webkit-overflow-scrolling: touch;
 }
 
 .me {
   &__popup {
-    @include transition(left 0.4s);
     position: absolute;
+    top: 0;
     height: 100%;
-    width: 100%;
     z-index: 10;
-    left: -100%;
+    left: 100%;
+    background: $grey-lightest;
+    background: -moz-linear-gradient(-45deg,  rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.03) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(0,0,0,0.2)), color-stop(100%,rgba(0,0,0,0.03))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(-45deg,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.03) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(-45deg,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.03) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(-45deg,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.03) 100%); /* IE10+ */
+    background: linear-gradient(135deg,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0.03) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33000000', endColorstr='#08000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
     &__wrap {
       display: table;
       height: 100%;
@@ -58,16 +73,27 @@
     &__container {
       display: table-cell;
       vertical-align: middle;
-      padding: 30px;
+      padding: 30px 100px;
+      @include mq(mediumDown) {
+        padding: 30px 50px;
+      }
+      @include mq(small) {
+        padding: 0;
+      }
     }
     &__inner {
-      @include box-shadow(0, 0, 50px, -10px, rgba($black-light, 0.8));
+      // @include box-shadow(0, 0, 50px, -10px, rgba($black-light, 0.8));
       padding: 30px;
-      background: $white;
+      // background: $white;
       position: relative;
       min-height: 300px;
       max-height: 100%;
       overflow-y: auto;
+      @include mq(small) {
+        padding: 15px;
+        max-width: 90%;
+        margin: auto;
+      }
     }
     &__close {
       position: absolute;
@@ -80,14 +106,6 @@
         color: $grey-dark;
       }
     }
-    &--open {
-      left: 0;
-      .me__popup {
-        &__inner {
-          // left: 0;
-        }
-      }
-    }
   }
   &__summary {
     position: relative;
@@ -97,9 +115,22 @@
     &__header {
       position: absolute;
       width: 100%;
+      cursor: pointer;
+      @include mq(mediumDown) {
+        position: static;
+      }
     }
     &__content {
+      @include hwa;
+      @include transition(transform 0.6s cubic-bezier(0.435, 0.000, 0.300, 0.850));
+      @include transform(translate3d(0,0,0));
       height: 100%;
+      &.me__popup--open {
+        @include transform(translate3d(-66.66667%,0,0));
+        @include mq(mediumDown) {
+          @include transform(translate3d(-100%,0,0));
+        }
+      }
     }
     & &__topic {
       @include transform(scale(1));
@@ -156,14 +187,23 @@
         .me__summary {
           &__meta {
             width: 200px;
+            @include mq(small) {
+              width: 100%;
+            }
           }
           &__description {
             margin-left: 200px;
+            @include mq(small) {
+              margin-left: 0;
+            }
             p {
               font-size: 12px;
               line-height: 1.2em;
             }
           }
+        }
+        @include mq(small) {
+          padding-bottom: 10px;
         }
       }
     }
@@ -186,6 +226,12 @@
       background-size: cover;
       background-repeat: no-repeat;
       background-position: top;
+    }
+    &__open-popup-wrap {
+      @include mq(mediumDown) {
+        position: absolute;
+        right: 0;
+      }
     }
     &__open-popup {
       cursor: pointer;
@@ -229,6 +275,9 @@
       &:hover {
         @extend .animated-icon--jump;
       }
+      @include mq(mediumDown) {
+        display: none;
+      }
     }
     // &__scroll-button {
     //   @include sansSerif;
@@ -269,6 +318,9 @@
     //     }
     //   }
     // }
+    @include mq(mediumDown) {
+      height: auto;
+    }
   }
 }
 
@@ -316,6 +368,9 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
+    @include mq(mediumDown) {
+      display: none;
+    }
     &__inner {
       width: $metaLineWidth * 3;
       margin: auto;
@@ -370,8 +425,17 @@
   &__item {
     display: inline-block;
     position: absolute;
-    width: $metaLineWidth;
+    width: $metaLineWidth - 1px;
+    margin: auto 0.5px;
     font-size: 0;
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
     &__title.has-title {
       position: absolute;
       opacity: 0;
@@ -413,6 +477,15 @@
       .timeline__item__title {
         top: 25%;
       }
+      &:after {
+        background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(50%,rgba(0,0,0,0.2)), color-stop(100%,rgba(0,0,0,0.2))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.2) 50%,rgba(0,0,0,0.2) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.2) 50%,rgba(0,0,0,0.2) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.2) 50%,rgba(0,0,0,0.2) 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.2) 50%,rgba(0,0,0,0.2) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#33000000',GradientType=0 ); /* IE6-9 */
+      }
     }
     &--previous {
       // @include transition (height 0.5s);
@@ -420,6 +493,15 @@
       height: 50%;
       .no-previous-event & {
         height: 0;
+      }
+      &:after {
+        background: -moz-linear-gradient(top,  rgba(0,0,0,0.2) 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.2)), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  rgba(0,0,0,0.2) 0%,rgba(0,0,0,0) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
       }
     }
     // &--hidden {
@@ -480,6 +562,9 @@
     height: calc(100% - #{$header-height});
     display: table;
     z-index: 10;
+    @include mq(mediumDown) {
+      display: none;
+    }
   }
   &__year {
     position: relative;
@@ -529,11 +614,20 @@
     &.events__item--active {
       z-index: 2;
     }
+    @include mq(mediumDown) {
+      height: auto;
+      position: static;
+    }
+  }
+  @include mq(mediumDown) {
+    height: auto;
   }
 }
 
 .life-event {
+  font-size: 0;
   &__text {
+    font-size: 16px;
     @include transition(opacity 0.4s 0.1s, padding-left 0.4s 0.1s);
     position: absolute;
     left: 0;
@@ -550,6 +644,12 @@
       opacity: 1;
       margin-left: 0;
     }
+    @include mq(mediumDown) {
+      position: static;
+      opacity: 1;
+      width: 100%;
+      padding: 0;
+    }
   }
   &__title {
     @include transition(opacity 0.4s 0.1s, margin-left 0.4s 0.1s);
@@ -562,6 +662,55 @@
       margin-left: 0;
       opacity: 1; 
     }
+    .events__item--no-picture & {
+      color: $black-light;
+    }
+    @include mq(mediumDown) {
+      opacity: 1;
+      margin-left: 0;
+    }
+  }
+  &__meta {
+    display: none;
+    color: $grey-lightest;
+    font-size: 0;
+    .events__item--no-picture & {
+      color: $grey-dark;
+    }
+    @include mq(mediumDown) {
+      display: inline-block;
+      position: relative;
+      z-index: 18;
+      &__period, &__location {
+        white-space: nowrap;
+        font-size: 12px;
+        padding: 0 10px;
+      }
+    }
+  }
+  &__picture-file {
+    display: none;
+  }
+  &__picture-bg {
+    display: none;
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 100%;
+      left: 0;
+      height: 100%;
+      background: rgba($black, 0.5);
+      z-index: 15;
+    }
+    @include mq(mediumDown) {
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
   }
   &__picture {
     position: absolute;
@@ -571,6 +720,7 @@
     height: 100%;
     font-size: 1em;
     overflow: hidden;
+    font-size: 16px;
     &__slice {
       // @include filter(grayscale(100%));
       position: absolute;
@@ -600,9 +750,41 @@
         background: rgba($black, 0.5);
         z-index: 15;
       }
+      @include mq(mediumDown) {
+        display: none;
+      }
     }
     .switch-side & {
       left: 0;
+    }
+    .events__item--with-picture & {
+      @include mq(mediumDown) {
+        &__overlay {
+          position: absolute;
+          width: 100%;
+          bottom: 15px;
+        }
+      }
+    }
+    .events__item--no-picture & {
+      @include mq(mediumDown) {
+        padding-top: 30px;
+        height: auto;
+      }  
+    }
+    @include mq(mediumDown) {
+      position: relative;
+      left: 0;
+      height: 200px;
+      width: 100%;
+    }
+    @include mq(small) {
+      height: 150px;
+    }
+  }
+  @include mq(mediumDown) {
+    &:nth-child(odd) {
+      background: $grey-lightest;
     }
   }
 }

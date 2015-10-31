@@ -87,4 +87,19 @@ module ApplicationHelper
   def bgCover(image_url)
     "background-image: url('#{image_url}');-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover; background-position: center center; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'#{image_url}\', sizingMethod=\'scale\'); -ms-filter: 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'#{image_url}\', sizingMethod=\'scale\')';"
   end
+
+  def date_from_field(date_text)
+    Date.strptime(date_text, '%Y-%m-%d')
+  end
+
+  def print_period(start_date_text, end_date_text)
+    period = ""
+    period += date_from_field(start_date_text).strftime('%d.%m.%Y')
+    if end_date_text.blank?
+      period += " - " + t("Today")
+    elsif start_date_text != end_date_text
+      period += " - " + date_from_field(end_date_text).strftime('%d.%m.%Y')
+    end
+    return period
+  end
 end

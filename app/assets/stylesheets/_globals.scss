@@ -32,6 +32,11 @@ body {
   &.scroll-locked {
     overflow: hidden;
   }
+  @include mq(large) {
+    &.large-scroll-locked {
+      overflow: hidden;
+    }
+  }
 }
 
 main {

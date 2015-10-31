@@ -42,7 +42,8 @@ fr:
   Projects: "Projets"
   Other interests: "Autres Interêts"
   Contact me: "Me contacter"
-
+  year_old: "%{years} ans"
+  new_skills: "Nouvelles Compétences :"
 
   UX Design : "UX Design"
   Backend : "Backend"

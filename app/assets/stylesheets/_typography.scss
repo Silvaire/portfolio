@@ -65,11 +65,34 @@ h1,
   &.big {
     font-size: 40px;
   }
+  &.small {
+    font-size: 30px;
+  }
   @include mq(small) {
     font-size: 30px;
     @include sansSerif;
     &.big {
       font-size: 35px;
+    }
+  }
+}
+
+h2,
+.heading-2 {
+  @include sansSerif;
+  font-size: 25px;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  line-height: 0.9em;
+  font-weight: 700;
+  color: inherit;
+  &.big {
+    font-size: 28px;
+  }
+  @include mq(small) {
+    font-size: 22px;
+    &.big {
+      font-size: 24px;
     }
   }
 }
@@ -86,33 +109,12 @@ h3,
   }
 }
 
-h2,
-.heading-2 {
-  @include sansSerif;
-  font-size: 28px;
-  text-transform: uppercase;
-  letter-spacing: 0;
-  line-height: 0.9em;
-  font-weight: 700;
-  color: inherit;
-  &.big {
-    font-size: 32px;
-  }
-  @include mq(small) {
-    font-size: 25px;
-    @include sansSerif;
-    &.big {
-      font-size: 28px;
-    }
-  }
-}
-
 p,
 .paragraph {
   @include sansSerif;
   font-size: 14px;
   line-height: 1.5em;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   margin-bottom: 0;
   &.big, &--big {
     font-size: 17px;

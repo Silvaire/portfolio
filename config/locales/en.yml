@@ -42,7 +42,8 @@ en:
   Projects: "Projects"
   Other interests: "Other interests"
   Contact me: "Contact me"
-
+  year_old: "%{years}"
+  new_skills: "New skills:"
 
 
 

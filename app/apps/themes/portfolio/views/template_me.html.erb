@@ -1,22 +1,22 @@
 <section class="section section--about at-top">
   <div class="me">
     <div class="me__summary">
-      <div class="me__summary__content row row--full-width collapse">
-        <div class="small-12 medium-7 large-8 columns fill-parent--height">
-          <div class="me__summary__header small-text-center padding--vertical">
-            <h2 class="me__summary__title big heading-1 padding--bottom--mini"><%= @post.the_field('descriptive-title') %></h2>
-            <p class="me__summary__introduction"><%= @post.the_field('introduction') %></p>
-          </div>
-          <div class="me__popup">
-            <div class="me__popup__wrap">
-              <div class="me__popup__container">
-                <div class="me__popup__inner scroll-enabled">
-                  <p class="me__popup__close">&times;</p>
-                  <div class="me__popup__content">
-                  </div>
+      <div class="me__summary__content row row--full-width collapse small-padding--bottom medium-padding--bottom--maxi large-padding--bottom--none">
+        <div class="small-12 large-8 columns me__popup">
+          <div class="me__popup__wrap">
+            <p class="me__popup__close">&times;</p>
+            <div class="me__popup__container">
+              <div class="me__popup__inner scroll-enabled">
+                <div class="me__popup__content">
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        <div class="small-12 medium-6 large-8 columns fill-parent--height">
+          <div class="me__summary__header small-text-center padding">
+            <h2 class="me__summary__title big heading-1 padding--bottom--mini"><%= current_site.the_field('author') %>, <%= t(:year_old, :years => Time.now.year - date_from_field(current_site.the_field('birth-date')).year) %></h2>
+            <p class="me__summary__introduction"><%= @post.the_field('introduction') %></p>
           </div>
           <div class="table">
             <div class="table__cell">
@@ -125,7 +125,7 @@
             </div>
           </div>
         </div>
-        <div class="small-12 medium-5 large-4 columns fill-parent--height hide-for-small-only">
+        <div class="small-12 medium-6 large-4 columns fill-parent--height hide-for-small-only me__summary__open-popup-wrap">
           <div class="me__summary__open-popup fill-parent--height">
             <div class="me_summary__content hide">
               <h2 class=" heading-1 me__popup__title padding--vertical small-text-center">
@@ -190,19 +190,22 @@
           <div class="timeline__years__content table__cell"></div>
         </div>
       </div>
+      <div class="timeline__header padding--vertical show-for-medium-down">
+        <h2 class="heading-1 big small-text-center"><%= t("Timeline") %></h2>
+      </div>
       <ul class="nostyle">
         <% current_site.the_post_type('event').post_type.posts.sort_by_field('start-date', 'ASC').where(status:'published').each do |event| %>
           <% event = event.decorate %>
           
           <li 
             id="life-event-<%= event.id %>"
-            class="life-event events__item <% if not event.the_field('picture').blank? %>events__item--no-picture<% end %>"
+            class="life-event events__item events__item--<% if event.the_field('picture').blank? %>no-picture<% else %>with-picture<% end %>"
             data-title="<%= event.the_title %>"
             data-event-id="<%= event.id %>"
             data-start-date="<%= event.the_field('start-date') %>"
-            data-start-month="<%= t(Date.strptime(event.the_field('start-date'), '%Y-%m-%d').strftime('%b')) %>"
+            data-start-month="<%= t(date_from_field(event.the_field('start-date')).strftime('%b')) %>"
             data-end-date="<%= event.the_field('end-date') %>"
-            data-end-month="<% if not event.the_field('end-date').blank? %><%= t(Date.strptime(event.the_field('end-date'), '%Y-%m-%d').strftime('%b')) %><% end %>"
+            data-end-month="<% if not event.the_field('end-date').blank? %><%= t(date_from_field(event.the_field('end-date')).strftime('%b')) %><% end %>"
             data-description="<%= simple_format(event.the_field('description')) %>"
             data-company="<%= event.the_field('company') %>"
             data-location="<%= event.the_field('location') %>"
@@ -212,54 +215,48 @@
             data-language="<%= event.the_field('language') %>"
             data-tags='<% tags = event.the_tags %>[<% tags.each do |tag| %>"<%= tag.name %>"<% if not tags.last == tag %>,<% end %><% end %>]'
             >
-            <div class="life-event__text small-text-center">
+            
+            <div class="life-event__picture">
+              <div class="table">
+                <div class="table__cell small-text-center text-white life-event__picture__overlay">
+                  <h2 class="heading-2 life-event__title small-padding--horizontal--mini large-padding--horizontal--huge"><%= event.the_title %></h2>
+                  <div class="life-event__meta">
+                    <span class="life-event__meta__period"><%= print_period(event.the_field('start-date'), event.the_field('end-date')) %></span>
+                    <% if not event.the_field('location').blank? %>
+                      <span class="life-event__meta__location"><%= event.the_field('location') %></span>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <% if not event.the_field('picture').blank? %>
+                <div class="life-event__picture-bg" style="<%= bgCover(event.the_field('picture')) %>" ></div>
+                <img class="life-event__picture-file" src="<%= event.the_field('picture') %>" />
+              <% end %>
+            </div>
+            <div class="life-event__text small-padding--top--mini small-padding--bottom large-padding--none small-text-center">
               <div class="table">
                 <div class="table__cell">
-                  <!-- <div class="life-event__title"><%= event.the_title %></div> -->
-                  <!-- <div class="life-event__period">
-                    <%= Date.strptime(event.the_field('start-date'), '%Y-%m-%d').strftime('%d.%m.%Y') %>
-                    <% if event.the_field('end-date').blank? %>
-                      - <%= t("Today") %>
-                    <% elsif event.the_field('start-date') != event.the_field('end-date') %>
-                      - <%= Date.strptime(event.the_field('end-date'), '%Y-%m-%d').strftime('%d.%m.%Y') %>
-                    <% end %>
-                  </div> -->
-                  <!-- <div class="life-event__location"><%= event.the_field('location') %></div> -->
-                  <div class="life-event__introduction"><%= event.the_field('introduction') %></div>
-                  <div class="life-event__description"><%= simple_format(event.the_field('description')) %></div>
-                  <div class="life-event__skills"><%= event.the_field('skills') %></div>
+                  <% if not event.the_field('introduction').blank? %>
+                    <h3 class="life-event__introduction padding--vertical--tiny"><%= event.the_field('introduction') %></h3>
+                  <% end %>
+                  <% if not event.the_field('description').blank? %>
+                    <div class="life-event__description padding--vertical--tiny"><%= simple_format(event.the_field('description'), class: "small") %></div>
+                  <% end %>
+                  <% if not event.the_field('skills').blank? %>
+                    <p class="text-green life-event__skills small-padding--top--tiny small-padding--bottom--mini medium-padding--top--mini medium-padding--bottom"><%= t(:new_skills) %> <%= event.the_field('skills') %></p>
+                  <% end %>
                   <div class="life-event__links">
                     <% links = event.get_field_values('links') %>
                     <% links.each do |string| %>
                       <% hash = JSON.parse(string) %>
                       <% if not hash['attr'].blank? and not hash['value'].blank? %>
-                        <a class="button life-event__link" href="<%= hash['value'] %>"><%= hash['attr'] %></a>
+                        <a class="button button--small life-event__link" href="<%= hash['value'] %>"><%= hash['attr'] %></a>
                       <% end %>
                     <% end %>
                   </div>
                 </div>
               </div>
             </div>
-            <% if not event.the_field('picture').blank? %>
-              <div class="life-event__picture">
-                <div class="table">
-                  <div class="table__cell small-text-center text-white">
-                    <h2 class="heading-2 big life-event__title large-padding--horizontal--huge"><%= event.the_title %></h2>
-                  </div>
-                </div>
-                <img class="hide life-event__picture-file" src="<%= event.the_field('picture') %>" />
-              </div>
-            <% end %>
-            
-            
-            <!-- 
-            data-icon="<%= event.the_field('icon') %>"
-            data-introduction="<%= event.the_field('introduction') %>"
-            data-description="<%= simple_format(event.the_field('description')) %>"
-            data-picture="<%= event.the_field('picture') %>"
-            data-links='<% links = event.get_field_values('links') %>[<% links.each do |string| %><% hash = JSON.parse(string) %><% if not hash['attr'].blank? and not hash['value'].blank? %>["<%= hash['attr'] %>","<%= hash['value'] %>"]<% if not links.last == string %>,<% end %><% end %><% end %>]' 
-            -->
-
           </li>
         <% end %>
       </ul>
