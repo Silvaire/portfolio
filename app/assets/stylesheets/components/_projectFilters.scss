@@ -13,9 +13,7 @@
     font-weight: 400;
     font-size: 13px;
     &--active, &:hover {
-      // background: $grey-dark;
       color: $green;
-      // border: solid 3px;
     }
     &:focus {
       color: $grey;
