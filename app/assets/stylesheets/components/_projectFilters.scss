@@ -12,10 +12,13 @@
     border: solid 3px;
     font-weight: 400;
     font-size: 13px;
-    &--active, &:hover, &:focus {
+    &--active, &:hover {
       // background: $grey-dark;
       color: $green;
       // border: solid 3px;
+    }
+    &:focus {
+      color: $grey;
     }
   }
   &.sticky {
