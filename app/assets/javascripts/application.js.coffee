@@ -20,7 +20,6 @@
 #= require plugins/jquery.royalslider.min
 #= require plugins/rAF
 #= require plugins/kwicks.min
-#= require plugins/disablescroll.min
 
 #= require _globals
 #= require _mobileMenu
