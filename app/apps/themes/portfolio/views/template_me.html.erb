@@ -194,7 +194,7 @@
         <h2 class="heading-1 big small-text-center"><%= t("Timeline") %></h2>
       </div>
       <ul class="nostyle">
-        <% current_site.the_post_type('event').post_type.posts.sort_by_field('start-date', 'ASC').where(status:'published').each do |event| %>
+        <% current_site.the_post_type('event').post_type.posts.sort_by_field('start-date', 'DESC').where(status:'published').each do |event| %>
           <% event = event.decorate %>
           
           <li 

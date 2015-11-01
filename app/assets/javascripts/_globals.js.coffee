@@ -1,4 +1,10 @@
+# global functions
+
 window.delay = (ms, func) -> setTimeout func, ms
+
+jQuery.fn.reverse = [].reverse;
+
+# end global functions
 
 initializeHeadroom = () ->
   $("html").headroom()

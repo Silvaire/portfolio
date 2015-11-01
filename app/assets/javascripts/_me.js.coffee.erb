@@ -616,7 +616,7 @@ initializeAboutMePage = ->
   if $meData.length
     window.myLife = new Life 'Silvain'
     $lifeEvents = $('.events__item')
-    $lifeEvents.each ->
+    $lifeEvents.reverse().each ->
       window.myLife.addEvent($(this)) # events need to be added chronologically
     window.myLife.initializeAtLatestEvent()
     window.myLife.enableYearLinks()
