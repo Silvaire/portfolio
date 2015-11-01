@@ -379,13 +379,13 @@ class Life
     context.beginPath()
     context.lineWidth = 4
     context.imageSmoothingEnabled = true
-    context.strokeStyle = '#ccc'
+    context.strokeStyle = '#aaaaaa'
     context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false)
     context.stroke()
 
 
     context.beginPath()
-    context.strokeStyle = '#044C29'
+    context.strokeStyle = '#45BF55'
     context.imageSmoothingEnabled = true
     if this.movingForward
       endValue = (2 * Math.PI * (inYearIndex-1)/eventInNewYear) - (Math.PI / 2)
@@ -402,10 +402,10 @@ class Life
       context.beginPath()
       context.imageSmoothingEnabled = true
       if forward or eventInNewYear == 1
-        context.strokeStyle = '#044C29'
+        context.strokeStyle = '#45BF55'
         curPerc = curPerc + 5
       else
-        context.strokeStyle = '#ccc'
+        context.strokeStyle = '#aaaaaa'
         curPerc = curPerc - 5
       context.arc(centerX, centerY, radius, 2 * (current-0.05) * Math.PI - (Math.PI / 2), 2 * current * Math.PI - (Math.PI / 2), false)
       context.stroke()

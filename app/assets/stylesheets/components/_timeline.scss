@@ -566,7 +566,7 @@
   }
   &__years {
     position: fixed;
-    right: 30px;
+    right: 0;
     top: $header-height;
     height: calc(100% - #{$header-height});
     display: table;
@@ -582,13 +582,12 @@
     width: 50px;
     font-size: 13px;
     height: 50px;
-    margin: 5px;
+    margin: 5px 10px;
     border-radius: 50%;
     padding: 0;
     text-align: center;
     line-height: 50px;
-    color: $grey-light;
-    font-weight: 500;
+    color: $grey;
     border: solid 1px;
     .border-canvas {
       position: absolute;
@@ -598,10 +597,10 @@
       height: 100%;
     }
     &:active, &:focus {
-      color: $grey-light;
+      color: $grey;
     }
     &:hover, &.timeline__year--active {
-      color: $green;
+      color: $green-lighter;
     }
     &.timeline__year--active {
       border: none;
@@ -613,7 +612,7 @@
   height: calc(100vh - #{$header-height});
   position: relative;
   background: $white;
-  z-index: 1;
+  z-index: 2;
   &__item {
     position: absolute;
     width: 100%;
