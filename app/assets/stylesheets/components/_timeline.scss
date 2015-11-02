@@ -89,7 +89,7 @@
       overflow-y: auto;
       @include mq(small) {
         padding: 15px;
-        max-width: 90%;
+        max-width: 100%;
         margin: auto;
       }
     }
@@ -157,7 +157,7 @@
           @include box-shadow(0, 5px, 10px, -6px, rgba($black-light,0.9));
           @include transform(scale(1.07));
           &:after {
-            color: $grey-dark;
+            color: $green;
           }
         }
         &.shrink-card {
