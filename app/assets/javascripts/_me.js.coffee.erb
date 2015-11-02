@@ -176,7 +176,7 @@ class Life
         $projectsContainer = this.$summary.find('.me__projects')
         $projectsContent = this.$summary.find('.me__topic__content--projects')
         newItem = '<div class="me__summary__item me__project from-event-' + lifeEvent.id + '"><span class="me__summary__meta">' + date + ', ' + lifeEvent.project + '</span>' + lifeEvent.title + '</div>'
-        detailedItem = '<div class="me__summary__item--detailed me__projects from-event-' + lifeEvent.id + '"><span class="me__summary__meta">' + date + ', ' + lifeEvent.project + '</span>' + lifeEvent.title + '<div class="me__summary__description">' + lifeEvent.description + '</div></div>'
+        detailedItem = '<div class="me__summary__item--detailed me__project from-event-' + lifeEvent.id + '"><span class="me__summary__meta">' + date + ', ' + lifeEvent.project + '</span>' + lifeEvent.title + '<div class="me__summary__description">' + lifeEvent.description + '</div></div>'
         $projectsContainer.html(newItem)
         $projectsContent.prepend(detailedItem)
       # if tags.include? "Location"
