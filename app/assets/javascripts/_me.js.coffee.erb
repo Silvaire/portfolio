@@ -166,7 +166,7 @@ class Life
       if tags.include? "Language"
         $languagesContainer = this.$summary.find('.me__languages')
         newItem = '<span class="me__summary__item me__language from-event-' + lifeEvent.id + '">' + lifeEvent.language + '</span><span class="me__summary__comma">, </span>'
-        $languagesContainer.prepend(newItem)
+        $languagesContainer.append(newItem)
       if tags.include? "Skills"
         $skillsContainer = this.$summary.find('.me__skills')
         newItem = '<span class="me__summary__item me__skill from-event-' + lifeEvent.id + '">' + lifeEvent.skills + '</span><span class="me__summary__comma">, </span>'
