@@ -148,8 +148,9 @@
       @include box-shadow(0, 3px, 9px, -5px, rgba($black-light,0.8));
       margin: 15px;
       background: $grey-lightest;
-      padding: 7px 15px;
+      padding: 7px 15px 7px 60px;
       min-height: 50px;
+      height: calc(100% - #{$column-gutter});
       &--with-more {
         cursor: pointer;
         &:hover {
@@ -187,7 +188,7 @@
       color: $grey-dark;
     }
     &__item {
-      margin-left: 50px;
+      // margin-left: 50px;
       &.me__summary__item--hidden {
         display: none;
       }
@@ -215,6 +216,9 @@
           padding-bottom: 10px;
         }
       }
+    }
+    &__comma:last-child{
+      display: none;
     }
     &__meta {
       display: inline-block;
@@ -536,10 +540,10 @@
     }
     &--current-study, &--previous-study {
       &[data-bg="1"] {
-        background: $green;
+        background: $purple-light;
       }
       &[data-bg="2"] {
-        background: $green-lighter;       
+        background: $purple;       
       }
     }
     &--current-location, &--previous-location {
