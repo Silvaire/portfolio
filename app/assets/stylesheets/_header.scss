@@ -76,10 +76,10 @@
         li {
           a {
             @include sansSerif;
-            font-size: 25px;
+            font-size: 24px;
             padding: 10px;
             .headroom--not-top.headroom--unpinned &.current-link {
-              font-size: 25px;
+              font-size: 24px;
               .primary-navigation__home-icon {
                 width: 40px;
                 height: 40px;
