@@ -37,7 +37,7 @@ enableGoogleAnalyticsEvents = () ->
       ga('send', 'event', 'link', 'click', 'open me popup')
     $meSummaryTopics = $trackingLinks.filter('.me__summary__topic--with-more')
     $meSummaryTopics.click ->
-      ga('send', 'event', 'link', 'click', 'topic: ' + $(this).data('title'))
+      ga('send', 'event', 'link', 'click', 'topic: ' + $(this).attr('title'))
     $meDownloadResume = $trackingLinks.filter('.me__download-resume__button')
     $meDownloadResume.click ->
       ga('send', 'event', 'link', 'click', 'download resume')

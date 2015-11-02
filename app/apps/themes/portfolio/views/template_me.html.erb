@@ -20,9 +20,9 @@
           </div>
           <div class="table">
             <div class="table__cell">
-              <div class="row padding">
-                <div class="small-12 large-6 columns ">
-                  <div class="me__summary__topic me__summary__topic--with-more js-tracking-event" data-topic="<i class='padding--right--mini ion-briefcase'></i><%= t('Work experience') %>" data-title="<%= t('Work experience') %>">  
+              <div class="row padding--top" >
+                <div class="small-12 large-6 columns">
+                  <div class="me__summary__topic me__summary__topic--with-more js-tracking-event" data-topic="<i class='padding--right--mini ion-briefcase'></i><%= t('Work experience') %>" title="<%= t('Work experience') %>">  
                     <div class="me__summary__icon">
                       <div class="table">
                         <div class="table__cell">
@@ -36,8 +36,8 @@
                     </div>
                   </div>
                 </div>
-                <div class="small-12 large-6 columns ">
-                  <div class="me__summary__topic me__summary__topic--with-more js-tracking-event" data-topic="<i class='padding--right--mini ion-university'></i><%= t('Studies') %>" data-title="<%= t('Studies') %>">  
+                <div class="small-12 large-6 columns">
+                  <div class="me__summary__topic me__summary__topic--with-more js-tracking-event" data-topic="<i class='padding--right--mini ion-university'></i><%= t('Studies') %>" title="<%= t('Studies') %>">  
                     <div class="me__summary__icon">
                       <div class="table">
                         <div class="table__cell">
@@ -51,40 +51,8 @@
                     </div>
                   </div>
                 </div>
-                <!-- <div class="small-12 large-6 columns ">
-                  <div class="me__summary__topic">  
-                    <div class="nostyle me__locations">
-                    </div>
-                  </div>
-                </div> -->
-                <div class="small-12 large-6 columns ">
-                  <div class="me__summary__topic">  
-                    <div class="me__summary__icon">
-                      <div class="table">
-                        <div class="table__cell">
-                          <i class="ion-ios-gear"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="nostyle me__skills">
-                    </div>
-                  </div>
-                </div>
-                <div class="small-12 large-6 columns ">
-                  <div class="me__summary__topic">  
-                    <div class="me__summary__icon">
-                      <div class="table">
-                        <div class="table__cell">
-                          <i class="ion-earth"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="nostyle me__languages">
-                    </div>
-                  </div>
-                </div>
-                <div class="small-12 large-6 columns ">
-                  <div class="me__summary__topic me__summary__topic--with-more js-tracking-event" data-topic="<i class='padding--right--mini ion-wrench'></i><%= t('Projects') %>" data-title="<%= t('Projects') %>">
+                <div class="small-12 large-6 columns">
+                  <div class="me__summary__topic me__summary__topic--with-more js-tracking-event" data-topic="<i class='padding--right--mini ion-wrench'></i><%= t('Projects') %>" title="<%= t('Projects') %>">
                     <div class="me__summary__icon">
                       <div class="table">
                         <div class="table__cell">
@@ -98,8 +66,8 @@
                     </div>
                   </div>
                 </div>
-                <div class="small-12 large-6 columns ">
-                  <div class="me__summary__topic me__summary__topic--with-more js-tracking-event" data-topic="<i class='padding--right--mini ion-android-color-palette'></i><%= t('Other interests') %>" data-title="<%= t('Other interests') %>">  
+                <div class="small-12 large-6 columns">
+                  <div class="me__summary__topic me__summary__topic--with-more js-tracking-event" data-topic="<i class='padding--right--mini ion-android-color-palette'></i><%= t('Other interests') %>" title="<%= t('Other interests') %>">
                     <div class="me__summary__icon">
                       <div class="table">
                         <div class="table__cell">
@@ -110,6 +78,42 @@
                     <div class="nostyle me__others">
                     </div>
                     <div class="me__topic__content me__topic__content--others hide">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row padding--bottom" >
+                <div class="small-12 large-6 columns">
+                  <div class="me__summary__topic" title="<%= t('Skills') %>">  
+                    <div class="me__summary__icon">
+                      <div class="table">
+                        <div class="table__cell">
+                          <i class="ion-ios-gear"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="table">
+                      <div class="table__cell">
+                        <div class="nostyle me__skills">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="small-12 large-6 columns">
+                  <div class="me__summary__topic" title="<%= t('Languages') %>">  
+                    <div class="me__summary__icon">
+                      <div class="table">
+                        <div class="table__cell">
+                          <i class="ion-earth"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="table">
+                      <div class="table__cell">
+                        <div class="nostyle me__languages">
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -154,9 +158,9 @@
       <div class="timeline">
         <div class="timeline__summary">
           <div class="timeline__icons small-text-center">
-            <i class="ion-university timeline__icon timeline__icon--study"></i>
-            <i class="ion-ios-location timeline__icon timeline__icon--location"></i>
-            <i class="ion-briefcase timeline__icon timeline__icon--company"></i>
+            <i class="ion-university timeline__icon timeline__icon--study" title="<%= t('Studies') %>"></i>
+            <i class="ion-ios-location timeline__icon timeline__icon--location" title="<%= t('Location') %>"></i>
+            <i class="ion-briefcase timeline__icon timeline__icon--company" title="<%= t('Company') %>"></i>
           </div>
           <div class="timeline__summary__inner">
             <div class="time-now"></div>
@@ -200,20 +204,20 @@
           <li 
             id="life-event-<%= event.id %>"
             class="life-event events__item events__item--<% if event.the_field('picture').blank? %>no-picture<% else %>with-picture<% end %>"
-            data-title="<%= event.the_title %>"
+            data-title="<%= event.the_title.gsub('"','&quot;') %>"
             data-event-id="<%= event.id %>"
             data-start-date="<%= event.the_field('start-date') %>"
             data-start-month="<%= t(date_from_field(event.the_field('start-date')).strftime('%b')) %>"
             data-end-date="<%= event.the_field('end-date') %>"
             data-end-month="<% if not event.the_field('end-date').blank? %><%= t(date_from_field(event.the_field('end-date')).strftime('%b')) %><% end %>"
-            data-description="<%= simple_format(event.the_field('description')) %>"
-            data-company="<%= event.the_field('company') %>"
-            data-location="<%= event.the_field('location') %>"
-            data-study="<%= event.the_field('study') %>"
-            data-project="<%= event.the_field('project') %>"
-            data-skills="<%= event.the_field('skills') %>"
-            data-language="<%= event.the_field('language') %>"
-            data-tags='<% tags = event.the_tags %>[<% tags.each do |tag| %>"<%= tag.name %>"<% if not tags.last == tag %>,<% end %><% end %>]'
+            data-description="<%= simple_format(event.the_field('description')).gsub('"','&quot;') %>"
+            data-company="<%= event.the_field('company').gsub('"','&quot;') %>"
+            data-location="<%= event.the_field('location').gsub('"','&quot;') %>"
+            data-study="<%= event.the_field('study').gsub('"','&quot;') %>"
+            data-project="<%= event.the_field('project').gsub('"','&quot;') %>"
+            data-skills="<%= event.the_field('skills').gsub('"','&quot;') %>"
+            data-language="<%= event.the_field('language').gsub('"','&quot;') %>"
+            data-tags='<% tags = event.the_tags %>[<% tags.each do |tag| %>"<%= tag.name.gsub('"','&quot;') %>"<% if not tags.last == tag %>,<% end %><% end %>]'
             >
             
             <div class="life-event__picture">
@@ -233,14 +237,14 @@
                 <img class="life-event__picture-file" src="<%= event.the_field('picture') %>" alt="event-picture"/>
               <% end %>
             </div>
-            <div class="life-event__text small-padding--top--mini small-padding--bottom large-padding--none small-text-center">
-              <div class="table">
+            <div class="life-event__text small-padding--horizontal--mini small-padding--top--mini small-padding--bottom large-padding--vertical--none large-padding--horizontal--maxi">
+              <div class="table large-padding--horizontal--mini">
                 <div class="table__cell">
                   <% if not event.the_field('introduction').blank? %>
                     <h3 class="life-event__introduction padding--vertical--tiny"><%= event.the_field('introduction') %></h3>
                   <% end %>
                   <% if not event.the_field('description').blank? %>
-                    <div class="life-event__description padding--vertical--tiny"><%= simple_format(event.the_field('description'), class: "small") %></div>
+                    <div class="life-event__description padding--vertical--tiny"><%= simple_format(event.the_field('description')) %></div>
                   <% end %>
                   <% if not event.the_field('skills').blank? %>
                     <p class="text-green life-event__skills small-padding--top--tiny small-padding--bottom--mini medium-padding--top--mini medium-padding--bottom"><%= t(:new_skills) %> <%= event.the_field('skills') %></p>
@@ -250,7 +254,7 @@
                     <% links.each do |string| %>
                       <% hash = JSON.parse(string) %>
                       <% if not hash['attr'].blank? and not hash['value'].blank? %>
-                        <a class="button button--small life-event__link" href="<%= hash['value'] %>"><%= hash['attr'] %></a>
+                        <a class="button button--small life-event__link" target="_blank" href="<%= hash['value'] %>"><%= hash['attr'] %></a>
                       <% end %>
                     <% end %>
                   </div>

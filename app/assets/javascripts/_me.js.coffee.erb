@@ -125,11 +125,12 @@ class Life
     this.lifeEvents[lifeEvent.id] = lifeEvent
     this._array.push(lifeEvent.id)
     eventIndex = this._array.length - 1
-    for tag in lifeEvent.tags
-      if this.tags[tag]?
-        this.tags[tag].push(eventIndex)
-      else
-        this.tags[tag] = [eventIndex]
+    if lifeEvent.tags?
+      for tag in lifeEvent.tags
+        if this.tags[tag]?
+          this.tags[tag].push(eventIndex)
+        else
+          this.tags[tag] = [eventIndex]
     eventYear = lifeEvent.startDate.getFullYear()
     if this.years[eventYear]?
       this.years[eventYear].push(eventIndex)
@@ -144,18 +145,10 @@ class Life
 
   addEventToSummary: (id) ->
     lifeEvent = this.lifeEvents[id]
-    if lifeEvent != null
+    if lifeEvent != null and lifeEvent.tags?
       tags = lifeEvent.tags
-      startYear = lifeEvent.startYear()
-      if lifeEvent.endDate?
-        endYear = lifeEvent.endYear()
-        if startYear == endYear
-          date = lifeEvent.startMonth + '. - ' + lifeEvent.endMonth + '. ' + endYear
-        else
-          date = lifeEvent.startMonth + '. ' + startYear + ' - ' + lifeEvent.endMonth + '. ' + endYear
-      else
-        date = lifeEvent.startMonth + '. ' + startYear + ' - ' + 'Today'
       if tags.include? "Work"
+        date = getPeriodWithMonths(lifeEvent)
         $companiesContainer = this.$summary.find('.me__companies')
         $companiesContent = this.$summary.find('.me__topic__content--companies')
         newItem = '<div class="me__summary__item me__company from-event-' + lifeEvent.id + '"><span class="me__summary__meta">' + date + ', ' + lifeEvent.company + '</span>' + lifeEvent.title + '</div>'
@@ -163,6 +156,7 @@ class Life
         $companiesContainer.html(newItem)
         $companiesContent.prepend(detailedItem)
       if tags.include? "Studies"
+        date = getPeriodWithoutMonths(lifeEvent)
         $studiesContainer = this.$summary.find('.me__studies')
         $studiesContent = this.$summary.find('.me__topic__content--studies')
         newItem = '<div class="me__summary__item me__study from-event-' + lifeEvent.id + '"><span class="me__summary__meta">' + date + ', ' + lifeEvent.study + '</span>' + lifeEvent.title + '</div>'
@@ -171,27 +165,29 @@ class Life
         $studiesContent.prepend(detailedItem)
       if tags.include? "Language"
         $languagesContainer = this.$summary.find('.me__languages')
-        newItem = '<span class="me__summary__item me__language from-event-' + lifeEvent.id + '">' + lifeEvent.language + ' </span>'
+        newItem = '<span class="me__summary__item me__language from-event-' + lifeEvent.id + '">' + lifeEvent.language + '</span><span class="me__summary__comma">, </span>'
         $languagesContainer.prepend(newItem)
       if tags.include? "Skills"
         $skillsContainer = this.$summary.find('.me__skills')
-        newItem = '<span class="me__summary__item me__skill from-event-' + lifeEvent.id + '">' + lifeEvent.skills + '</span>'
+        newItem = '<span class="me__summary__item me__skill from-event-' + lifeEvent.id + '">' + lifeEvent.skills + '</span><span class="me__summary__comma">, </span>'
         $skillsContainer.prepend(newItem)
       if tags.include? "Project"
+        date = getPeriodWithMonths(lifeEvent)
         $projectsContainer = this.$summary.find('.me__projects')
         $projectsContent = this.$summary.find('.me__topic__content--projects')
         newItem = '<div class="me__summary__item me__project from-event-' + lifeEvent.id + '"><span class="me__summary__meta">' + date + ', ' + lifeEvent.project + '</span>' + lifeEvent.title + '</div>'
-        detailedItem = '<div class="me__summary__item--detailed me__projects from-event-' + lifeEvent.id + '"><span class="me__summary__meta">' + date + ', ' + lifeEvent.projects + '</span>' + lifeEvent.title + '<div class="me__summary__description">' + lifeEvent.description + '</div></div>'
+        detailedItem = '<div class="me__summary__item--detailed me__projects from-event-' + lifeEvent.id + '"><span class="me__summary__meta">' + date + ', ' + lifeEvent.project + '</span>' + lifeEvent.title + '<div class="me__summary__description">' + lifeEvent.description + '</div></div>'
         $projectsContainer.html(newItem)
         $projectsContent.prepend(detailedItem)
       # if tags.include? "Location"
       #   $locationsContainer = this.$summary.find('.me__locations')
       #   $locationsContainer.html('<div class="me__summary__item me__location from-event-' + lifeEvent.id + '"><span class="me__summary__meta">' + date + '</span>' + lifeEvent.location + '</div>')
       if tags.include? "Other"
+        date = getPeriodWithoutMonths(lifeEvent)
         $otherContainer = this.$summary.find('.me__others')
         $otherContent = this.$summary.find('.me__topic__content--others')
         newItem = '<div class="me__summary__item me__other from-event-' + lifeEvent.id + '"><span class="me__summary__meta">' + date + '</span>' + lifeEvent.title + '</div>'
-        detailedItem = '<div class="me__summary__item me__other from-event-' + lifeEvent.id + '"><span class="me__summary__meta">' + date + '</span>' + lifeEvent.title + '<div class="me__summary__description">' + lifeEvent.description + '</div></div>'
+        detailedItem = '<div class="me__summary__item--detailed me__other from-event-' + lifeEvent.id + '"><span class="me__summary__meta">' + date + '</span>' + lifeEvent.title + '<div class="me__summary__description">' + lifeEvent.description + '</div></div>'
         $otherContainer.html(newItem)
         $otherContent.prepend(detailedItem)
         
@@ -575,6 +571,7 @@ setEventPictureSlicesCss = ->
       $pictureFile = $this.find('.life-event__picture-file')
       url = $pictureFile.attr('src')
       ratio = $pictureFile.height() / $pictureFile.width()
+      $this.find('.life-event__picture__slice').remove()
       for i in [0..9] by 1
         $this.append('<div class="life-event__picture__slice life-event__picture__slice--' + i + '" style="background-image:url(\'' + url + '\');background-position:-' + sliceWidthEm * i + 'em 50%;left:' + sliceWidthEm * i + 'em;"></div>')
       $pictureSlices = $this.find('.life-event__picture__slice')
@@ -610,6 +607,38 @@ enableMePopup = ->
         $body.removeClass('me__popup--open')
     $summaryHeader.click ->
       $openPopup.click()
+
+getPeriodWithMonths = (lifeEvent) ->
+  startYear = lifeEvent.startYear()
+  if lifeEvent.endDate?
+    endYear = lifeEvent.endYear()
+    if startYear == endYear
+      if lifeEvent.startMonth == lifeEvent.endMonth
+        date = lifeEvent.startMonth + '. ' + startYear
+      else
+        date = lifeEvent.startMonth + '. - ' + lifeEvent.endMonth + '. ' + endYear
+    else
+      date = lifeEvent.startMonth + '. ' + startYear + ' - ' + lifeEvent.endMonth + '. ' + endYear
+  else
+    date = lifeEvent.startMonth + '. ' + startYear + ' - ' + 'Today'
+
+  return date
+
+getPeriodWithoutMonths = (lifeEvent) ->
+  startYear = lifeEvent.startYear()
+  if lifeEvent.endDate?
+    endYear = lifeEvent.endYear()
+    if startYear == endYear
+      if lifeEvent.startMonth == lifeEvent.endMonth
+        date = lifeEvent.startMonth + '. ' + startYear
+      else
+        date = lifeEvent.startMonth + '. - ' + lifeEvent.endMonth + '. ' + endYear
+    else
+      date = startYear + ' - ' + endYear
+  else
+    date = startYear + ' - ' + 'Today'
+
+  return date
 
 initializeAboutMePage = ->
   $meData = $('.me__data')

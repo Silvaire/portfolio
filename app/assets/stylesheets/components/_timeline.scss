@@ -149,8 +149,8 @@
       margin: 15px;
       background: $grey-lightest;
       padding: 7px 15px 7px 60px;
-      min-height: 50px;
-      height: calc(100% - #{$column-gutter});
+      min-height: 62px;
+      // height: calc(100% - #{$column-gutter});
       &--with-more {
         cursor: pointer;
         &:hover {
@@ -189,6 +189,7 @@
     }
     &__item {
       // margin-left: 50px;
+      font-size: 14px;
       &.me__summary__item--hidden {
         display: none;
       }

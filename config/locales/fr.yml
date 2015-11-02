@@ -44,6 +44,10 @@ fr:
   Contact me: "Me contacter"
   year_old: "%{years} ans"
   new_skills: "Nouvelles Compétences :"
+  Skills: "Compétences"
+  Languages: "Langues"
+  Location: "Domicile"
+  Company: "Entreprise"
 
   UX Design : "UX Design"
   Backend : "Backend"
