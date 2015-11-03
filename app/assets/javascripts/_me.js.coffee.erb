@@ -354,9 +354,26 @@ class Life
     year = currentEvent.startYear()
 
     $timelineYears = $('.timeline__year')
-    $timelineYears.removeClass('timeline__year--active')
+    $timelineYears.removeClass('timeline__year--active').removeClass('timeline__year--previous').removeClass('timeline__year--next').removeClass('timeline__year--with-gap')
     $newYear = $timelineYears.filter('[data-year=' + year + ']')
-    $newYear.addClass('timeline__year--active');
+    $newYear.addClass('timeline__year--active')
+    $previousYear = $newYear.prev()
+    if $previousYear.length
+      $previousYear.addClass('timeline__year--previous')
+      $previousPreviousYear = $previousYear.prev()
+      if $previousPreviousYear.length
+        $previousPreviousYear.addClass('timeline__year--previous')
+      if $('.timeline__year:first-child + .timeline__year--previous').length == 0
+        $('.timeline__year:first-child').addClass('timeline__year--with-gap')        
+    $nextYear = $newYear.next()
+    if $nextYear.length
+      $nextYear.addClass('timeline__year--next')
+      $nextNextYear = $nextYear.next()
+      if $nextNextYear.length
+        $nextNextYear.addClass('timeline__year--next')
+      if $('.timeline__year--next + .timeline__year:last-child').length == 0
+        $('.timeline__year:last-child').addClass('timeline__year--with-gap')
+
     eventInNewYear = $newYear.data('event-nb')
     inYearIndex = currentEvent.inYearIndex
     $('.border-canvas').removeClass('border-canvas--active').each ->

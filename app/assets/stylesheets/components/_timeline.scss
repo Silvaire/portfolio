@@ -585,7 +585,7 @@
   &__year {
     position: relative;
     vertical-align: middle;
-    display: block;
+    display: none;
     width: 50px;
     font-size: 13px;
     height: 50px;
@@ -610,8 +610,46 @@
       color: $green-lighter;
     }
     &.timeline__year--active {
+      display: block;
       border: none;
     }
+    &:first-child, &--next, &--previous, &:last-child {
+      display: block;
+    }
+    &--with-gap:not(.timeline__year--previous):first-child {
+      margin-bottom: 56px;
+      &:after {
+        @include transform(rotate(90deg));
+        color: $grey;
+        cursor: default;
+        content: '...';
+        font-size: 34px;
+        line-height: 28px;
+        position: absolute;
+        top: 54px;
+        left: -1px;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+      }
+    } 
+    &--with-gap:not(.timeline__year--next):last-child {
+      margin-top: 56px;
+      &:before {
+        @include transform(rotate(90deg));
+        color: $grey;
+        cursor: default;
+        content: '...';
+        font-size: 34px;
+        line-height: 28px;
+        position: absolute;
+        top: -54px;
+        left: -1px;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+      }
+    } 
   }
 }
 
