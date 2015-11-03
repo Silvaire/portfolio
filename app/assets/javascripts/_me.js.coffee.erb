@@ -392,7 +392,7 @@ class Life
     context.beginPath()
     context.lineWidth = 4
     context.imageSmoothingEnabled = true
-    context.strokeStyle = '#aaaaaa'
+    context.strokeStyle = '#fff'
     context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false)
     context.stroke()
 
@@ -403,32 +403,33 @@ class Life
     if this.movingForward
       endValue = (2 * Math.PI * (inYearIndex-1)/eventInNewYear) - (Math.PI / 2)
       curPerc = ((inYearIndex-1)/eventInNewYear * 100) + 5
-      endPercent = inYearIndex/eventInNewYear * 100
+      endPercent = inYearIndex/eventInNewYear * 100 + 7
     else
       endValue = (2 * Math.PI * (inYearIndex+1)/eventInNewYear) - (Math.PI / 2)
-      curPerc = ((inYearIndex+1)/eventInNewYear * 100)
-      endPercent = (inYearIndex/eventInNewYear * 100) + 5
+      curPerc = 100
+      endPercent = (inYearIndex/eventInNewYear * 100)
     context.arc(centerX, centerY, radius, -(Math.PI / 2) , endValue, false)
     context.stroke()
 
     animate = (current, forward) ->
       context.beginPath()
       context.imageSmoothingEnabled = true
-      if forward or eventInNewYear == 1
+      if forward
         context.strokeStyle = '#45BF55'
         curPerc = curPerc + 5
       else
-        context.strokeStyle = '#aaaaaa'
+        context.strokeStyle = '#fff'
         curPerc = curPerc - 5
       context.arc(centerX, centerY, radius, 2 * (current-0.05) * Math.PI - (Math.PI / 2), 2 * current * Math.PI - (Math.PI / 2), false)
-      context.stroke()
-      if (forward and curPerc <= endPercent) or (not forward and curPerc >= endPercent)
+      if (forward and curPerc <=  endPercent) or (not forward and curPerc >= endPercent)
+        context.stroke()
         if $canvas.hasClass('border-canvas--active')
           requestAnimationFrame ->
             animate(curPerc/100, forward)
         else
           context.clearRect(0, 0, canvas.width, canvas.height)
-    animate(curPerc/100, this.movingForward)
+    if eventInNewYear != 1 or this.movingForward # special case for only one event in year
+      animate(curPerc/100, this.movingForward)
 
   displayEventDetails: (id) ->
     $lifeEvents = $('.life-event')
