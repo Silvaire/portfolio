@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/Silvaire/camaleon-cms
-  revision: 34d346cf26afe070f8733533219f9ac0a73d0231
+  remote: git://github.com/owen2345/camaleon-cms
+  revision: 679b12ee55388c6960e3ba391a257299e5e08138
   specs:
     camaleon_cms (1.0.8)
       actionpack-page_caching
