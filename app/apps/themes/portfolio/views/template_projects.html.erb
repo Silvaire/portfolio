@@ -1,7 +1,7 @@
 <section class="section">
   <div class="row row--full-width projects-landing">
     <div class="projects-landing__featured kwicks kwicks-horizontal green-row bg-green" id="featured-projects">
-      <% current_site.the_category('major').decorate.the_posts().limit(3).each do |post| %>
+      <% current_site.the_category('major').decorate.the_posts().limit(5).each do |post| %>
         <% orig = post %>
         <% post = post.decorate %>
         <% techs = post.the_tags %>
