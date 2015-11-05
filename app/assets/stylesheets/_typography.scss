@@ -109,6 +109,26 @@ h3,
   }
 }
 
+h4,
+.heading-4 {
+  @include sansSerif;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  line-height: 0.9em;
+  font-weight: 700;
+  color: inherit;
+  &.big {
+    font-size: 21px;
+  }
+  @include mq(small) {
+    font-size: 15px;
+    &.big {
+      font-size: 18px;
+    }
+  }
+}
+
 p,
 .paragraph {
   @include sansSerif;
