@@ -1,19 +1,23 @@
 <section class="section single-project">
   <div class="single-project__banner text-white padding--top--huge padding--bottom--mini overlay-gradient-black">
     <div class="single-project__banner__image" style="<%= bgCover(@post.the_thumb_url) %>"></div>
-    <div class="row">
-      <div class="small-12 columns">
+    <div class="row row--full-width">
+      <div class="small-12 medium-offset-1 medium-11 columns">
         <!-- <h2 class="heading-3 padding--top--huge padding--bottom--mini"><%= @post.the_title %></h2> -->
         <h2 class="heading-1 big padding--top--huge padding--bottom--mini single-project__banner__title"><%= @post.the_field('introduction') %></h2>
       </div>
     </div>
   </div>
   <div class="single-project__content">
-    <div class="row">
-      <div class="small-12 medium-9 columns end padding--bottom padding--top--mini">
+    <div class="row row--full-width">
+      <div class="small-12 medium-offset-1 medium-11 columns end padding--top--mini">
         <div class="crumbs padding--bottom">
           <p><a class="parent-style" href="<%= current_site.the_post('projects').the_url %>"><%= current_site.the_post('projects').the_title %></a></p>&nbsp;/&nbsp;<p><%= @post.the_title %></p>
         </div>
+      </div>
+    </div>
+    <div class="row row--full-width">
+      <div class="small-12 medium-offset-1 medium-10 large-7 columns end padding--bottom">
         <p class="big text-green padding--bottom--tiny"><%= t(:project_skills) %> <%= @post.the_field('technologies') %></p>
         <h3 class="heading-3 padding--bottom"><%= @post.the_field('header') %></h3>
         <%= simple_format(@post.the_field('description')) %>
@@ -24,19 +28,19 @@
           <% end %>
         </div>
       </div>
-      <div class="small-12 columns padding--bottom">
-        <div class="row collapse small-text-center green-row" data-equalizer>
-          <h2 class="heading-1 padding--bottom--mini small-12 columns"><%= t('Read about more projects') %></h2>
+      <div class="small-12 medium-offset-1 medium-10 large-offset-0 large-4 end columns padding--bottom">
+        <div class="row collapse small-text-center large-text-left green-row" data-equalizer>
+          <h3 class="small-12 large-offset-2 large-9 columns end heading-4 padding--bottom--mini"><%= t('Read about more projects') %></h3>
           <% current_site.the_post_type('project').the_posts().where.not(id:@post.id).reorder('RANDOM()').limit(3).each do |post|  %>
             <% post = post.decorate %>
-            <div class="small-12 medium-6 large-4 columns end green-row__item project--other small-padding--vertical--mini large--padding--vertical">
+            <div class="small-12 medium-6 large-offset-2 large-9 columns end green-row__item project--other small-text-center">
               <a href="<%= post.the_url %>" class="single-project__suggested-project__link js-tracking-event" data-title="<%= post.the_title %>">
-                <div class="project--other__content small-padding--horizontal large-padding--horizontal--maxi small-padding--vertical medium-padding--vertical--maxi remove-equalize-on-small" data-equalizer-watch>
+                <div class="project--other__content small-padding--horizontal small-padding--vertical remove-equalize-on-small" data-equalizer-watch>
                   <div class="project--other__image-wrap">
-                    <div class="project--other__image" style="<%= bgCover(post.the_thumb_url) %>"></div>
+                    <div class="project--other__image project--other__image--small" style="<%= bgCover(post.the_thumb_url) %>"></div>
                   </div>
-                  <h2 class="heading-2 padding--vertical--maxi"><%= post.the_title %></h2>
-                  <span class="button button--light"><%= t('Read more') %></span>
+                  <h2 class="heading-4 padding--vertical"><%= post.the_title %></h2>
+                  <span class="button button--light button--small"><%= t('Read more') %></span>
                 </div>
               </a>
             </div>

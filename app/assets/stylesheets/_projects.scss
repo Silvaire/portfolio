@@ -173,6 +173,11 @@
       border: solid 3px;
       position: relative;
       // z-index: 3;
+      &--small {
+        width: 81px;
+        height: 81px;
+        border: solid 1px;
+      }
     }
     &:hover {
       .project--other__image {
