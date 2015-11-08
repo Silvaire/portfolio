@@ -716,6 +716,7 @@
     height: 100%;
     opacity: 0;
     padding-left: 75px;
+    background: $white;
     .switch-side & {
       left: calc(50% + #{$metaLineWidth} * 3 / 2);
     }
@@ -729,6 +730,7 @@
       opacity: 1;
       width: 100%;
       padding: 0;
+      background: transparent;
     }
   }
   &__title {
@@ -815,6 +817,7 @@
       @for $i from 0 through 9 {
         &--#{$i} {
           @include transition(transform 0.5s #{random(8) / 10}s);
+          z-index: #{$i+1};
         }
       }
       .events__item--active & {
