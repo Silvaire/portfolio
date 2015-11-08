@@ -18,13 +18,18 @@
     </div>
     <div class="row row--full-width">
       <div class="small-12 medium-offset-1 medium-10 large-7 columns end padding--bottom">
-        <p class="big text-green padding--bottom--tiny"><%= t(:project_skills) %> <%= @post.the_field('technologies') %></p>
+        <% skills = @post.the_field('technologies') %>
+        <% if not skills.blank? %>
+          <p class="big text-green padding--bottom--tiny"><%= t(:project_skills) %> <%= skills %></p>
+        <% end %>
         <h3 class="heading-3 padding--bottom"><%= @post.the_field('header') %></h3>
         <%= simple_format(@post.the_field('description')) %>
         <div class="single-project__links padding--top">
           <% @post.get_field_values('links').each do |hash| %>
             <% hash = JSON.parse(hash) %>
-            <a class="button button--small js-tracking-event single-project__links__button" target="_blank" href="<%= hash["value"] %>"><%= hash["attr"] %></a>
+            <% if not hash["attr"].blank? and not hash["value"].blank? %>
+              <a class="button button--small js-tracking-event single-project__links__button" target="_blank" href="<%= hash["value"] %>"><%= hash["attr"] %></a>
+            <% end %>
           <% end %>
         </div>
       </div>
