@@ -588,10 +588,15 @@ setEventPictureSlicesCss = ->
       $this = $(this)
       $pictureFile = $this.find('.life-event__picture-file')
       url = $pictureFile.attr('src')
-      ratio = $pictureFile.height() / $pictureFile.width()
+      pictureWidth = $pictureFile.width()
+      pictureHeight = $pictureFile.height()
+      ratio = pictureHeight / pictureWidth
+      pictureWidthEm = pictureWidth / activePictureContainerFontSize
+      pictureHeightEm = pictureHeight / activePictureContainerFontSize
+      horizontalCorrection = Math.min(0,(containerWidthEm - (pictureWidthEm * (containerHeightEm / pictureHeightEm))) / 2)
       $this.find('.life-event__picture__slice').remove()
       for i in [0..9] by 1
-        $this.append('<div class="life-event__picture__slice life-event__picture__slice--' + i + '" style="background-image:url(\'' + url + '\');background-position:-' + sliceWidthEm * i + 'em 50%;left:' + sliceWidthEm * i + 'em;"></div>')
+        $this.append('<div class="life-event__picture__slice life-event__picture__slice--' + i + '" style="background-image:url(\'' + url + '\');background-position:' + (horizontalCorrection - (sliceWidthEm * i)) + 'em 50%;left:' + sliceWidthEm * i + 'em;"></div>')
       $pictureSlices = $this.find('.life-event__picture__slice')
       fittedContainerWidthEm = Math.max(containerWidthEm * ratio, containerHeightEm) # in case the section is too high for the picture, makes the picture even bigger
       $pictureSlices.css({'width':sliceWidthEm + 0.2 + 'em','height':fittedContainerWidthEm + 'em', 'top':(containerHeightEm - fittedContainerWidthEm)/2 + 'em'}) # adds 0.2 em for overlap, so that there's never a white pixel
