@@ -85,7 +85,7 @@ module ApplicationHelper
   end
 
   def bgCover(image_url)
-    "background-image: url('#{image_url}');-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover; background-position: center center; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'#{image_url}\', sizingMethod=\'scale\'); -ms-filter: 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'#{image_url}\', sizingMethod=\'scale\')';"
+    "background-image: url('#{image_url}');-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover; background-position: center center;"
   end
 
   def date_from_field(date_text)
