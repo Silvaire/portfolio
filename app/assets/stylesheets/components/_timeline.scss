@@ -143,6 +143,22 @@
         }
       }
     }
+    &__last-row {
+      display: table;
+      border-spacing: $column-gutter 0;
+      border-collapse: separate;
+      width: calc(100% + #{$column-gutter});
+      padding: $column-gutter/2 0;
+      margin-left: -$column-gutter/2;
+      min-height: 62px + 30px;
+      @include mq(mediumDown) {
+        display: inline-block;
+        width: 100%;
+        position: relative;
+        margin: 0;
+        padding: 0 30px 15px 0;
+      }
+    }
     & &__topic {
       @include transform(scale(1));
       @include transition(transform 0.2s, box-shadow 0.2s);
@@ -151,6 +167,7 @@
       margin: 15px;
       background: $grey-lightest;
       padding: 7px 15px 7px 60px;
+      border-radius: 5px;
       min-height: 62px;
       // height: calc(100% - #{$column-gutter});
       &--with-more {
@@ -175,6 +192,16 @@
           right: 7px;
           color: $grey;
           text-align: center;
+        }
+      }
+      &--skills, &--languages {
+        display: table-cell;
+        width: 50%;
+        vertical-align: middle;
+        @include mq(mediumDown) {
+          display: block;
+          width: 100%;
+          float: left;
         }
       }
     }
