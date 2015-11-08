@@ -4,6 +4,21 @@ window.delay = (ms, func) -> setTimeout func, ms
 
 jQuery.fn.reverse = [].reverse;
 
+window.dictionary = (word) ->
+  dict = {
+    'en': {
+      'Today': 'Today',
+    },
+    'fr': {
+      'Today': "Aujourd'hui",
+    },
+  }
+  inLocale = dict[$('html').attr('lang')]
+  if inLocale?
+    inLocale[word] || ''
+  else
+    ''
+
 # end global functions
 
 initializeHeadroom = () ->

@@ -638,7 +638,7 @@ getPeriodWithMonths = (lifeEvent) ->
     else
       date = lifeEvent.startMonth + '. ' + startYear + ' - ' + lifeEvent.endMonth + '. ' + endYear
   else
-    date = lifeEvent.startMonth + '. ' + startYear + ' - ' + 'Today'
+    date = lifeEvent.startMonth + '. ' + startYear + ' - ' + window.dictionary('Today')
 
   return date
 
@@ -654,7 +654,7 @@ getPeriodWithoutMonths = (lifeEvent) ->
     else
       date = startYear + ' - ' + endYear
   else
-    date = startYear + ' - ' + 'Today'
+    date = startYear + ' - ' + window.dictionary('Today')
 
   return date
 
