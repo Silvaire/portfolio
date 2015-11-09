@@ -192,6 +192,12 @@
           right: 7px;
           color: $grey;
           text-align: center;
+          @include mq(mediumDown) {
+            bottom: -2px;
+            right: 6px;
+            color: $green-light;
+            font-size: 19px;
+          }
         }
       }
       &--skills, &--languages {
@@ -310,14 +316,15 @@
       text-align: center;
     }
     &__scroll-icon {
+      @extend .animated-icon--jump--slow;
       position: relative;
       font-size: 25px;
       color: $green;
       cursor: pointer;
       padding: 10px;
-      &:hover {
-        @extend .animated-icon--jump;
-      }
+      // &:hover {
+        
+      // }
       @include mq(mediumDown) {
         display: none;
       }
