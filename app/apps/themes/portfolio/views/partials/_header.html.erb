@@ -2,6 +2,7 @@
   <div class="row row--full-width">
     <div class="small-12 medium-12 large-12 columns">
       <div class="site-header">
+        <h1 class="hide"><%= t(:site_title) %></h1>
         <nav id="primary-navigation" class="primary-navigation" role="navigation">
           <%= raw my_draw_menu({callback_item:lambda{|args| 
             if current_site.the_post(current_site.options[:home_page]).the_url(as_path:true) == args[:link][:link]

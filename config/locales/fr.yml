@@ -20,6 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 fr:
+  site_title: "Silvain's Space | Présenter les projets et compétences de Silvain Toromanoff dans son portfolio"
   Read about more projects: "En savoir plus sur d'autres projets"
   Read more: "Lire la suite"
   See all projects: "Voir tous les projets"
