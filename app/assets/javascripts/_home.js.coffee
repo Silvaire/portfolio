@@ -32,7 +32,7 @@ animateOnLoad = ->
   $homepageContainer = $('.section--homepage')
   if $homepageContainer.length
     $homepageContainer.addClass('loaded')
-    moveBackgroundOnMouseMove()
+    # moveBackgroundOnMouseMove()
 
 
 $(window).load ->
