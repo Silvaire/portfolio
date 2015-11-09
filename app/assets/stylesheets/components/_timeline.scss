@@ -606,14 +606,48 @@
     }
   }
   &__years {
+    @include transition(right 0.3s);
     position: fixed;
-    right: 0;
+    right: -70px;
     top: $header-height;
     height: calc(100% - #{$header-height});
     display: table;
     z-index: 10;
+    .at-timeline &, .at-bottom & {
+      right: 0;
+    }
     @include mq(mediumDown) {
       display: none;
+    }
+  }
+  &__to-top {
+    @include transition(right 0.3s);
+    position: fixed;
+    right: -50px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 30px;
+    bottom: 5px;
+    z-index: 100;
+    background: rgba($black,0.2);
+    color: $white;
+    cursor: pointer;
+    .at-timeline &, .at-bottom & {
+      right: 5px;
+      &:hover {
+        background: rgba($black,0.5);
+      }
+    }
+    @include mq(mediumDown) {
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 20px;
+      .headroom--not-top & {
+        right: 5px;
+      }
     }
   }
   &__year {

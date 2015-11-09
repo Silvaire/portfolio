@@ -107,14 +107,14 @@ class Life
       this.movingForward = previousActiveEventIndex <= this.activeEventIndex
       this.updateTimelineMeta(this.activeEventIndex)
       this.updateTimelineYears(this.activeEventIndex)
-      if previousActiveEventIndex > this.activeEventIndex
-        while previousActiveEventIndex > this.activeEventIndex
-          this.hideEventFromSummary(this._array[previousActiveEventIndex])
-          previousActiveEventIndex--
-      else
-        while previousActiveEventIndex < this.activeEventIndex
-          previousActiveEventIndex++
-          this.showEventInSummary(this._array[previousActiveEventIndex])
+      # if previousActiveEventIndex > this.activeEventIndex
+      #   while previousActiveEventIndex > this.activeEventIndex
+      #     this.hideEventFromSummary(this._array[previousActiveEventIndex])
+      #     previousActiveEventIndex--
+      # else
+      #   while previousActiveEventIndex < this.activeEventIndex
+      #     previousActiveEventIndex++
+      #     this.showEventInSummary(this._array[previousActiveEventIndex])
       # display the currentEvent
       this.displayEventDetails(this._array[this.activeEventIndex])
     return this.lifeEvents[this._array[this.activeEventIndex]]
@@ -663,6 +663,14 @@ getPeriodWithoutMonths = (lifeEvent) ->
 
   return date
 
+enableBackToTopButton = () ->
+  $backToTop = $('.timeline__to-top')
+  if $backToTop.length
+    $backToTop.click ->
+      scrollToElement('body')
+      $('.section--about').addClass('at-top').removeClass('at-bottom').removeClass('at-timeline')
+
+
 initializeAboutMePage = ->
   $meData = $('.me__data')
   if $meData.length
@@ -681,6 +689,7 @@ initializeAboutMePage = ->
     window.myLife.enableSrollButtonBetweenTimelineAndSummary()
     enableTopicCards()
     enableMePopup()
+    enableBackToTopButton()
     
 
 
