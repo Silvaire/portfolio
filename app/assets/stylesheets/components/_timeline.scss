@@ -161,7 +161,7 @@
     }
     & &__topic {
       @include transform(scale(1));
-      @include transition(transform 0.2s, box-shadow 0.2s);
+      @include transition(transform 0.4s cubic-bezier(.53,2.39,.53,.46), box-shadow 0.4s cubic-bezier(.53,2.39,.53,.46));      
       @include hwa;
       @include box-shadow(0, 3px, 9px, -5px, rgba($black-light,0.8));
       margin: 15px;
@@ -173,16 +173,17 @@
       &--with-more {
         cursor: pointer;
         &:hover {
+          @include transition(transform 0.2s ease, box-shadow 0.2s ease);
           @include box-shadow(0, 5px, 10px, -6px, rgba($black-light,0.9));
           @include transform(scale(1.07));
           &:after {
             color: $green;
           }
         }
-        &.shrink-card {
-          @include animation(shrink-card 0.7s 1);
-          @include animation-play-state(running);
-        }
+        // &.shrink-card {
+        //   @include animation(shrink-card 0.7s 1);
+        //   @include animation-play-state(running);
+        // }
         &:after {
           content: '\f48a';
           font-family: Ionicons;

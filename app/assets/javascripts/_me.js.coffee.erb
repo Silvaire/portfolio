@@ -606,10 +606,10 @@ enableTopicCards = ->
   if $topicCards.length
     $mePopup = $('.me__popup')
     $body = $('body.section-page.about')
-    $topicCards.mouseenter ->
-      $(this).removeClass('shrink-card')
-    $topicCards.mouseleave ->
-      $(this).addClass('shrink-card')
+    # $topicCards.mouseenter ->
+    #   $(this).removeClass('shrink-card')
+    # $topicCards.mouseleave ->
+    #   $(this).addClass('shrink-card')
     $topicCards.filter('.me__summary__topic--with-more').click ->
       $this = $(this)
       $body.addClass('me__popup--open')
