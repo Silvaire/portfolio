@@ -3,7 +3,7 @@ enableGoogleAnalyticsEvents = () ->
   if $trackingLinks.length
     $headerLinks = $trackingLinks.filter('.primary-navigation__link')
     $headerLinks.click ->
-      ga('send', 'event', 'link', 'click', 'primary-navigation')
+      ga('send', 'event', 'link', 'click', 'primary-navigation to ' + $(this).attr('href'))
     $homepageButtons = $trackingLinks.filter('.homepage__link')
     $homepageButtons.click ->
       ga('send', 'event', 'link', 'click', 'home button to ' + $(this).data('target'))
@@ -49,4 +49,5 @@ enableGoogleAnalyticsEvents = () ->
       ga('send', 'event', 'link', 'click', 'single project related: ' + $(this).data('title'))
 
 $ ->
-  enableGoogleAnalyticsEvents()
+  if "<%= Rails.env %>" != "development"
+    enableGoogleAnalyticsEvents()
