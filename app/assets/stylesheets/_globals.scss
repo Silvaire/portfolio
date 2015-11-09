@@ -294,6 +294,9 @@ hr {
     @include animation(icon-bounce 1s infinite);
     @include animation-play-state(running);
     position: relative;
+    &--slow {
+      @include animation(icon-bounce 2s infinite);
+    }
   }
 }
 
