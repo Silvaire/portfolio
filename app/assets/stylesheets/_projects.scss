@@ -6,14 +6,19 @@
   margin-top: -$header-height;
   .projects-landing__featured {
     position: relative;
-    height: calc(100% - 75px);
+    height: calc(90% - 45px);
+    .ie9 & {
+      height: calc(100% - 75px);
+    }
     @include mq(mediumDown) {
       height: auto;
     }
   }
   .projects-landing__read-more {
-    padding: 15px 0;
-    height: 75px;
+    height: calc(45px + 10%);
+    .ie9 & {
+      height: 75px;
+    }
   }
 }
 .project {
