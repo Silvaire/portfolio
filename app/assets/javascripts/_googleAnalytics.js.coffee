@@ -49,5 +49,4 @@ enableGoogleAnalyticsEvents = () ->
       ga('send', 'event', 'link', 'click', 'single project related: ' + $(this).data('title'))
 
 $ ->
-  if "<%= Rails.env %>" != "development"
-    enableGoogleAnalyticsEvents()
+  enableGoogleAnalyticsEvents()
