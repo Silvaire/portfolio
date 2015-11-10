@@ -43,7 +43,7 @@
               <a href="<%= post.the_url %>" class="single-project__suggested-project__link js-tracking-event" data-title="<%= post.the_title %>">
                 <div class="project--other__content small-padding--horizontal small-padding--vertical remove-equalize-on-small" data-equalizer-watch>
                   <div class="project--other__image-wrap">
-                    <div class="project--other__image project--other__image--small" style="<%= bgCover(post.the_thumb_url) %>"></div>
+                    <div class="project--other__image project--other__image--small" style="<%= bgCover(post.the_field('thumbnail')) %>"></div>
                   </div>
                   <h2 class="heading-4 padding--vertical"><%= post.the_title %></h2>
                   <span class="button button--light button--small"><%= t('Read more') %></span>
