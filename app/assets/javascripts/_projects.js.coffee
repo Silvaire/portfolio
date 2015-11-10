@@ -41,9 +41,24 @@ removeKwicksOnMobileDown = ->
     else
       initializeKwicks($featuredProjects)
 
+enableStickyProjectCrumbs = () ->
+  $crumbs = $('.single-project__content .crumbs')
+  if $crumbs.length
+    $nextSection = $crumbs.next()
+    crumbsHeight = $crumbs.outerHeight()
+    $(window).scroll ->
+      crumbsTop = $nextSection.offset().top - $(window).scrollTop()
+      if crumbsTop < miniHeaderHeight + crumbsHeight and $('.headroom--unpinned').length
+        $crumbs.addClass('crumbs--fixed')
+        $nextSection.addClass('crumbs-placeholder--active')
+      if crumbsTop > headerHeight + crumbsHeight and $('.headroom--pinned').length
+        $crumbs.removeClass('crumbs--fixed')
+        $nextSection.removeClass('crumbs-placeholder--active')
+
 
 $ ->
   enableMajorProjectsLanding()
+  enableStickyProjectCrumbs()
 
 $(window).resize ->
   removeKwicksOnMobileDown()

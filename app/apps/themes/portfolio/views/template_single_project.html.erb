@@ -10,14 +10,15 @@
   </div>
   <div class="single-project__content">
     <div class="row row--full-width">
-      <div class="small-12 medium-offset-1 medium-11 columns end padding--top--mini">
-        <div class="crumbs padding--bottom">
-          <p><a class="parent-style" href="<%= current_site.the_post('projects').the_url %>"><%= current_site.the_post('projects').the_title %></a></p>&nbsp;/&nbsp;<p><%= @post.the_title %></p>
+      <div class="small-12 columns end padding--top--mini padding--bottom--mini crumbs">
+        <div class="crumbs__content">
+          <span class="crumbs__content__root"><a class="parent-style " href="<%= current_site.the_post('projects').the_url %>"><%= current_site.the_post('projects').the_title %></a></span>&nbsp;/&nbsp;<%= @post.the_title %>
         </div>
       </div>
+      <div class="small-12 columns crumbs-placeholder"></div>
     </div>
-    <div class="row row--full-width">
-      <div class="small-12 medium-offset-1 medium-10 large-7 columns end padding--bottom">
+    <div class="row row--full-width padding--bottom padding--top--mini">
+      <div class="small-12 medium-offset-1 medium-10 large-7 columns end">
         <% skills = @post.the_field('technologies') %>
         <% if not skills.blank? %>
           <p class="big text-green padding--bottom--tiny"><%= t(:project_skills) %> <%= skills %></p>
@@ -33,7 +34,7 @@
           <% end %>
         </div>
       </div>
-      <div class="small-12 medium-offset-1 medium-10 large-offset-0 large-4 end columns padding--bottom">
+      <div class="small-12 medium-offset-1 medium-10 large-offset-0 large-4 end columns">
         <div class="row collapse small-text-center large-text-left green-row" data-equalizer>
           <h3 class="small-12 large-offset-2 large-9 columns end heading-4 padding--bottom--mini"><%= t('Read about more projects') %></h3>
           <% current_site.the_post_type('project').the_posts().where.not(id:@post.id).reorder('RANDOM()').limit(3).each do |post|  %>

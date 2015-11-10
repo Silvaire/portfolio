@@ -1,8 +1,47 @@
 .crumbs {
-  p {
-    display: inline-block;
+  @include transition(background 0.2s);
+  padding-left: calc(8.33333% + #{$column-gutter/2});
+  background: $white;
+  &__content {
+    @include transition(color 0.2s);
     color: $grey;
     font-size: 12px;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
+    &__root {
+      @include transition(color 0.2s);
+      font-weight: 400;
+    }
+    @include mq(small) {
+      padding-left: 0;
+    }
   }
+  &--fixed {
+    @include transition(top 0.4s, background 0.2s);
+    @include box-shadow(0px, 0px, 1px, 0, $black-light);
+    position: fixed;
+    color: $grey-dark;
+    background: $grey-lightest;
+    top: $header-height;
+    z-index: 60;
+    .crumbs__content {
+      color: $grey-dark;
+      &__root {
+        color: $green-light;
+      }
+    }
+    .headroom--not-top.headroom--unpinned & {
+      top: $mini-header-height;
+    }
+    @include mq(small) {
+      top: $mobile-header-height;
+    }
+  }
+  @include mq(small) {
+    padding-left: $column-gutter/2;
+  }
+}
+
+.crumbs-placeholder--active {
+   margin-top: 48px;
 }
