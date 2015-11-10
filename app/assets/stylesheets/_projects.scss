@@ -19,6 +19,9 @@
     .ie9 & {
       height: 75px;
     }
+    @include mq(mediumDown) {
+      height: 75px;
+    }
   }
 }
 .project {
