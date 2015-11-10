@@ -310,11 +310,15 @@
       }
     }
     &__scroll-container {
+      @include transition(left 0.6s cubic-bezier(0.435, 0.000, 0.300, 0.850));
       position: absolute;
       bottom: 5px;
       width: 100%;
       left: 0;
       text-align: center;
+      .me__popup--open & {
+        left: -66.6667%;
+      }
     }
     &__scroll-icon {
       @extend .animated-icon--jump--slow;
