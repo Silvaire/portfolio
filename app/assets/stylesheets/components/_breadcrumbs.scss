@@ -2,6 +2,8 @@
   @include transition(background 0.2s);
   padding-left: calc(8.33333% + #{$column-gutter/2});
   background: $white;
+  position: static;
+  top: $mini-header-height;
   &__content {
     @include transition(color 0.2s);
     color: $grey;
