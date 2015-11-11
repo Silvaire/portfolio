@@ -34,9 +34,9 @@
           <% end %>
         </div>
       </div>
-      <div class="small-12 medium-offset-1 medium-10 large-offset-0 large-4 end columns">
+      <div class="small-12 medium-offset-1 medium-10 large-offset-0 large-4 small-padding--top large-padding--top--none end columns">
         <div class="row collapse small-text-center large-text-left green-row" data-equalizer>
-          <h3 class="small-12 large-offset-2 large-9 columns end heading-4 padding--bottom--mini"><%= t('Read about more projects') %></h3>
+          <h3 class="small-12 large-offset-2 large-9 columns end heading-4 small-padding--top--mini large-padding--top--none padding--bottom--mini"><%= t('Read about more projects') %></h3>
           <% current_site.the_post_type('project').the_posts().where.not(id:@post.id).reorder('RANDOM()').limit(3).each do |post|  %>
             <% post = post.decorate %>
             <div class="small-12 medium-6 large-offset-2 large-9 columns end green-row__item project--other small-text-center">
