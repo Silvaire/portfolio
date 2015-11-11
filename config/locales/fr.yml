@@ -44,7 +44,7 @@ fr:
   Other interests: "Autres Interêts"
   Contact me: "Me contacter"
   year_old: "%{years} ans"
-  new_skills: "Nouvelles Compétences :"
+  skills_with_colon: "Compétences :"
   Skills: "Compétences"
   Languages: "Langues"
   Location: "Domicile"

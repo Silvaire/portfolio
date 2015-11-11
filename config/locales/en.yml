@@ -44,7 +44,7 @@ en:
   Other interests: "Other interests"
   Contact me: "Contact me"
   year_old: "%{years}"
-  new_skills: "New skills:"
+  skills_with_colon: "Skills:"
   Skills: "Skills"
   Languages: "Languages"
   Location: "Location"

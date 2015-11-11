@@ -246,7 +246,7 @@
                     <div class="life-event__description padding--vertical--tiny"><%= simple_format(event.the_field('description')) %></div>
                   <% end %>
                   <% if not event.the_field('skills').blank? %>
-                    <p class="text-green life-event__skills small-padding--top--tiny small-padding--bottom--mini medium-padding--top--mini medium-padding--bottom"><%= t(:new_skills) %> <%= event.the_field('skills') %></p>
+                    <p class="text-green life-event__skills small-padding--top--tiny small-padding--bottom--mini medium-padding--top--mini medium-padding--bottom"><%= t(:skills_with_colon) %> <%= event.the_field('skills') %></p>
                   <% end %>
                   <div class="life-event__links">
                     <% links = event.get_field_values('links') %>
