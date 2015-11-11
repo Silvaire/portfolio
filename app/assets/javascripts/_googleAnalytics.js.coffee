@@ -23,7 +23,7 @@ enableGoogleAnalyticsEvents = () ->
     $featuredProjectLinks = $trackingLinks.filter('.project--featured__link')
     $featuredProjectLinks.click ->
       ga('send', 'event', 'link', 'click', 'featured project: ' + $(this).data('title'))
-    $seeAllProjectsButton = $trackingLinks.filter('.see-all-prokects__button')
+    $seeAllProjectsButton = $trackingLinks.filter('.see-all-projects__button')
     $seeAllProjectsButton.click ->
       ga('send', 'event', 'link', 'click', 'see all projects button')
     $projectFilters = $trackingLinks.filter('.project-filters__button')
@@ -47,6 +47,9 @@ enableGoogleAnalyticsEvents = () ->
     $singleProjectSuggestedProjectLinks = $trackingLinks.filter('.single-project__suggested-project__link')
     $singleProjectSuggestedProjectLinks.click ->
       ga('send', 'event', 'link', 'click', 'single project related: ' + $(this).data('title'))
+    $crumbsLinks = $trackingLinks.filter('.crumbs__link')
+    $crumbsLinks.click ->
+      ga('send', 'event', 'link', 'click', 'breadcrumbs: ' + $(this).data('type'))
 
 $ ->
   enableGoogleAnalyticsEvents()

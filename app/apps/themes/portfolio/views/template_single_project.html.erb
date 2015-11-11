@@ -12,7 +12,7 @@
     <div class="row row--full-width">
       <div class="small-12 columns end padding--top--mini padding--bottom--mini crumbs">
         <div class="crumbs__content">
-          <span class="crumbs__content__root"><a class="parent-style " href="<%= current_site.the_post('projects').the_url %>"><%= current_site.the_post('projects').the_title %></a></span>&nbsp;/&nbsp;<%= @post.the_title %>
+          <span class="crumbs__content__root"><a class="parent-style js-tracking-event crumbs__link" href="<%= current_site.the_post('projects').the_url %>" data-type="root"><%= current_site.the_post('projects').the_title %></a></span>&nbsp;/&nbsp;<a class="parent-style scroll-to js-tracking-event crumbs__link" href="body" data-type="top"><%= @post.the_title %></a>
         </div>
       </div>
       <div class="small-12 columns crumbs-placeholder"></div>
