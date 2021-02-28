@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.1.7"
+ruby "2.7.2"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
@@ -74,7 +74,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
-  
+
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
@@ -82,10 +82,10 @@ group :development, :test do
   gem 'spring'
 
   ## BEGIN CAMALEON GEMS (FOR HEROKU)
-  
+
   gem 'thin'
   gem 'tzinfo-data'
-  
+
   ## END CAMALEON GEMS (FOR HEROKU)
 end
 
@@ -94,6 +94,6 @@ gem 'puma'
 
 
 
-#################### Camaleon CMS include all gems for plugins and themes #################### 
-require './lib/plugin_routes' 
+#################### Camaleon CMS include all gems for plugins and themes ####################
+require './lib/plugin_routes'
 instance_eval(PluginRoutes.draw_gems)
