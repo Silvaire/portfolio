@@ -34,7 +34,7 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
+# gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -91,7 +91,7 @@ end
 
 gem 'rails_12factor', group: :production
 gem 'puma', '>= 3'
-
+gem 'json', '2.1.0'
 
 
 #################### Camaleon CMS include all gems for plugins and themes ####################
