@@ -15,6 +15,7 @@
         </div>
         <div class="small-12 medium-6 large-8 columns fill-parent--height">
           <div class="me__summary__header small-text-center padding">
+            <p><%= Time.now.month %></p>
             <h2 class="me__summary__title big heading-1 padding--bottom--mini"><%= current_site.the_field('author') %>, <%= t(:year_old, :years => Time.now.year - date_from_field(current_site.the_field('birth-date')).year) %></h2>
             <p class="me__summary__introduction"><%= @post.the_field('introduction') %></p>
           </div>
@@ -22,7 +23,7 @@
             <div class="table__cell">
               <div class="row padding--top" >
                 <div class="small-12 large-6 columns">
-                  <div class="me__summary__topic me__summary__topic--with-more js-tracking-event" data-topic="<i class='padding--right--mini ion-briefcase'></i><%= t('Work experience') %>" title="<%= t('Work experience') %>">  
+                  <div class="me__summary__topic me__summary__topic--with-more js-tracking-event" data-topic="<i class='padding--right--mini ion-briefcase'></i><%= t('Work experience') %>" title="<%= t('Work experience') %>">
                     <div class="me__summary__icon">
                       <div class="table">
                         <div class="table__cell">
@@ -37,7 +38,7 @@
                   </div>
                 </div>
                 <div class="small-12 large-6 columns">
-                  <div class="me__summary__topic me__summary__topic--with-more js-tracking-event" data-topic="<i class='padding--right--mini ion-university'></i><%= t('Studies') %>" title="<%= t('Studies') %>">  
+                  <div class="me__summary__topic me__summary__topic--with-more js-tracking-event" data-topic="<i class='padding--right--mini ion-university'></i><%= t('Studies') %>" title="<%= t('Studies') %>">
                     <div class="me__summary__icon">
                       <div class="table">
                         <div class="table__cell">
@@ -83,7 +84,7 @@
                 </div>
               </div>
               <div class="me__summary__last-row" >
-                <div class="me__summary__topic me__summary__topic--skills" title="<%= t('Skills') %>">  
+                <div class="me__summary__topic me__summary__topic--skills" title="<%= t('Skills') %>">
                   <div class="me__summary__icon">
                     <div class="table">
                       <div class="table__cell">
@@ -98,7 +99,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="me__summary__topic me__summary__topic--languages" title="<%= t('Languages') %>">  
+                <div class="me__summary__topic me__summary__topic--languages" title="<%= t('Languages') %>">
                   <div class="me__summary__icon">
                     <div class="table">
                       <div class="table__cell">
@@ -160,21 +161,21 @@
           </div>
           <div class="timeline__summary__inner">
             <div class="time-now"></div>
-            
+
             <div class="timeline__item timeline__item--current timeline__item--current-study">
               <div class="timeline__item__title"></div>
             </div>
             <div class="timeline__item timeline__item--previous timeline__item--previous-study">
               <div class="timeline__item__title"></div>
             </div>
-            
+
             <div class="timeline__item timeline__item--current timeline__item--current-location">
               <div class="timeline__item__title"></div>
             </div>
             <div class="timeline__item timeline__item--previous timeline__item--previous-location">
               <div class="timeline__item__title"></div>
             </div>
-            
+
             <div class="timeline__item timeline__item--current timeline__item--current-company">
               <div class="timeline__item__title"></div>
             </div>
@@ -199,8 +200,8 @@
       <ul class="nostyle">
         <% current_site.the_post_type('event').post_type.posts.sort_by_field('start-date', 'DESC').where(status:'published').each do |event| %>
           <% event = event.decorate %>
-          
-          <li 
+
+          <li
             id="life-event-<%= event.id %>"
             class="life-event events__item events__item--<% if event.the_field('picture').blank? %>no-picture<% else %>with-picture<% end %>"
             data-title="<%= event.the_title.gsub('"','&quot;') %>"
@@ -218,7 +219,7 @@
             data-language="<%= event.the_field('language').gsub('"','&quot;') %>"
             data-tags='<% tags = event.the_tags %>[<% tags.each do |tag| %>"<%= tag.name.gsub('"','&quot;') %>"<% if not tags.last == tag %>,<% end %><% end %>]'
             >
-            
+
             <div class="life-event__picture">
               <div class="table">
                 <div class="table__cell small-text-center text-white life-event__picture__overlay">
