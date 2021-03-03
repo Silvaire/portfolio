@@ -15,8 +15,12 @@
         </div>
         <div class="small-12 medium-6 large-8 columns fill-parent--height">
           <div class="me__summary__header small-text-center padding">
-            <p><%= Time.now.month %></p>
-            <h2 class="me__summary__title big heading-1 padding--bottom--mini"><%= current_site.the_field('author') %>, <%= t(:year_old, :years => Time.now.year - date_from_field(current_site.the_field('birth-date')).year) %></h2>
+            <h2 class="me__summary__title big heading-1 padding--bottom--mini"><%= current_site.the_field('author') %>,
+            <% if Time.now.month >= 5 %>
+              <%= t(:year_old, :years => Time.now.year - date_from_field(current_site.the_field('birth-date')).year) %></h2>
+            <% else %>
+              <%= t(:year_old, :years => Time.now.year - date_from_field(current_site.the_field('birth-date')).year - 1) %></h2>
+            <% end %>
             <p class="me__summary__introduction"><%= @post.the_field('introduction') %></p>
           </div>
           <div class="table">
