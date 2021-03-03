@@ -53,4 +53,6 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  match "*path" => redirect("https://www.silvain.space/%{path}"), :constraints => { :protocol => "http://" }
+  match "*path" => redirect("https://www.silvain.space/%{path}"), :constraints => { :subdomain => "" }
 end
