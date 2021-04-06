@@ -84,7 +84,7 @@
       .loaded > & {
         max-width: 415px;
       }
-      @include mq (mediumDown) {
+      @include mq(mediumDown) {
         max-width: 100% !important;
       }
     }
@@ -197,7 +197,7 @@
   &--filtered-out {
     opacity: 0;
     &.project--all {
-      height: 0;  
+      height: 0;
     }
     &.project--other {
       width: 0;
@@ -264,6 +264,11 @@
       max-height: 600px;
       display: block;
       margin: auto;
+    }
+  }
+  &__links {
+    &__button {
+      margin-bottom: 5px;
     }
   }
 }
